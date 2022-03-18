@@ -1,7 +1,6 @@
 import Phaser from "phaser";
 // this.load.setBaseURL('http://labs.phaser.io');
 
-
 export default function configFunction(){
   return {
     type: Phaser.AUTO,

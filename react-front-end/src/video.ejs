@@ -1,0 +1,17 @@
+<div>
+  <video id="camera" width="640" height="480" autoPlay="true"></video>
+</div>
+<script>
+  let video = document.querySelector("#camera")
+  
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    .then(function(stream) {
+      video.srcObject = stream
+    })
+    .catch(function(err) {
+      console.log("Something went wrong!")
+      console.log(err)
+    })
+  }
+</script>   

@@ -10,12 +10,11 @@ App.use(Express.static('public'));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
-  message: "Seems to workkdjfgndfkjbndkfjbn!",
+  message: "Seems to work!",
 }));
 
 App.get('/test', (req, res) => {
   res.render('index');
-  console.log("ksjaddskjgkjfgjsjfgnsjfgnskrjgnskjerg");
 });
 
 App.listen(PORT, () => {
