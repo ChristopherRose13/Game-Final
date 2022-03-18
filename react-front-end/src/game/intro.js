@@ -212,7 +212,29 @@ var tracker = new tracking.ObjectTracker('face');
   tracker.on('track', function(event) {
       if (event.data.length == 1) {
       console.log(event.data[0])
+      
       }
+      // Clear entire canvas  
+context.clearRect(0, 0, canvas.width, canvas.height)
+
+// Draw grid lines so we can see control points
+var leftBound = canvas.width / 3
+var rightBound = leftBound * 2
+var upBound = canvas.height / 3
+var downBound = upBound * 2
+
+var drawLine = function(ctx, x1, y1, x2, y2) {
+  context.beginPath()
+  context.moveTo(x1, y1)
+  context.lineTo(x2, y2)
+  context.stroke()
+}
+
+context.strokeStyle = '#ff0000';
+drawLine(context, leftBound, 0, leftBound, canvas.height);
+drawLine(context, rightBound, 0, rightBound, canvas.height);
+drawLine(context, 0, upBound, canvas.width, upBound);
+drawLine(context, 0, downBound, canvas.width, downBound);    
   })
 
 tracking.track(video, tracker, { camera: true })
@@ -222,6 +244,7 @@ var context = canvas.getContext('2d')
 
 tracker.on('track', function(event) {
   if (event.data.length == 1) {
+    
     var rect = event.data[0]
 
     // Find center of face
@@ -237,5 +260,9 @@ tracker.on('track', function(event) {
     // Draw face bounding box & center point
     context.strokeStyle = '#0000ff'
     context.strokeRect(faceX - 10, faceY - 10, 20, 20)
+
+    
   }
+
+  
 })
