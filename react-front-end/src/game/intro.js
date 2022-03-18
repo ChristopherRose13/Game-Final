@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import tracking from "jstracking";
 // this.load.setBaseURL('http://labs.phaser.io');
 
+
 export default function configFunction(){
   return {
     type: Phaser.AUTO,
