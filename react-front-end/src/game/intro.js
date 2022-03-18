@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import tracking from "jstracking";
 // this.load.setBaseURL('http://labs.phaser.io');
 
 
@@ -189,3 +190,52 @@ function hitBomb (player, bomb)
 
     gameOver = true;
 }
+
+// Video Functions
+
+var video = document.querySelector("#camera")
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+  .then(function(stream) {
+    video.srcObject = stream
+  })
+  .catch(function(err) {
+    console.log("Something went wrong!")
+  })
+}
+
+var tracker = new tracking.ObjectTracker('face');
+  tracker.setInitialScale(4)
+  tracker.setStepSize(2)
+  tracker.setEdgesDensity(0.1)
+      
+  tracker.on('track', function(event) {
+      if (event.data.length == 1) {
+      console.log(event.data[0])
+      }
+  })
+
+tracking.track(video, tracker, { camera: true })
+
+var canvas = document.getElementById('overlay')
+var context = canvas.getContext('2d')
+
+tracker.on('track', function(event) {
+  if (event.data.length == 1) {
+    var rect = event.data[0]
+
+    // Find center of face
+    var faceX = rect.x + (rect.width / 2)
+    var faceY = rect.y + (rect.height / 2)
+
+    // Clear entire canvas  
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    // Draw square at center of face
+    context.lineWidth = 5
+
+    // Draw face bounding box & center point
+    context.strokeStyle = '#0000ff'
+    context.strokeRect(faceX - 10, faceY - 10, 20, 20)
+  }
+})
