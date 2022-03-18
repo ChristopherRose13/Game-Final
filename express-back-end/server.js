@@ -10,8 +10,13 @@ App.use(Express.static('public'));
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
+  message: "Seems to workkdjfgndfkjbndkfjbn!",
 }));
+
+App.get('/test', (req, res) => {
+  res.render('index');
+  console.log("ksjaddskjgkjfgjsjfgnsjfgnskrjgnskjerg");
+});
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
