@@ -30,6 +30,8 @@ let bombs;
 let gameOver = false;
 let score = 0;
 let scoreText;
+let movementX;
+let movementY;
 
 function preload ()
 {
@@ -126,13 +128,13 @@ function update ()
       return;
   }
 
-    if (cursors.left.isDown)
+    if (cursors.left.isDown || movementX=="left")
   {
       player.setVelocityX(-160);
 
       player.anims.play('left', true);
   }
-  else if (cursors.right.isDown)
+  else if (cursors.right.isDown || movementX=="right")
   {
       player.setVelocityX(160);
 
@@ -145,7 +147,7 @@ function update ()
       player.anims.play('turn');
   }
 
-  if (cursors.up.isDown && player.body.touching.down)
+  if ((cursors.up.isDown && player.body.touching.down) || (movementY=="up" && player.body.touching.down))
   {
       player.setVelocityY(-330);
   }
@@ -192,8 +194,13 @@ function hitBomb (player, bomb)
 }
 
 // Video Functions
-function sendMove(move) {
-  console.log(move)
+var sendMoveX = function(move) {
+  console.log(move);
+  movementX = move;
+}
+var sendMoveY = function(move) {
+  console.log(move);
+  movementY = move;
 }
 
 var video = document.querySelector("#camera")
@@ -207,24 +214,8 @@ if (navigator.mediaDevices.getUserMedia) {
   })
 }
 
-var tracker = new tracking.ObjectTracker('face');
-  tracker.setInitialScale(4)
-  tracker.setStepSize(2)
-  tracker.setEdgesDensity(0.1)
-      
-  tracker.on('track', function(event) {
-      if (event.data.length == 1) {
-      console.log(event.data[0])
-      
-      }
-      // Clear entire canvas  
-context.clearRect(0, 0, canvas.width, canvas.height)
-
-// Draw grid lines so we can see control points
-var leftBound = canvas.width / 3
-var rightBound = leftBound * 2
-var upBound = canvas.height / 3
-var downBound = upBound * 2
+var canvas = document.getElementById('overlay')
+var context = canvas.getContext('2d')
 
 var drawLine = function(ctx, x1, y1, x2, y2) {
   context.beginPath()
@@ -233,43 +224,33 @@ var drawLine = function(ctx, x1, y1, x2, y2) {
   context.stroke()
 }
 
-context.strokeStyle = '#ff0000';
-drawLine(context, leftBound, 0, leftBound, canvas.height);
-drawLine(context, rightBound, 0, rightBound, canvas.height);
-drawLine(context, 0, upBound, canvas.width, upBound);
-drawLine(context, 0, downBound, canvas.width, downBound);  
-
-// Has face crossed a boundary?
-if (faceX < leftBound) {
-  sendMove('left')
-} else if (faceX > rightBound) {
-  sendMove('right')
-}
-if (faceY < upBound) {
-  sendMove('up')
-} else if (faceY > downBound) {
-  sendMove('down')
-}
- 
-})
-
-tracking.track(video, tracker, { camera: true })
-
-var canvas = document.getElementById('overlay')
-var context = canvas.getContext('2d')
+var tracker = new tracking.ObjectTracker('face')
+tracker.setInitialScale(4)
+tracker.setStepSize(2)
+tracker.setEdgesDensity(0.1)
 
 tracker.on('track', function(event) {
   if (event.data.length == 1) {
-    
-    var rect = event.data[0]
-
-    // Find center of face
-    var faceX = rect.x + (rect.width / 2)
-    var faceY = rect.y + (rect.height / 2)
-
     // Clear entire canvas  
     context.clearRect(0, 0, canvas.width, canvas.height)
 
+    // Draw grid lines so we can see control points
+    var leftBound = canvas.width / 3
+    var rightBound = leftBound * 2
+    var upBound = canvas.height / 3
+    var downBound = upBound * 2
+
+    context.strokeStyle = '#ff0000';
+    drawLine(context, leftBound, 0, leftBound, canvas.height);
+    drawLine(context, rightBound, 0, rightBound, canvas.height);
+    drawLine(context, 0, upBound, canvas.width, upBound);
+    drawLine(context, 0, downBound, canvas.width, downBound);          
+
+    // Find center of face
+    var rect = event.data[0]
+    var faceX = rect.x + (rect.width / 2)
+    var faceY = rect.y + (rect.height / 2)
+    
     // Draw square at center of face
     context.lineWidth = 5
 
@@ -277,8 +258,22 @@ tracker.on('track', function(event) {
     context.strokeStyle = '#0000ff'
     context.strokeRect(faceX - 10, faceY - 10, 20, 20)
 
-    
-  }
+    // Has face crossed a boundary?
 
-  
+    if (faceX < leftBound) {
+      sendMoveX('left')
+    } else if (faceX > rightBound) {
+      sendMoveX('right')
+    } else {
+      sendMoveX('neutral')
+    }
+    if (faceY < upBound) {
+      sendMoveY('up')
+    } else if (faceY > downBound) {
+      sendMoveY('down')
+    } else {
+      sendMoveY('neutral')
+    }
+  }
 })
+tracking.track(video, tracker, { camera: true })
