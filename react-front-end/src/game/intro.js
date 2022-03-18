@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import tracking from "jstracking";
 // this.load.setBaseURL('http://labs.phaser.io');
 
+
 export default function configFunction(){
   return {
     type: Phaser.AUTO,
@@ -191,6 +192,9 @@ function hitBomb (player, bomb)
 }
 
 // Video Functions
+function sendMove(move) {
+  console.log(move)
+}
 
 var video = document.querySelector("#camera")
 if (navigator.mediaDevices.getUserMedia) {
@@ -233,8 +237,21 @@ context.strokeStyle = '#ff0000';
 drawLine(context, leftBound, 0, leftBound, canvas.height);
 drawLine(context, rightBound, 0, rightBound, canvas.height);
 drawLine(context, 0, upBound, canvas.width, upBound);
-drawLine(context, 0, downBound, canvas.width, downBound);    
-  })
+drawLine(context, 0, downBound, canvas.width, downBound);  
+
+// Has face crossed a boundary?
+if (faceX < leftBound) {
+  sendMove('left')
+} else if (faceX > rightBound) {
+  sendMove('right')
+}
+if (faceY < upBound) {
+  sendMove('up')
+} else if (faceY > downBound) {
+  sendMove('down')
+}
+ 
+})
 
 tracking.track(video, tracker, { camera: true })
 
