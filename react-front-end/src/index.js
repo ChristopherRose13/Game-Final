@@ -34,7 +34,7 @@ const timeOut = setTimeout(() => {
 }, 1000)
 // Let's define a command.
 var commands = {
-  'pause': function() { alert('Game paused!'); },
+  'pause': function() { alert('Game is paused!'); },
   'right': function () {
     voiceMoverX("right")
     setTimeout(() => {
