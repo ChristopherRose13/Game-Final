@@ -7,6 +7,7 @@ import Phaser from 'phaser';
 // import configFunction from "./game/intro"
 import tracking from "jstracking";
 import annyang from "annyang";
+import { isListening } from 'annyang';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
@@ -28,6 +29,91 @@ const config = {
   }
 };
 
+const timeOut = setTimeout(() => {
+  voiceMoverX("")
+}, 1000)
+// Let's define a command.
+var commands = {
+  'pause': function() { alert('Game paused!'); },
+  'right': function () {
+    voiceMoverX("right")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 1000)
+  },
+  'left': function () {
+    voiceMoverX("left")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 1000)
+  },
+  'jump': function () {
+    voiceMoverY("up")
+    setTimeout(() => {
+      voiceMoverY("")
+    }, 50)
+  },
+  'right jump': function () {
+    voiceMoverX("right")
+    voiceMoverY("up")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 1300)
+    setTimeout(() => {
+      voiceMoverY("")
+    }, 100)
+  },
+  'left jump': function () {
+    voiceMoverX("left")
+    voiceMoverY("up")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 1300)
+    setTimeout(() => {
+      voiceMoverY("")
+    }, 100)
+  },
+  'long left': function () {
+    voiceMoverX("left")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 1700)
+  },
+
+  'long right': function () {
+    voiceMoverX("right")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 1700)
+  },
+
+  'baby right': function () {
+    voiceMoverX("right")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 300)
+  },
+  'baby left': function () {
+    voiceMoverX("left")
+    setTimeout(() => {
+      voiceMoverX("")
+    }, 300)
+  }
+};
+
+// Add our commands to annyang
+annyang.addCommands(commands);
+
+const pauseVoice = function () {
+  annyang.pause();
+}
+
+// Start listening.
+const startVoice = function() {
+  annyang.start();
+}
+
+
 const game = new Phaser.Game(config);
 
 let cursors;
@@ -41,6 +127,7 @@ let movementX;
 let movementY;
 let voiceMoveX;
 let voiceMoveY;
+let cameraOn = true;
 
 function preload ()
 {
@@ -56,8 +143,32 @@ this.load.spritesheet('dude',
 );
 }
 
+const toggleVoice = function () {
+  if(annyang.isListening()) {
+    console.log("attempting to pause")
+    pauseVoice()
+
+  } else {
+    annyang.isListening() 
+    console.log("attempting to start voice")
+    startVoice();
+    
+  }
+}
+
+
 function create ()
 {
+
+this.input.keyboard.on('keydown-M', () => {
+  toggleVoice()
+}, this);
+
+this.input.keyboard.on('keydown-V', () => {
+  console.log("attempting to toggle camera")
+  toggleVideo();
+}, this);
+
 this.add.image(400, 300, 'sky');
 
 const platforms = this.physics.add.staticGroup();
@@ -139,6 +250,7 @@ if (gameOver)
     return;
 }
 
+
   if (cursors.left.isDown || movementX==="left" || voiceMoveX==="left")
 {
     player.setVelocityX(-160);
@@ -206,11 +318,11 @@ function hitBomb (player, bomb)
 
 // Video Functions
 const sendMoveX = function(move) {
-console.log(move);
+
 movementX = move;
 }
 const sendMoveY = function(move) {
-console.log(move);
+
 movementY = move;
 }
 
@@ -222,28 +334,33 @@ const voiceMoverY = function (move) {
   voiceMoveY = move
 }
 
-var video = document.querySelector("#camera")
+const inititializeCamera = function () {
+  
+}
+let video = document.querySelector("#camera")
 if (navigator.mediaDevices.getUserMedia) {
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: true})
 .then(function(stream) {
   video.srcObject = stream
+  toggleVideo()
 })
 .catch(function(err) {
   console.log("Something went wrong!")
+  console.log(err)
 })
 }
 
-var canvas = document.getElementById('overlay')
-var context = canvas.getContext('2d')
+let canvas = document.getElementById('overlay')
+let context = canvas.getContext('2d')
 
-var drawLine = function(ctx, x1, y1, x2, y2) {
+let drawLine = function(ctx, x1, y1, x2, y2) {
 context.beginPath()
 context.moveTo(x1, y1)
 context.lineTo(x2, y2)
 context.stroke()
 }
 
-var tracker = new tracking.ObjectTracker('face')
+let tracker = new tracking.ObjectTracker('face')
 tracker.setInitialScale(4)
 tracker.setStepSize(2)
 tracker.setEdgesDensity(0.1)
@@ -254,10 +371,10 @@ if (event.data.length === 1) {
   context.clearRect(0, 0, canvas.width, canvas.height)
 
   // Draw grid lines so we can see control points
-  var leftBound = canvas.width / 3
-  var rightBound = leftBound * 2
-  var upBound = canvas.height / 3
-  var downBound = upBound * 2
+  let leftBound = canvas.width / 3
+  let rightBound = leftBound * 2
+  let upBound = canvas.height / 3
+  let downBound = upBound * 2
 
   context.strokeStyle = '#ff0000';
   drawLine(context, leftBound, 0, leftBound, canvas.height);
@@ -266,9 +383,9 @@ if (event.data.length === 1) {
   drawLine(context, 0, downBound, canvas.width, downBound);          
 
   // Find center of face
-  var rect = event.data[0]
-  var faceX = rect.x + (rect.width / 2)
-  var faceY = rect.y + (rect.height / 2)
+  let rect = event.data[0]
+  let faceX = rect.x + (rect.width / 2)
+  let faceY = rect.y + (rect.height / 2)
   
   // Draw square at center of face
   context.lineWidth = 5
@@ -297,88 +414,22 @@ if (event.data.length === 1) {
 })
 tracking.track(video, tracker, { camera: true, audio: false})
 
-const timeOut = setTimeout(() => {
-  voiceMoverX("")
-}, 1000)
-// Let's define a command.
-var commands = {
-  'pause': function() { alert('Game paused!'); },
-  'right': function () {
-    voiceMoverX("right")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 1000)
-  },
-  'left': function () {
-    voiceMoverX("left")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 1000)
-  },
-  'jump': function () {
-    voiceMoverY("up")
-    setTimeout(() => {
-      voiceMoverY("")
-    }, 50)
-  },
-  'right jump': function () {
-    voiceMoverX("right")
-    voiceMoverY("up")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 1300)
-    setTimeout(() => {
-      voiceMoverY("")
-    }, 100)
-  },
-  'left jump': function () {
-    voiceMoverX("left")
-    voiceMoverY("up")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 1300)
-    setTimeout(() => {
-      voiceMoverY("")
-    }, 100)
-  },
-  'long left': function () {
-    voiceMoverX("left")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 1700)
-  },
-
-  'long right': function () {
-    voiceMoverX("right")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 1700)
-  },
-
-  'baby right': function () {
-    voiceMoverX("right")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 300)
-  },
-  'baby left': function () {
-    voiceMoverX("left")
-    setTimeout(() => {
-      voiceMoverX("")
-    }, 300)
-  }
-};
-
-// Add our commands to annyang
-annyang.addCommands(commands);
-
-
-
-// Start listening.
-const startVoice = function() {
-  annyang.start();
+function toggleVideo () {
+  if (cameraOn) {
+    const mediaStream = video.srcObject;
+    const tracks = mediaStream.getTracks();
+    tracks.forEach(track => track.stop())
+    cameraOn = false;
+    console.log("camera is off")
+  } else if (navigator.mediaDevices.getUserMedia){
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+    video.srcObject = stream
+  })
+    console.log("camera is on")
+    cameraOn = true;
+  }  
 }
-startVoice();
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
