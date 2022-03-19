@@ -1,40 +1,61 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import MenuList from './components/MenuList';
+import Game from './components/Game';
 
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
 
-  fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-    .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
+export default function App() {
+  // const[state, setState] = useState(false);
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     message: 'Click the button to load data!'
+  //   }
+  // }
 
-      console.log(response.data.message) // Just the message
-      this.setState({
-        message: response.data.message
-      });
-    }) 
-  }
+  // fetchData = () => {
+  //   axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
+  //     .then((response) => {
+  //       // handle success
+  //       console.log(response.data) // The entire response from the Rails API
 
-  render() {
-    return (
-      <div className="App">
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>        
+  //       console.log(response.data.message) // Just the message
+  //       this.setState({
+  //         message: response.data.message
+  //       });
+  //     })
+  // }
+
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       <h1>{this.state.message}</h1>
+  //       <button onClick={this.fetchData} >
+  //         Fetch Data
+  //       </button>
+
+  //     </div>
+  //   );
+  // }
+
+  return(
+   
+    <main className = "layout" >
+      <section>
+        <MenuList
         
-      </div>
-    );
-  }
+        />
+      </section>
+      <section>
+        <Game />
+      </section>
+    </main>
+
+
+
+  )
 }
 
-export default App;
+

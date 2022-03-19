@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "annyang": "^2.6.1",
     "axios": "^0.26.1",
     "jstracking": "0.0.3",
     "phaser": "^3.55.2",
