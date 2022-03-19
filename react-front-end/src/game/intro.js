@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import tracking from "jstracking";
+import annyang from "annyang";
 // this.load.setBaseURL('http://labs.phaser.io');
 
 
@@ -277,3 +278,16 @@ tracker.on('track', function(event) {
   }
 })
 tracking.track(video, tracker, { camera: true })
+
+if (annyang) {
+  // Let's define a command.
+  var commands = {
+    'hello': function() { alert('Hello world!'); }
+  };
+ 
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+ 
+  // Start listening.
+  annyang.start();
+}
