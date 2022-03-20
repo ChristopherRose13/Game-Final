@@ -1,4 +1,4 @@
-As usual npm install and npm run build to build the project.
+As usual npm install.
 
 if missing something, maybe the morgan, pg, dotenv that missing in the npm install.
 
