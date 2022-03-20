@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function HowTo() {
+export default function HowTo(props) {
 
-  return 
+  return <div>How To Page</div>
 }

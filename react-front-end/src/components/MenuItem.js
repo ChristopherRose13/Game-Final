@@ -1,4 +1,6 @@
 import React from "react";
+import '../styles/menu.scss';
+// import classNames from 'classnames';
 
 
 export default function MenuItem(props) {
@@ -7,7 +9,7 @@ export default function MenuItem(props) {
 
   return (
     <body>
-      <button>
+      <button className="play-button">
         PLAY
       </button>
 
@@ -21,4 +23,4 @@ export default function MenuItem(props) {
   )
 }
 
-{/* <button onClick={() => setState(!state)}>How To</button> */}
+{/* <button onClick={() => setState(!state)}>How To</button> */ }

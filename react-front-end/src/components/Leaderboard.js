@@ -1,7 +1,8 @@
 import React from "react";
 
 
-export default function Leaderboard() {
+export default function Leaderboard(props) {
 
-  return
-}
+  return <div>Leaderboard Page</div>
+
+};

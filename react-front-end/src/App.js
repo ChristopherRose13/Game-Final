@@ -1,61 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import MenuList from './components/MenuList';
 import Game from './components/Game';
-
+import HowTo from './components/HowTo';
+import Leaderboard from './components/Leaderboard';
 
 
 export default function App() {
-  // const[state, setState] = useState(false);
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     message: 'Click the button to load data!'
-  //   }
-  // }
+  const [step, setStep] = useState(0);
 
-  // fetchData = () => {
-  //   axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-  //     .then((response) => {
-  //       // handle success
-  //       console.log(response.data) // The entire response from the Rails API
+  const changeStep = (step) => {
+    setStep(step)
+  }
 
-  //       console.log(response.data.message) // Just the message
-  //       this.setState({
-  //         message: response.data.message
-  //       });
-  //     })
-  // }
+  if (step === 0) {
+    return (
+      <div>
+        <button onClick={() => { changeStep(1) }} >Play</button>
+        <button onClick={() => { changeStep(2) }}>How To</button>
+        <button onClick={() => { changeStep(3) }}>Leaderboard</button>
+      </div>
+    )
+  }
 
-  // render() {
-  //   return (
-  //     <div className="App">
-  //       <h1>{this.state.message}</h1>
-  //       <button onClick={this.fetchData} >
-  //         Fetch Data
-  //       </button>
+  if (step === 1) {
+    return (
+      <Game />
+    )
+  }
 
-  //     </div>
-  //   );
-  // }
+  if (step === 2) {
+    return (
+      <HowTo />
+    )
+  }
 
-  return(
-   
-    <main className = "layout" >
-      <section>
-        <MenuList
-        
-        />
-      </section>
-      <section>
-        <Game />
-      </section>
-    </main>
+  if (step === 3) {
+    return (
+      <Leaderboard />
+    )
+  }
 
 
+  // return (
 
-  )
+  //   <main className="layout" >
+  //     <section>
+  //       <MenuList
+  //       />
+  //     </section>
+
+  //   </main>
+  // )
 }
 
 
