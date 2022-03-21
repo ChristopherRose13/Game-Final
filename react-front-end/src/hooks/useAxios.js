@@ -4,7 +4,7 @@ import axios from "axios";
 const useAxios = () => {
   const [error, setError] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [state, setState] = useState({ 
+  const [dbState, setDbState] = useState({ 
     users: {},
     games: {},
     modes: {},
@@ -12,7 +12,7 @@ const useAxios = () => {
     });
 
   const setScores = scores => setState( prev => ({...prev, scores }));
-  const setAllData = (users, games, modes, scores) => setState( prev => ({ ...prev, users, games, modes, scores }));
+  const setAllData = (users, games, modes, scores) => setDbState( prev => ({ ...prev, users, games, modes, scores }));
 
   // Retrieve all data from the database
   const endpointUsers = "/api/users";
@@ -43,24 +43,25 @@ const useAxios = () => {
   },[]);
 
   // Set the scores for a new game
-
-  function postAxios(user_id, game_id, mode_id, score) {
-    let modeIfSuccess = "";
-    let modeIfFail = "";
-    const endpointPost = "/api/scores/";
-    
+  const postAxios = (obj) => { //working  (user_id, game_id, mode_id, score)
+    const endpointPost = "/api/highscores";
     axios
-      .post(endpointPost, {user_id, game_id, mode_id, score}) 
-      .then((res) => {
-        setError(null);
-        return res.body; 
-      })
-      .catch(err => {
-        setError(err.message);
-        return err;
-      });
+    .post(endpointPost, obj)
+    .then(res => {
+      console.log(res);
+      setError(null);
+      return res.body;
+    })
+    .catch(err => {
+      console.log(err);
+      setError(err.message);
+      return err;
+    })
   }
-    return {state, setScores, postAxios};
+     
+  
+    return {dbState, setScores, postAxios};
 };
 
 export default useAxios;
+
