@@ -42,17 +42,6 @@ export default function App() {
     )
   }
 
-
-  // return (
-
-  //   <main className="layout" >
-  //     <section>
-  //       <MenuList
-  //       />
-  //     </section>
-
-  //   </main>
-  // )
 }
 
 
