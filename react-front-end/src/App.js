@@ -5,10 +5,18 @@ import MenuList from './components/MenuList';
 import Game from './components/Game';
 import HowTo from './components/HowTo';
 import Leaderboard from './components/Leaderboard';
+import useAxios from './hooks/useAxios';
+
 
 
 export default function App() {
   const [step, setStep] = useState(0);
+
+  //import data from database
+  const { state, setScores, postAxios } = useAxios();
+  const { users, games, modes, scores } = state;
+  
+  console.log(users, games, modes, scores);
 
   const changeStep = (step) => {
     setStep(step)

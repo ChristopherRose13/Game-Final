@@ -52,19 +52,15 @@ const useAxios = () => {
     axios
       .post(endpointPost, {user_id, game_id, mode_id, score}) 
       .then((res) => {
-        updateMemoryData(); 
-        updateMemorySpots(); 
         setError(null);
-        setStackMode(modeIfSuccess, true); 
         return res.body; 
       })
       .catch(err => {
-        setStackMode(modeIfFail, true); 
         setError(err.message);
         return err;
       });
   }
-    return {state, setScore, postAxios};
+    return {state, setScores, postAxios};
 };
 
 export default useAxios;
