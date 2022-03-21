@@ -36,65 +36,66 @@ class SceneMain extends Phaser.Scene {
                   this.score = 0;
                   this.scoreText = "High Score";
                   this.cameraOn = true;
-                  this.movementX = "idle";
-                  this.movementY = "idle";
-                  this.voiceMoveX = "idle";
-                  this.voiceMoveY = "idle";
-                }                 
+                  this.state = {
+                                movementX: "idle",
+                                movementY: "idle",
+                                voiceMoveX: "idle",
+                                voiceMoveY: "idle"
+                                }
+                }
 componentDidMount() {
-  this.updateFunction();
   if (annyang) {
     // Let's define a command.
     var commands = {
       'pause': function() { alert('Game is paused!'); },
       'right': function () {
-                            this.voiceMoveX = "right";
+                            this.setState({voiceMoveX: "right"})
                             setTimeout(() => {
-                              this.voiceMoveX = "neutral";
+                              this.setState({voiceMoveX: "neutral"})
                             }, 1000)
                             },
       'left': function () {
-                            this.voiceMoveX = "left";
+                            this.setState({voiceMoveX: "left"})
                             setTimeout(() => {
-                              this.voiceMoveX = "neutral";
+                              this.setState({voiceMoveX: "neutral"})
                             }, 1000)
                           },
       'jump': function () {
-                            this.voiceMoveY = "up";
+                            this.setState({voiceMoveY: "up"})
                             setTimeout(() => {
-                              this.voiceMoveY = "neutral";
+                              this.setState({voiceMoveY: "neutral"})
                             }, 50)
                           },
       'right jump': function () {
-                            this.voiceMoveX = "right";
-                            this.voiceMoveY = "up";
+                            this.setState({voiceMoveX: "right"})
+                            this.setState({voiceMoveY: "up"})
                             setTimeout(() => {
-                              this.voiceMoveX = "neutral";
+                              this.setState({voiceMoveX: "neutral"})
                             }, 1300)
                             setTimeout(() => {
-                              this.voiceMoveY = "neutral";
+                              this.setState({voiceMoveY: "neutral"})
                             }, 100)
                           },
       'left jump': function () {
-                            this.voiceMoveX = "left";
-                            this.voiceMoveY = "up";
+                            this.setState({voiceMoveX: "left"})
+                            this.setState({voiceMoveY: "up"})
                             setTimeout(() => {
-                            this.voiceMoveX = "neutral";
+                            this.setState({voiceMoveX: "neutral"})
                             }, 1300)
                             setTimeout(() => {
-                            this.voiceMoveY = "neutral";
+                            this.setState({voiceMoveY: "neutral"})
                             }, 100)
                           },
       'long left': function () {
-                            this.voiceMoveX = "left";
+                            this.setState({voiceMoveX: "left"})
                             setTimeout(() => {
-                            this.voiceMoveX = "neutral";
+                            this.setState({voiceMoveX: "neutral"})
                             }, 1700)
                           },
       'long right': function () {
-                            this.voiceMoveX = "right";
+                            this.setState({voiceMoveX: "right"})
                             setTimeout(() => {
-                            this.voiceMoveX = "neutral";
+                            this.setState({voiceMoveX: "neutral"})
                             }, 1700)
                           },
       'baby right': function () {
@@ -189,7 +190,102 @@ componentDidMount() {
     gameOver = true;
   }
   
- 
+  // Video Functions
+
+  const video = document.querySelector("#camera")
+  if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true})
+  .then(function(stream) {
+    video.srcObject = stream
+    toggleVideo()
+  })
+  .catch(function(err) {
+    console.log("Something went wrong!")
+    console.log(err)
+  })
+  }
+  
+  let canvas = document.getElementById('overlay')
+  let context = canvas.getContext('2d')
+  
+  let drawLine = function(ctx, x1, y1, x2, y2) {
+  context.beginPath()
+  context.moveTo(x1, y1)
+  context.lineTo(x2, y2)
+  context.stroke()
+  }
+  
+  let tracker = new tracking.ObjectTracker('face')
+  tracker.setInitialScale(4)
+  tracker.setStepSize(2)
+  tracker.setEdgesDensity(0.1)
+  
+  tracker.on('track', function(event) {
+  if (event.data.length === 1) {
+    // Clear entire canvas  
+    context.clearRect(0, 0, canvas.width, canvas.height)
+  
+    // Draw grid lines so we can see control points
+    let leftBound = canvas.width / 3
+    let rightBound = leftBound * 2
+    let upBound = canvas.height / 3
+    let downBound = upBound * 2
+  
+    context.strokeStyle = '#ff0000';
+    drawLine(context, leftBound, 0, leftBound, canvas.height);
+    drawLine(context, rightBound, 0, rightBound, canvas.height);
+    drawLine(context, 0, upBound, canvas.width, upBound);
+    drawLine(context, 0, downBound, canvas.width, downBound);          
+  
+    // Find center of face
+    let rect = event.data[0]
+    let faceX = rect.x + (rect.width / 2)
+    let faceY = rect.y + (rect.height / 2)
+    
+    // Draw square at center of face
+    context.lineWidth = 5
+  
+    // Draw face bounding box & center point
+    context.strokeStyle = '#0000ff'
+    context.strokeRect(faceX - 10, faceY - 10, 20, 20)
+  
+    // Has face crossed a boundary?
+    var move
+    if (faceX < leftBound) {
+      move = this.setState({movementX: "left"})  
+    } else if (faceX > rightBound) {
+      move = this.setState({movementX: "right"})
+    } else {
+      move = this.setState({movementX: "neutral"})
+    }
+    if (faceY < upBound) {
+      move = this.setState({movementY: "up"})
+    } else if (faceY > downBound) {
+      move = this.setState({movementY: "down"})
+    } else {
+      move = this.setState({movementY: "neutral"})
+    }
+    console.log("move",move); 
+  }
+  })
+  tracking.track(video, tracker, { camera: true, audio: false})
+  
+  function toggleVideo () {
+    if (this.cameraOn) {
+      const mediaStream = video.srcObject;
+      const tracks = mediaStream.getTracks();
+      tracks.forEach(track => track.stop())
+      this.cameraOn = false;
+      console.log("camera is off")
+    } else if (navigator.mediaDevices.getUserMedia){
+      navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+      video.srcObject = stream
+    })
+      console.log("camera is on")
+      this.cameraOn = true;
+    }  
+  }
 
               this.input.keyboard.on('keydown-M', () => {
                 toggleVoice()
@@ -260,103 +356,7 @@ componentDidMount() {
               this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
             }
   update () {
-     // Video Functions
-
-  const video = document.querySelector("#camera")
-  if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true})
-  .then(function(stream) {
-    video.srcObject = stream
-    toggleVideo()
-  })
-  .catch(function(err) {
-    console.log("Something went wrong!")
-    console.log(err)
-  })
-  }
-  
-  let canvas = document.getElementById('overlay')
-  let context = canvas.getContext('2d')
-  
-  let drawLine = function(ctx, x1, y1, x2, y2) {
-  context.beginPath()
-  context.moveTo(x1, y1)
-  context.lineTo(x2, y2)
-  context.stroke()
-  }
-  
-  let tracker = new tracking.ObjectTracker('face')
-  tracker.setInitialScale(4)
-  tracker.setStepSize(2)
-  tracker.setEdgesDensity(0.1)
-  
-  tracker.on('track', function(event) {
-  if (event.data.length === 1) {
-    // Clear entire canvas  
-    context.clearRect(0, 0, canvas.width, canvas.height)
-  
-    // Draw grid lines so we can see control points
-    let leftBound = canvas.width / 3
-    let rightBound = leftBound * 2
-    let upBound = canvas.height / 3
-    let downBound = upBound * 2
-  
-    context.strokeStyle = '#ff0000';
-    drawLine(context, leftBound, 0, leftBound, canvas.height);
-    drawLine(context, rightBound, 0, rightBound, canvas.height);
-    drawLine(context, 0, upBound, canvas.width, upBound);
-    drawLine(context, 0, downBound, canvas.width, downBound);          
-  
-    // Find center of face
-    let rect = event.data[0]
-    let faceX = rect.x + (rect.width / 2)
-    let faceY = rect.y + (rect.height / 2)
-    
-    // Draw square at center of face
-    context.lineWidth = 5
-  
-    // Draw face bounding box & center point
-    context.strokeStyle = '#0000ff'
-    context.strokeRect(faceX - 10, faceY - 10, 20, 20)
-  
-    // Has face crossed a boundary?
-    
-    if (faceX < leftBound) {
-      this.movementX = "left";
-    } else if (faceX > rightBound) {
-      this.movementX = "right";
-    } else {
-      this.movementX = "neutral";
-    }
-    if (faceY < upBound) {
-      this.movementY = "up";
-    } else if (faceY > downBound) {
-      this.movementY = "down";
-    } else {
-      this.movementY = "neutral";
-    }
-    console.log("create() capturing face: " + this.movementX + " " + this.movementY);
-  }
-  })
-  tracking.track(video, tracker, { camera: true, audio: false})
-  
-  // function toggleVideo () {
-  //   if (this.cameraOn) {
-  //     const mediaStream = video.srcObject;
-  //     const tracks = mediaStream.getTracks();
-  //     tracks.forEach(track => track.stop())
-  //     this.cameraOn = false;
-  //     console.log("camera is off")
-  //   } else if (navigator.mediaDevices.getUserMedia){
-  //     navigator.mediaDevices.getUserMedia({ video: true })
-  //     .then(function(stream) {
-  //     video.srcObject = stream
-  //   })
-  //     console.log("camera is on")
-  //     this.cameraOn = true;
-  //   }  
-  // }
-              console.log("update() controls", this.movementX,this.movementY)
+              console.log("update()", this.state.movementX,this.state.movementY)
               if (this.gameOver)
               {
                   //save score and name to database
@@ -364,13 +364,13 @@ componentDidMount() {
                   return;
               }
                       
-              if (this.cursors.left.isDown || this.movementX==="left" || this.voiceMoveX==="left")
+              if (this.cursors.left.isDown || this.state.movementX==="left" || this.state.voiceMoveX==="left")
               {
                 this.player.setVelocityX(-160);
               
                 this.player.anims.play('left', true);
               }
-              else if (this.cursors.right.isDown || this.movementX==="right" || this.voiceMoveX === "right")
+              else if (this.cursors.right.isDown || this.state.movementX==="right" || this.state.voiceMoveX === "right")
               {
                 this.player.setVelocityX(160);
               
@@ -385,7 +385,7 @@ componentDidMount() {
               
               // console.log this.movementY from create() binding its context to this
                           
-              if ((this.cursors.up.isDown && this.player.body.touching.down) || (this.movementY==="up" && this.player.body.touching.down) || (this.voiceMoveY==="up" && this.player.body.touching.down))
+              if ((this.cursors.up.isDown && this.player.body.touching.down) || (this.state.movementY==="up" && this.player.body.touching.down) || (this.state.voiceMoveY==="up" && this.player.body.touching.down))
               {
                 this.player.setVelocityY(-330);
               }
