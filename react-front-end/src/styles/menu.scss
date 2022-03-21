@@ -1,3 +1,52 @@
-.play-button {
+
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  // opacity: 0.5;
+}
+
+.content {
+  position: relative;
+  top:10em;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+.keyboard {
+  padding-top: 40px;
+  font-size: 25pt;
+}
+.voice-control {
+  padding-top: 40px;
+  font-size: 25pt;
+}
+
+.face-detection {
+  padding-top: 40px;
+  font-size: 25pt;
+}
+
+.how-to {
+  font-size: 40pt;
+ text-align: center;
+}
+
+
+
+.details {
+  font-size: 20pt;
+}
+
+.body {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.welcome {
   font-size: 30pt;
 }

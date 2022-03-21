@@ -5,6 +5,7 @@ import MenuList from './components/MenuList';
 import Game from './components/Game';
 import HowTo from './components/HowTo';
 import Leaderboard from './components/Leaderboard';
+// import './styles/menu.scss';
 
 
 export default function App() {
