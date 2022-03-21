@@ -1,7 +1,7 @@
 import annyang from "annyang";
  
 
-export default function voice () {
+export default function initialize () {
     // Let's define a command.
     const commands = {
       'pause': function() { alert('Game is paused!'); },
@@ -63,24 +63,23 @@ export default function voice () {
           voiceMoverX("")
         }, 300)
       },
-      'baby left': function () {
-        voiceMoverX("left")
+      'baby left': function (props) {
+        props("left")
         setTimeout(() => {
-          voiceMoverX("")
+          props("")
         }, 300)
       }
     };
   
    // Add our commands to annyang
     annyang.addCommands(commands);
-    
-    const pauseVoice = function () {
-      annyang.pause();
-    }
-    
-    // Start listening.
-    const startVoice = function() {
-      annyang.start();
-    }
 }
 
+const pauseVoice = function () {
+  annyang.pause();
+}
+
+    // Start listening.
+const startVoice = function() {
+      annyang.start();
+}
