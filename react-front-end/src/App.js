@@ -6,6 +6,8 @@ import HowTo from './components/HowTo';
 import Leaderboard from './components/Leaderboard';
 // import useAxios from './hooks/useAxios'; // commented out for now
 
+// import './styles/menu.scss';
+
 export default function App() {
   const [step, setStep] = useState(0);
 
