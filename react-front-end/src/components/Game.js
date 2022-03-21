@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import phaserGame from "../game/intro";
 
 
 export default function Game() {
@@ -6,7 +7,7 @@ export default function Game() {
   useEffect(() => {
     console.log("canvasRef", canvasRef.current)
   }, [])
-  
+  let game = new phaserGame();
   return (
 
     <body>
