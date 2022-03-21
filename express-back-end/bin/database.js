@@ -57,7 +57,26 @@ const getUserById = function(id) {
 };
 exports.getUserById = getUserById;
 
-// 1 - Get HighScores
+/** 0.03_ ger all users
+ * Get all users from the database.
+ **/
+const getUsers = function() {
+  return db
+    .query(`SELECT *
+            FROM users;
+          `)
+    .then((result) => {
+      console.log("database", result.rows);
+      return result.rows;
+      
+    })
+    .catch((err) => {
+      console.log('Error retrieving all user', err.message);
+    });
+};
+exports.getUsers = getUsers;
+
+// 1 - Get HighScores limited by 10
 const getHighScores = function() {
   return db
     .query(`SELECT highscores.id, highscores.user_id, highscores.game_id, highscores.mode_id, users.name, games.name as game_name, modes.name as mode_name, highscores.score
@@ -99,3 +118,60 @@ const insertHighScore = function(newHighScore) {
 };
 exports.insertHighScore = insertHighScore;
 
+/** 5 get Games
+ * Get all games from the database.
+ **/
+const getGames = function() {
+  return db
+    .query(`SELECT *
+            FROM games;
+          `)
+    .then((result) => {
+      console.log("database", result.rows);
+      return result.rows;
+      
+    })
+    .catch((err) => {
+      console.log('Error retrieving all games', err.message);
+    });
+};
+exports.getGames = getGames;
+
+/** 6 get Modes
+ * Get all modes from the database.
+ **/
+const getModes = function() {
+  return db
+    .query(`SELECT *
+            FROM modes;
+          `)
+    .then((result) => {
+      console.log("database", result.rows);
+      return result.rows;
+      
+    })
+    .catch((err) => {
+      console.log('Error retrieving all modes', err.message);
+    });
+};
+exports.getModes = getModes;
+
+/** 7 get score
+ * Get all score from the database.
+ **/
+const getScores = function() {
+  return db
+    .query(`SELECT *
+            FROM highscores
+            ORDER BY highscores.score DESC;
+          `)
+    .then((result) => {
+      console.log("database", result.rows);
+      return result.rows;
+      
+    })
+    .catch((err) => {
+      console.log('Error retrieving all scores', err.message);
+    });
+};
+exports.getScores = getScores;

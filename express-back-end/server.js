@@ -60,7 +60,61 @@ App.post("/api/highscores", (req, res) => {
     });
 });
 
+App.get("/api/users", (req, res) => {
+  Promise.all([
+    database.getUsers()
+  ])
+    .then((data) => {
+      const users = data[0];
+      console.log("Users route", users);
+      res.json(users);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
+App.get("/api/games", (req, res) => {
+  Promise.all([
+    database.getGames()
+  ])
+    .then((data) => {
+      const games = data[0];
+      console.log("Games route", games);
+      res.json(games);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+App.get("/api/modes", (req, res) => {
+  Promise.all([
+    database.getModes()
+  ])
+    .then((data) => {
+      const modes = data[0];
+      console.log("Modes route", modes);
+      res.json(modes);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+App.get("/api/scores", (req, res) => {
+  Promise.all([
+    database.getScores()
+  ])
+    .then((data) => {
+      const scores = data[0];
+      console.log("Scores route", scores);
+      res.json(scores);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
