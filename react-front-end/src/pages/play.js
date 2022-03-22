@@ -1,5 +1,6 @@
 import React from 'react';
 import NavButtons from '../NavButtons';
+import Game from '../components/Game';
 
 export default function Play() {
 
@@ -7,7 +8,7 @@ export default function Play() {
     <div className="play">
       <NavButtons />
       <h1> PLAY </h1>
-      <div id="game">          Game DIV is Here</div>
+      <Game />
     </div>
   );
 }
