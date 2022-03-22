@@ -1,13 +1,14 @@
 import React from "react";
 import '../styles/menu.scss';
-import Navbar from "./Navbar";
+
+import state from "../useState";
 
 export default function HowTo(props) {
-
+  const navMenu = state();
   return (
 
     <body className="body">
-
+      {navMenu}
       <video src="./assets/backgroundVideo.mov" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
       <div className="content">
         <h1 className="how-to" >How To</h1>
@@ -33,7 +34,7 @@ export default function HowTo(props) {
         <h3 className="face-detection" >3. Face Detection:</h3>
         <p className="details">You can move dude around the course with facial tracking! Dude moves in the direction of your head as it moves outside the bounds of the centre square. </p>
       </div>
-      
+
     </body >
 
   )

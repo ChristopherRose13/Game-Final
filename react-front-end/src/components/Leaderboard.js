@@ -1,11 +1,15 @@
 import React from "react";
-import Navbar from "./Navbar";
+
+import state from "../useState";
+
 
 export default function Leaderboard(props) {
+  const navMenu = state();
+  return (
 
-  return <div>
-    <Navbar />
-    Leaderboard Page
-  </div>
-
+    < div >
+      {navMenu}
+      Leaderboard Page
+    </div >
+  )
 };
