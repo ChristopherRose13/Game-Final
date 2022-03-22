@@ -3,45 +3,74 @@ import Game from "./components/Game";
 
 import Leaderboard from "./components/Leaderboard";
 import HowTo from "./components/HowTo";
+import phaserGame from "./game/intro";
 
 
 
 export default function state() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState('main');
+
+  
+  const [history, setHistory] = useState([step]);
 
 
   const changeStep = (step) => {
     setStep(step)
+    // setHistory(history.push(step))
   }
 
-  if (step === 0) {
+  if (step === 'main') {
     return (
       <div>
-        <button onClick={() => { changeStep(1) }}>Play</button>
-        <button onClick={() => { changeStep(2) }}>How To</button>
-        <button onClick={() => { changeStep(3) }}>Leaderboard</button>
+        <button onClick={() => {
+           changeStep('play')
+       }}>Play</button>
+        <button onClick={() => { changeStep('howTo') }}>How To</button>
+        <button onClick={() => { changeStep('leaderboard') }}>Leaderboard</button>
       </div>
     )
   }
 
-  if (step === 1) {
+  if (step === 'play') {
     return (
-      <Game />
-    )
-  }
-
-  if (step === 2) {
-    return (
+      <div class="container">
       <div>
+        <button onClick={() => { changeStep('play')
+      window.location.reload(true).then(console.log("loaded!"))
+      }}>Play</button>
+        <button onClick={() => { changeStep('howTo') 
+        window.location.reload(true).then(console.log("loaded!")) }}>How To</button>
+        <button onClick={() => { changeStep('leaderboard')
+        window.location.reload(true).then(console.log("loaded!")) }}>Leaderboard</button>
+      </div>
+      <Game game={new phaserGame()}/>
+      </div>
+    )
+  } 
 
-        <HowTo />
+  if (step === 'howTo') {
+    return (
+      <div class="container">
+      <div>
+        <button onClick={() => { changeStep('play') }}>Play</button>
+        <button onClick={() => { changeStep('howTo') }}>How To</button>
+        <button onClick={() => { changeStep('leaderboard') }}>Leaderboard</button>
+      </div>
+      <HowTo />
       </div>
     )
   }
 
-  if (step === 3) {
+  if (step === 'leaderboard') {
     return (
+      <div class="container">
+      <div>
+        <button onClick={() => { changeStep('play') }}>Play</button>
+        <button onClick={() => { changeStep('howTo') }}>How To</button>
+        <button onClick={() => { changeStep('leaderboard') }}>Leaderboard</button>
+      </div>
       <Leaderboard />
+      </div>
     )
-  }
+  } 
 }
