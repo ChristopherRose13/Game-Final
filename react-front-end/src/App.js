@@ -4,6 +4,7 @@ import Play from './pages/play';
 import HowTo from './pages/howto';
 import HighScores from './pages/highscores';
 import { menuContext } from './providers/NavProvider';
+import phaserGame from './game/intro';
 // import 'App.css';
 
 export default function App() {
