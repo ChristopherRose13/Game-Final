@@ -6,7 +6,6 @@ import HowTo from "./components/HowTo";
 import phaserGame from "./game/intro";
 
 
-
 export default function state() {
   const [step, setStep] = useState('main');
 

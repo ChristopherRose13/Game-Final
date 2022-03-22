@@ -7,7 +7,7 @@ export const menuContext = createContext();
 export default function SelectorProvider(props) {
 
   // Here is our Shared State Object
-  const [selector, setSelector] = useState("play");
+  const [selector, setSelector] = useState("howto");
 
   // Functions to change  the selector state item
   const onPlay = function() {
