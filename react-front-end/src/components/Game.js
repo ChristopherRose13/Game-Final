@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import phaserGame from "../game/intro";
-
+import Navbar from "./Navbar";
 
 export default function Game() {
   const canvasRef = useRef();
@@ -11,7 +11,7 @@ export default function Game() {
   return (
 
     <body>
-      
+      < Navbar />
       <div id="wrapper">
         <video id="camera" width="320" height="240" autoplay="true"></video>
         <canvas ref={canvasRef} id="overlay" width="320" height="240"></canvas>

@@ -5,17 +5,19 @@
   right: 0;
   bottom: 0;
   min-width: 100%;
-  min-height: 100%;
-  // opacity: 0.5;
+  min-height: 70%;
+  opacity: 0.9;
 }
 
 .content {
   position: relative;
   top:10em;
-  background: rgba(0, 0, 0, 0.5);
+  // background: rgba(0, 0, 0, 0.5);
+   background: rgba(54, 64, 66, 0.5);
   color: #f1f1f1;
   width: 100%;
   padding: 20px;
+  
 }
 
 .keyboard {
@@ -45,6 +47,7 @@
 
 .body {
   font-family: 'Press Start 2P', cursive;
+  margin-right: 30px;
 }
 
 .welcome {
