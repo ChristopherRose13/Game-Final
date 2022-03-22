@@ -3,12 +3,12 @@ import '../styles/menu.scss';
 
 import state from "../useState";
 
-export default function HowTo(props) {
-  const navMenu = state();
+export default function HowTo() {
+  // const navMenu = state();
   return (
 
     <body className="body">
-      {navMenu}
+      
       <video src="./assets/backgroundVideo.mov" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
       <div className="content">
         <h1 className="how-to" >How To</h1>

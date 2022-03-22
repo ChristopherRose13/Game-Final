@@ -8,10 +8,10 @@ import state from './useState';
 // import './styles/menu.scss';
 
 export default function App() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState('main');
 
 
-  const navMenu = state();
+  const navMenu = state(step);
   return navMenu;
 
 }
