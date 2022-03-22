@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import axios from 'axios';
 import './App.css';
 import Game from './components/Game';
 import HowTo from './components/HowTo';
@@ -13,10 +12,26 @@ import {
 } from "react-router-dom";
 
 
+// import './styles/menu.scss';
 
 export default function App() {
   const [step, setStep] = useState(0);
 
+  //import data from database // Commented out for now to avoid unnecessary requests
+  // const { dbState, setScores, postScoreAxios, getHighScoresAxios } = useAxios();
+  // const { users, games, modes, scores } = dbState;
+  // console.log(users, games, modes, scores);
+  // const newScore ={
+  //   user_id: 2, // hardcoded for test
+  //   game_id: 1,
+  //   mode_id: 3,
+  //   score: 500
+  // } 
+  // div for test
+  //<button onClick={() => { postScoreAxios(newScore) }} >Play</button> 
+  //<button onClick={() => { getHighScoresAxios() }} >Play</button> 
+
+  
   const changeStep = (step) => {
     setStep(step)
   }

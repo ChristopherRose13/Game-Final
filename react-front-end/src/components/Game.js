@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import phaserGame from "../game/intro";
 import Navbar from "./Navbar";
+import '../styles/game.scss';
+
 
 export default function Game() {
   const canvasRef = useRef();
@@ -8,6 +10,7 @@ export default function Game() {
     console.log("canvasRef", canvasRef.current)
   }, [])
   let game = new phaserGame();
+
   return (
 
     <body>

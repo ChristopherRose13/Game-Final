@@ -12,7 +12,6 @@ export default function MenuItem(props) {
       <button className="play-button">
         PLAY
       </button>
-
       <button>
         HOW TO
       </button>
