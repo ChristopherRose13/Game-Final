@@ -126,6 +126,10 @@ export default function phaserGame () {
   let voiceMoveX;
   let voiceMoveY;
   let cameraOn = true;
+  let bombSound;
+  let jumpSound;
+  let starSound;
+  let backgroundMusic;
   
   function preload ()
   {
@@ -176,6 +180,10 @@ export default function phaserGame () {
   progressBox.fillStyle(0x222222, 0.8);
   progressBox.fillRect(240, 270, 320, 50);
   
+  this.load.audio('bombSound', 'assets/bomb.mp3')
+  this.load.audio('jump', 'assets/jump.mp3')
+  this.load.audio('background', 'assets/background.mp3')
+  this.load.audio('starSound', 'assets/star.mp3')
   this.load.image('ground', 'assets/platform.png');
   this.load.image('sky', 'assets/sky.png');
   this.load.image('ground', 'assets/platform.png');
@@ -203,6 +211,17 @@ export default function phaserGame () {
   
   function create ()
   {
+
+    bombSound = this.sound.add('bombSound');
+    jumpSound = this.sound.add('jump');
+    backgroundMusic = this.sound.add('background');
+    starSound = this.sound.add('starSound');
+    backgroundMusic.setVolume(0.2)
+    backgroundMusic.loop = true;
+    starSound.setVolume(0.5)
+    jumpSound.setVolume(0.6)
+    bombSound.setVolume(0.5)
+    backgroundMusic.play()
   
   this.input.keyboard.on('keydown-M', () => {
     toggleVoice()
@@ -305,6 +324,7 @@ export default function phaserGame () {
   
   if ((cursors.up.isDown && player.body.touching.down) || (movementY==="up" && player.body.touching.down) || (voiceMoveY==="up" && player.body.touching.down))
   {
+      jumpSound.play()
       player.setVelocityY(-330);
   }
   
@@ -314,6 +334,7 @@ export default function phaserGame () {
   
   function collectStar (player, star)
   {
+    starSound.play();
     star.disableBody(true, true);
     score += 10;
     scoreText.setText('Score: ' + score);
@@ -341,6 +362,8 @@ export default function phaserGame () {
   function hitBomb (player, bomb)
   {
     this.physics.pause();
+
+    bombSound.play()
   
     player.setTint(0xff0000);
   
