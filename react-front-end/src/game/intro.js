@@ -96,6 +96,9 @@ export default function phaserGame () {
       setTimeout(() => {
         voiceMoverX("")
       }, 300)
+    },
+    'game over': function (){
+      window.location.reload(true);
     }
   };
   
