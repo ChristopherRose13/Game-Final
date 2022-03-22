@@ -9,9 +9,11 @@ export default function Game() {
   const canvasRef = useRef();
   useEffect(() => {
     console.log("canvasRef", canvasRef.current)
-  }, [])
+
+  },[])
+
   let game = new phaserGame();
-  
+
   return (
 
     <body>
