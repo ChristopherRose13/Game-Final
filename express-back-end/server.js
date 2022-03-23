@@ -4,7 +4,7 @@ require("dotenv").config();
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
-const PORT = 8080;
+const PORT = 8000;
 const morgan = require("morgan");
 const database = require('./bin/database');
 

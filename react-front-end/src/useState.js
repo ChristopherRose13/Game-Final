@@ -12,6 +12,7 @@ export default function state() {
   
   const [history, setHistory] = useState([step]);
 
+  
 
   const changeStep = (step) => {
     setStep(step)
