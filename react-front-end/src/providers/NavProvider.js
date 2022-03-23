@@ -7,9 +7,13 @@ export const menuContext = createContext();
 export default function SelectorProvider(props) {
 
   // Here is our Shared State Object
-  const [selector, setSelector] = useState("howto");
+  const [selector, setSelector] = useState("home");
 
   // Functions to change  the selector state item
+const home = function() {
+  setSelector("home")
+}
+
   const onPlay = function() {
     setSelector("play");
   };
@@ -21,7 +25,7 @@ export default function SelectorProvider(props) {
   };
 
   // This list can get long with a lot of functions.  Reducer may be a better choice
-  const providerData = { selector, onPlay, onHowTo, onHighScores };
+  const providerData = { selector, onPlay, onHowTo, onHighScores, home };
 
   // We can now use this as a component to wrap anything
   // that needs our state

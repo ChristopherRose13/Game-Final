@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import Play from './pages/play';
 import HowTo from './pages/howto';
 import HighScores from './pages/highscores';
+import Home from './pages/home';
 import { menuContext } from './providers/NavProvider';
 import phaserGame from './game/intro';
 
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <div className="App">
       {/* <h1>My App</h1> */}
+      {selector === "home" && <Home />}
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
