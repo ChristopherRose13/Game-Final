@@ -11,13 +11,14 @@
 }
 
 .content {
-  position: relative;
+ 
+  z-index: 3;
   top:10em;
-  // background: rgba(0, 0, 0, 0.5);
    background: rgba(54, 64, 66, 0.5);
   color: #f1f1f1;
  
 }
+ 
 
 .keyboard {
   padding-top: 40px;

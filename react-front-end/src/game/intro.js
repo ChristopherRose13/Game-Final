@@ -294,7 +294,7 @@ export default function phaserGame() {
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-    gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', fill: 'F00' });
+    gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', color: '#ff0000' });
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
   }
