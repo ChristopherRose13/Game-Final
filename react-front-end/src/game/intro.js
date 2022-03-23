@@ -5,11 +5,17 @@ import tracking from "jstracking";
 import annyang from "annyang";
 import { isListening } from 'annyang';
 import Leaderboard from '../components/Leaderboard';
+import useAxios from '../hooks/useAxios';
+import state from '../useState';
+
+
+
 
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
-export default function phaserGame() {
+export default function phaserGame () {
+  const { postScoreAxios, getHighScoresAxios } = useAxios();
   const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -98,7 +104,9 @@ export default function phaserGame() {
         voiceMoverX("")
       }, 300)
     },
-    'game over': function () {
+    'game over': function (){
+      //send score to database
+      
       window.location.reload(true);
     }
   };
@@ -298,16 +306,23 @@ export default function phaserGame() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
   }
-
-  function update() {
-    if (gameOver) {
-      //save score and name to database
-      //send to game over screen
-      return;
+  
+  function update ()
+  {
+    if (gameOver)
+    {
+        //save score and name to database
+        postScoreAxios({user_id:2, game_id:1, mode_id: 3, score})
+        // setScore(score)
+        game.scene.pause("default")
+        //send to game over screen
+        return;
+        
     }
-
-
-    if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
+  
+  
+    if (cursors.left.isDown || movementX==="left" || voiceMoveX==="left")
+  {
       player.setVelocityX(-160);
 
       player.anims.play('left', true);
