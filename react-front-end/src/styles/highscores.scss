@@ -1,0 +1,42 @@
+.leaderboard {
+  font-size: 50pt;
+  margin-top: 100px;
+text-align: center;
+}
+
+.highScores {
+  background-image: "../assets/leaderboard-stars.jpg";
+  
+}
+.body {
+  background-color: bisque;
+}
+
+.table {
+  // display: flex;
+  // align-content: center;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15pt;
+}
+
+.your-score {
+  text-align: center;
+  margin-top: 50px;
+  color: red;
+}
+
+.your-rank {
+  text-align: center;
+  margin-top: 50px;
+  color: red;
+}
+
+.heading {
+  font-size: 20pt;
+}
+
+.results {
+  padding-top: 75px;
+}
