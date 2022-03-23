@@ -1,12 +1,15 @@
 import React from "react";
 import '../styles/menu.scss';
 
-export default function HowTo(props) {
+import state from "../useState";
 
+export default function HowTo() {
+  // const navMenu = state();
   return (
 
     <body className="body">
-      <video src="./assets/skull.mp4" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
+      
+      <video src="./assets/backgroundVideo.mov" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
       <div className="content">
         <h1 className="how-to" >How To</h1>
         <h2 className="welcome">Welcome to Stars n Bombs! The goal is to collect all the stars to gain points. Be on the lookout for falling bombs  💣  though! The game's over when you're hit by a bomb. You have 3 options to play:</h2>
@@ -31,6 +34,7 @@ export default function HowTo(props) {
         <h3 className="face-detection" >3. Face Detection:</h3>
         <p className="details">You can move dude around the course with facial tracking! Dude moves in the direction of your head as it moves outside the bounds of the centre square. </p>
       </div>
+
     </body >
 
   )
