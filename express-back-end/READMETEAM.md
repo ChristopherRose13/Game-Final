@@ -19,6 +19,10 @@ create tables and insert data seeds
 
 * npm run db:reset
 
+obs: if miss the script, simply add
+"db:reset": "node bin/resetdb.js" 
+in package.json in script section
+
 # last step
 
 * npm start
