@@ -1,41 +1,15 @@
 import React from 'react';
 import NavButtons from '../NavButtons';
-import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { FaCamera, FaMicrophoneAlt, FaKeyboard  } from 'react-icons/fa';
-import useAxios from '../hooks/useAxios';
+import getLeaderBoard from '../hooks/getLeaderBoard';
 
-export default function Login() {
- const [data, setData] = useState([]);
- const { getHighScoresAxios} = useAxios;
-
- useEffect(() => {
-  axios.get("/api/highscores")
-  .then(res => {
-    console.log(res.data);
-    setData([...res.data]);
-  })
-  .catch(err => {
-    console.log(err);
-    return err;
-  });
-}, [])
-
-// useEffect(() => {
-//   getHighScoresAxios()
-//   .then(res => {
-//     console.log(res);
-//     setData([...res]);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//     return err;
-//   });
-// }, [])
+export default function Highscores() {
+  const data = getLeaderBoard();
+  const localData = [...data];
 
 
-  if(!data===[]) {
+  if(!localData===[]) {
+    console.log(localData);
     return (
       <div className="highScores">
         <NavButtons />
@@ -62,9 +36,11 @@ export default function Login() {
             <td>{i+1}</td>
             <td>{d.name}</td>
             <td>
+              <span>
               {d.mode_name === "camera" ? <FaCamera /> : 
               d.mode_name === "voice" ?  <FaMicrophoneAlt /> : 
                                           <FaKeyboard />}
+              </span>
             </td>
             <td>{d.score}</td>
           </tr>)} 

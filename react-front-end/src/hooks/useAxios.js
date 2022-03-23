@@ -52,25 +52,8 @@ const useAxios = () => {
       return err;
     })
   }
-
-  // Get all HighScores
-  const getHighScoresAxios = (setData) => {
-    const endpointGet = "/api/highscores";
-    axios
-    .get(endpointGet)
-    .then(res => {
-      console.log(res.body);
-      setData(res.body);
-      return res.body;
-    })
-    .catch(err => {
-      console.log(err);
-      return err;
-    })
-  }
-     
   
-    return {dbState, setScores, postScoreAxios, getHighScoresAxios};
+    return {dbState, setScores, postScoreAxios};
 };
 
 export default useAxios;
