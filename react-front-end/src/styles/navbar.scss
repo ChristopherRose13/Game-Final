@@ -3,7 +3,7 @@
  height: 45px;
  display: flex;
  
- font-size: 20pt;
+ font-size: 30pt;
  font-family: 'Press Start 2P', cursive;
  outline: none;
  background:none;
@@ -23,16 +23,14 @@ margin-right: 15px;
 
 
 .nav {
-  
+  margin-top: 100px;
+  margin-right: auto;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
- margin-right: 0 px;
-  // position: absolute;
+  
   z-index: 2;
-  align-items: center;
+  align-items: flex-start;
+  align-content: center;
   margin-right: 0px;
 }
-// .buttons {
-//   background-color: aquamarine; 
-// }

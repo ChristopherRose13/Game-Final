@@ -6,7 +6,8 @@
   "author": "garrettgsb",
   "license": "MIT",
   "scripts": {
-    "go": "nodemon server.js"
+    "go": "nodemon server.js",
+    "db:reset": "node bin/resetdb.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -14,6 +15,7 @@
     "express": "^4.16.4",
     "morgan": "^1.10.0",
     "nodemon": "^1.18.7",
+    "pg": "^8.7.3",
     "pg-pool": "^3.5.1"
   }
 }

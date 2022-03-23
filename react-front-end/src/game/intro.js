@@ -98,7 +98,7 @@ export default function phaserGame() {
         voiceMoverX("")
       }, 300)
     },
-    'game over': function (){
+    'game over': function () {
       window.location.reload(true);
     }
   };
@@ -125,6 +125,7 @@ export default function phaserGame() {
   let gameOver = false;
   let score = 0;
   let scoreText;
+  let gameOverText;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -293,6 +294,9 @@ export default function phaserGame() {
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', fill: 'F00' });
+    gameOverText.setOrigin(0.5);
+    gameOverText.visible = false;
   }
 
   function update() {
@@ -363,6 +367,7 @@ export default function phaserGame() {
     player.anims.play('turn');
 
     gameOver = true;
+    gameOverText.visible = true;
   }
 
   // Video Functions
