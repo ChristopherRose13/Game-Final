@@ -2,15 +2,15 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 
 const useAxios = () => {
-  const [dbState, setDbState] = useState({ 
-    users: {},
-    games: {},
-    modes: {},
-    scores: {}
-    });
+  // const [dbState, setDbState] = useState({ 
+  //   users: {},
+  //   games: {},
+  //   modes: {},
+  //   scores: {}
+  //   });
 
-  const setScores = scores => setDbState( prev => ({...prev, scores }));
-  const setAllData = (users, games, modes, scores) => setDbState( prev => ({ ...prev, users, games, modes, scores }));
+  // const setScores = scores => setDbState( prev => ({...prev, scores }));
+  // const setAllData = (users, games, modes, scores) => setDbState( prev => ({ ...prev, users, games, modes, scores }));
 
   // Retrieve all data from the database
   const endpointUsers = "/api/users";
@@ -30,7 +30,7 @@ const useAxios = () => {
       const games = all[1].data;
       const modes = all[2].data; 
       const scores = all[3].data;      
-      setAllData({...users}, {...games}, {...modes}, {...scores});
+      // setAllData({...users}, {...games}, {...modes}, {...scores});
     })
     .catch(err => {
       console.log(err);
@@ -69,7 +69,7 @@ const useAxios = () => {
   }
      
   
-    return {dbState, setScores, postScoreAxios, getHighScoresAxios};
+    return {postScoreAxios, getHighScoresAxios};
 };
 
 export default useAxios;
