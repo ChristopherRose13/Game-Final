@@ -3,6 +3,7 @@ import phaserGame from "../game/intro";
 
 import '../styles/game.scss';
 import state from "../useState";
+import '../styles/game.scss';
 
 let game;
 export default function Game() {
@@ -10,10 +11,10 @@ export default function Game() {
   useEffect(() => {
     console.log("canvasRef", canvasRef.current)
   }, [])
-  if(!game) {
+  if (!game) {
     game = new phaserGame();
   }
-  
+
   return (
 
     <body>
