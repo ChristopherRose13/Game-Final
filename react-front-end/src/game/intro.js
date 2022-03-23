@@ -143,6 +143,9 @@ export default function phaserGame () {
   let jumpSound;
   let starSound;
   let backgroundMusic;
+  let keyboard = false;
+  let camera = false;
+  let voice = true;
 
   function preload() {
     var width = this.cameras.main.width;
