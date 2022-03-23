@@ -54,12 +54,13 @@ const useAxios = () => {
   }
 
   // Get all HighScores
-  const getHighScoresAxios = () => {
+  const getHighScoresAxios = (setData) => {
     const endpointGet = "/api/highscores";
     axios
     .get(endpointGet)
     .then(res => {
-      console.log(res);
+      console.log(res.body);
+      setData(res.body);
       return res.body;
     })
     .catch(err => {

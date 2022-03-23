@@ -10,6 +10,7 @@ export default function Game() {
   useEffect(() => {
     console.log("canvasRef", canvasRef.current)
   }, [])
+  
   let game = new phaserGame();
   
   return (
@@ -19,7 +20,7 @@ export default function Game() {
         <video id="camera" width="320" height="240" autoplay="true"></video>
         <canvas ref={canvasRef} id="overlay" width="320" height="240"></canvas>
       </div>
-      <div id="phaser-example"></div>
+      <div id="phaser-example">{game.score}</div>
     </body>
   )
 }
