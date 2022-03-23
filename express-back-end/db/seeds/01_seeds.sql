@@ -10,6 +10,9 @@ INSERT INTO users (
 name, email, password) 
 VALUES (
 'Pluto', 'dog@disney.com', 'password');
+name, email, password) 
+VALUES (
+'3W', '3w@gmail.com', 'password');
 
 INSERT INTO games (
 name, description, rating)
@@ -41,6 +44,8 @@ INSERT INTO highscores (user_id, game_id, mode_id, score)
 VALUES (3, 1, 2, 190);
 INSERT INTO highscores (user_id, game_id, mode_id, score)
 VALUES (3, 1, 3, 80);
+INSERT INTO highscores (user_id, game_id, mode_id, score)
+VALUES (4, 1, 2, 120);
 
 
 
