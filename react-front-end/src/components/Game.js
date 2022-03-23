@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import phaserGame from "../game/intro";
 
-import '../styles/game.scss';
+// import '../styles/game.scss';
 import state from "../useState";
-import '../styles/game.scss';
+
 
 let game;
 export default function Game() {
