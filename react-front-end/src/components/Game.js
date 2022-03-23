@@ -12,12 +12,7 @@ export default function Game() {
     console.log("canvasRef", canvasRef.current)
   }, [])
 
-
-  if(!game) {
-    game = new phaserGame();
-  }
-
-  
+  game = new phaserGame();  
   return (
 
     <body>
