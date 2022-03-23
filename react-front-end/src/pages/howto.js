@@ -1,13 +1,15 @@
 import React from 'react';
 import NavButtons from '../NavButtons';
+import '../styles/menu.scss';
+import HowTo from '../components/HowTo';
 
-export default function HowTo() {
+
+export default function howto() {
 
   return (
-    <div className="howTo">
+    <body className="body">
       <NavButtons />
-      <h1>How To</h1>
-      <div> How To DIV is here </div>
-    </div>
+      <HowTo />
+    </body >
   );
 }

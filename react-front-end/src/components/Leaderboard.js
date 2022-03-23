@@ -4,12 +4,11 @@ import state from "../useState";
 
 
 export default function Leaderboard() {
-  // const navMenu = state();
+
   return (
 
-    < div >
-      
+    <body className="body">
       Leaderboard Page
-    </div >
+    </body>
   )
 };

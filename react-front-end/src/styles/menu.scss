@@ -4,21 +4,21 @@
   position: fixed;
   right: 0;
   bottom: 0;
+  top: 0px;
   min-width: 100%;
   min-height: 70%;
   opacity: 0.9;
 }
 
 .content {
-  position: relative;
+ 
+  z-index: 3;
   top:10em;
-  // background: rgba(0, 0, 0, 0.5);
    background: rgba(54, 64, 66, 0.5);
   color: #f1f1f1;
-  width: 100%;
-  padding: 20px;
-  
+ 
 }
+ 
 
 .keyboard {
   padding-top: 40px;
@@ -47,7 +47,7 @@
 
 .body {
   font-family: 'Press Start 2P', cursive;
-  margin-right: 30px;
+  
 }
 
 .welcome {
