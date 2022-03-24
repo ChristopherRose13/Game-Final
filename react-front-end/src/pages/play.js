@@ -9,6 +9,7 @@ export default function Play() {
   return (
     
       <div className="play">
+        <img src="../assets/pink-space.jpeg" alt="stars" className="background"></img>
         <NavButtons />
         <Game />
       </div>

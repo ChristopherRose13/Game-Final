@@ -8,7 +8,6 @@ $VIEWPORTS_CONFIG:
 // Import the library:
 @import "./viewport.scss";
 
-
 @include viewports(small) {
   h1.title {
     margin-top: 2em;
@@ -101,9 +100,11 @@ $VIEWPORTS_CONFIG:
     }
   }
   div#phaser-example {    
+    display:flex;
+    justify-content: center;
     canvas { 
       width: 60%;
-      margin-left: 10%;
+      // margin-left: 10%;
     }
 
   }
