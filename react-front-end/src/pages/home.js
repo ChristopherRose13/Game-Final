@@ -3,6 +3,7 @@ import NavButtons from '../NavButtons';
 import HowTo from '../components/HowTo';
 import '../styles/home.scss';
 import '../styles/homeNavBar.scss'
+import { Fragment } from 'react';
 
 export default function Home() {
 
