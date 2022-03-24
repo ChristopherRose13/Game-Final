@@ -18,9 +18,9 @@ export default function Game() {
     <body>
       <div id="wrapper">
         <video id="camera" width="320" height="240" autoplay="true"></video>
-        <canvas ref={canvasRef} id="overlay" width="320" height="240"></canvas>
+        <canvas ref={canvasRef} id="overlay" width="320" height="240" ></canvas>
+        <div id="phaser-example"></div>
       </div>
-      <div id="phaser-example">{game.score}</div>
     </body>
   )
 }

@@ -19,7 +19,7 @@ export default function App() {
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
-
+      
     </div>
   );
 }

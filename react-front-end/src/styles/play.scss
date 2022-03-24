@@ -1,0 +1,58 @@
+// Define what ranges you want and what they're called:
+$VIEWPORTS_CONFIG:
+    up-to  480px it-is "tiny",
+    up-to  768px it-is "small",
+    up-to 1024px it-is "medium",
+    beyond-that  it-is "large";
+
+// Import the library:
+@import "./viewport.scss";
+
+
+@include viewports(small) {
+  h1.title {
+    margin-top: 2em;
+    font-size: 3em;
+  }
+  .btn {
+    font-size: 80%;
+  }
+  
+  .phaser-example {
+    max-width: 160px;
+  max-height: 120px;
+  width: 100%;
+  height: 100%;
+  }
+}
+@include viewports(medium) {
+  h1.title {
+    margin-top: 2em;
+    font-size: 4em;
+  }
+  .btn {
+    font-size: 120%;
+  }
+  .phaser-example {
+    max-width: 320px;
+  max-height: 240px;
+  width: 100%;
+  height: 100%;
+  }
+}
+@include viewports(large) {
+  h1.title {
+    margin-top: 1em;
+    font-size: 6em;
+  }
+  .btn {
+    font-size: 200%;
+  }
+  .phaser-example {
+    canvas { // ocuppy all the space
+      display: flexbox;
+      align-items: center;
+      
+      }
+    }
+}

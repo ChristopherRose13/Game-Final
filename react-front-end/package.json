@@ -5,15 +5,18 @@
   "dependencies": {
     "annyang": "^2.6.1",
     "axios": "^0.26.1",
+    "icons": "^1.0.0",
     "jstracking": "0.0.3",
     "node-sass": "^4.14.1",
     "phaser": "^3.55.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.2",
     "react-scripts": "2.1.8",
     "tracking": "^1.1.3",
-    "tracking.js": "^0.1.1"
+    "tracking.js": "^0.1.1",
+    "viewports": "^0.6.4"
   },
   "scripts": {
     "start": "react-scripts start",

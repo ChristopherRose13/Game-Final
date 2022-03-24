@@ -1,6 +1,6 @@
 import React from 'react';
 import NavButtons from '../NavButtons';
-import { FaCamera, FaMicrophoneAlt, FaKeyboard  } from 'react-icons/fa';
+import { FaCamera, FaMicrophoneAlt, FaKeyboard  } from 'react-icons/fa'; 
 import getLeaderBoard from '../hooks/getLeaderBoard';
 
 export default function Highscores() {
