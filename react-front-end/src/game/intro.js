@@ -148,7 +148,7 @@ export default function phaserGame() {
   let backgroundMusic;
   let keyboard = false;
   let camera = false;
-  let voice = true;
+  let mode_id = 3;
 
   function preload() {
     var width = this.cameras.main.width;
@@ -226,9 +226,15 @@ export default function phaserGame() {
     }
   }
 
-
+  function kill () {
+    game.destroy(true);
+  }
   function create() {
-
+    let leaderButton = document.getElementsByClassName("leaderboard")
+    let howButton = document.getElementsByClassName("howTo")
+    let playButton = document.getElementsByClassName("play")
+    leaderButton[0].addEventListener("click", kill)
+    howButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
@@ -316,25 +322,35 @@ export default function phaserGame() {
     seeLeaderboard.setOrigin(0.5)
     seeLeaderboard.visible = false;
   }
-
-  function update() {
-    if (gameOver) {
-      //save score and name to database
-      postScoreAxios({ user_id: 2, game_id: 1, mode_id: 3, score })
-      // setScore(score)
-      game.scene.pause("default")
-      //send to game over screen
-      return;
-
+  
+  function update ()
+  {
+    if (gameOver)
+    {
+        if(keyboard) {
+          mode_id = 1;
+        } else if(camera){
+          mode_id = 2;
+        }
+        //save score and name to database
+        postScoreAxios({user_id:2, game_id:1, mode_id, score})
+        // setScore(score)
+        game.scene.pause("default")
+        //send to game over screen
+        return;
+        
     }
-
-
-    if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
+  
+  
+    if (cursors.left.isDown || movementX==="left" || voiceMoveX==="left")
+  {
+      keyboard = true;
       player.setVelocityX(-160);
 
       player.anims.play('left', true);
     }
     else if (cursors.right.isDown || movementX === "right" || voiceMoveX === "right") {
+      keyboard = true;
       player.setVelocityX(160);
 
       player.anims.play('right', true);
@@ -346,6 +362,7 @@ export default function phaserGame() {
     }
 
     if ((cursors.up.isDown && player.body.touching.down) || (movementY === "up" && player.body.touching.down) || (voiceMoveY === "up" && player.body.touching.down)) {
+      keyboard = true;
       jumpSound.play()
       player.setVelocityY(-330);
     }
@@ -392,11 +409,9 @@ export default function phaserGame() {
 
   // Video Functions
   const sendMoveX = function (move) {
-
     movementX = move;
   }
   const sendMoveY = function (move) {
-
     movementY = move;
   }
 
@@ -471,15 +486,19 @@ export default function phaserGame() {
       // Has face crossed a boundary?
 
       if (faceX < leftBound) {
+        camera = true;
         sendMoveX('left')
       } else if (faceX > rightBound) {
+        camera= true;
         sendMoveX('right')
       } else {
         sendMoveX('neutral')
       }
       if (faceY < upBound) {
+        camera = true;
         sendMoveY('up')
       } else if (faceY > downBound) {
+        camera = true;
         sendMoveY('down')
       } else {
         sendMoveY('neutral')

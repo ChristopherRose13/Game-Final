@@ -1,9 +1,8 @@
 import React from 'react';
 import NavButtons from '../NavButtons';
-import '../styles/menu.scss';
 import HowTo from '../components/HowTo';
 import '../styles/home.scss';
-import '../styles/navbar.scss'
+import '../styles/homeNavBar.scss'
 
 export default function Home() {
 
