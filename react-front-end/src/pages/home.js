@@ -13,7 +13,6 @@ export default function Home() {
       <h1 className="title">Stars n Bombs</h1>
       {/* <img src="../assets/tron.png"></img> */}
       <NavButtons />
-
     </body >
   );
 }
