@@ -12,15 +12,23 @@ export default function Game() {
     console.log("canvasRef", canvasRef.current)
   }, [])
 
+  window.onkeyup = function(event) {
+    let key = event.key.toUpperCase();
+    if ( key == 'V' || key == 'v') {
+        console.log("V pressed");
+        const element = document.getElementById("wrapper");
+        console.log(element);
+        if(element.style.display === "block") {
+        element.style.display = "none"
+        } else {
+        element.style.display = "block"
+        }
+    } 
+  }
   game = new phaserGame();  
   return (
-
-    <body>
-      <div id="wrapper">
-        <video id="camera" width="320" height="240" autoplay="true"></video>
-        <canvas ref={canvasRef} id="overlay" width="320" height="240"></canvas>
-      </div>
-      <div id="phaser-example">{game.score}</div>
-    </body>
+           
+        <div id="phaser-example"></div>
+   
   )
 }

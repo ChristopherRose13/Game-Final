@@ -1,0 +1,164 @@
+// Define what ranges you want and what they're called:
+$VIEWPORTS_CONFIG:
+    up-to  480px it-is "tiny",
+    up-to  768px it-is "small",
+    up-to 1024px it-is "medium",
+    beyond-that  it-is "large";
+
+// Import the library:
+@import "./viewport.scss";
+
+@include viewports("tiny") {
+  h1.title {
+    margin-top: 2em;
+    font-size: 3em;
+  }
+  .btn {
+    font-size: 80%;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 15%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 15%;
+    }
+  }
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 60%;
+      margin-left: 10%;
+    }
+
+  }
+}
+
+
+@include viewports(small) {
+  h1.title {
+    margin-top: 2em;
+    font-size: 3em;
+  }
+  .btn {
+    font-size: 80%;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 15%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 15%;
+    }
+  }
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 60%;
+      margin-left: 10%;
+    }
+
+  }
+}
+@include viewports(medium) {
+  h1.title {
+    margin-top: 2em;
+    font-size: 3em;
+  }
+  .btn {
+    font-size: 120%;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 25%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 25%;
+    }
+  }
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 60%;
+      margin-left: 10%;
+    }
+
+  }
+}
+@include viewports(large) {
+  h1.title {
+    margin-top: 1em;
+    font-size: 4em;
+  }
+  button.btn {
+    display: flexbox;
+    font-size: 200%;
+  }
+  div.nav {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-right: 0px;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 35%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 35%;
+    }
+  }
+  div#phaser-example {    
+    display:flex;
+    justify-content: center;
+    canvas { 
+      width: 60%;
+      // margin-left: 10%;
+    }
+
+  }
+  
+}

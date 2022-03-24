@@ -7,9 +7,9 @@ import HowTo from '../components/HowTo';
 export default function howto() {
 
   return (
-    <body className="body">
+    <div className="body">
       <NavButtons />
       <HowTo />
-    </body >
+    </div >
   );
 }

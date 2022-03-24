@@ -11,6 +11,7 @@ import phaserGame from './game/intro';
 
 export default function App() {
   const { selector } = useContext(menuContext);
+  
 
   return (
     <div className="App">
@@ -19,7 +20,10 @@ export default function App() {
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
-
+      <div id="wrapper">
+        <video id="camera" width="320" height="240" autoplay="true" ></video>
+        <canvas id="overlay" width="320" height="240" ></canvas>
+      </div>
     </div>
   );
 }
