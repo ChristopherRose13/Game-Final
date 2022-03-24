@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import phaserGame from "../game/intro";
+import hitBomb from "../game/intro";
 
 // import '../styles/game.scss';
 import state from "../useState";
+import Leaderboard from "./Leaderboard";
 
 
 let game;
@@ -13,11 +15,12 @@ export default function Game() {
   }, [])
 
 
-  if(!game) {
+  if (!game) {
     game = new phaserGame();
   }
 
-  
+
+
   return (
 
     <body>
