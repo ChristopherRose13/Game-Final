@@ -19,7 +19,7 @@ ReactDOM.render(
   <NavProvider>
   
     <App />
-
+    <div id="phaser-example"></div>
   </NavProvider>
   ,
   document.getElementById('root')

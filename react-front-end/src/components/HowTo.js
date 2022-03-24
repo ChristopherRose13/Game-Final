@@ -7,7 +7,7 @@ export default function HowTo() {
   // const navMenu = state();
   return (
 
-    <body className="body">
+    <div className="body">
       
       <video src="./assets/backgroundVideo.mov" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
       <div className="content">
@@ -35,7 +35,7 @@ export default function HowTo() {
         <p className="details">You can move dude around the course with facial tracking! Dude moves in the direction of your head as it moves outside the bounds of the centre square. </p>
       </div>
 
-    </body >
+    </div >
 
   )
 
