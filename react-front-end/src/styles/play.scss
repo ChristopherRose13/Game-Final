@@ -37,6 +37,13 @@ $VIEWPORTS_CONFIG:
     }
 
   }
+  div#phaser-example {    
+    canvas { 
+      width: 80%;
+      margin-left: 10%;
+    }
+
+  }
 }
 @include viewports(medium) {
   h1.title {
@@ -63,6 +70,13 @@ $VIEWPORTS_CONFIG:
   div.phaser-example {    
     canvas { // ocuppy all the space
       margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 80%;
+      margin-left: 10%;
     }
 
   }
