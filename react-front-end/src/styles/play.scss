@@ -8,6 +8,44 @@ $VIEWPORTS_CONFIG:
 // Import the library:
 @import "./viewport.scss";
 
+@include viewports("tiny") {
+  h1.title {
+    margin-top: 2em;
+    font-size: 3em;
+  }
+  .btn {
+    font-size: 80%;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 15%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 15%;
+    }
+  }
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 60%;
+      margin-left: 10%;
+    }
+
+  }
+}
+
+
 @include viewports(small) {
   h1.title {
     margin-top: 2em;
@@ -33,6 +71,13 @@ $VIEWPORTS_CONFIG:
   div.phaser-example {    
     canvas { // ocuppy all the space
       margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 60%;
+      margin-left: 10%;
     }
 
   }
@@ -62,6 +107,13 @@ $VIEWPORTS_CONFIG:
   div.phaser-example {    
     canvas { // ocuppy all the space
       margin-left: 50px;
+    }
+
+  }
+  div#phaser-example {    
+    canvas { 
+      width: 60%;
+      margin-left: 10%;
     }
 
   }
