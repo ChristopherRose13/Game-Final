@@ -10,10 +10,6 @@ import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
 
-
-
-
-
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 export default function phaserGame() {
@@ -203,7 +199,7 @@ export default function phaserGame() {
     this.load.audio('background', 'assets/background.mp3')
     this.load.audio('starSound', 'assets/star.mp3')
     this.load.image('ground', 'assets/platform.png');
-    this.load.image('sky', 'assets/sky.png');
+    this.load.image('sky', 'assets/space.jpeg');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
