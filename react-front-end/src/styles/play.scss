@@ -38,7 +38,7 @@ $VIEWPORTS_CONFIG:
   }
   div#phaser-example {    
     canvas { 
-      width: 80%;
+      width: 60%;
       margin-left: 10%;
     }
 
@@ -76,7 +76,7 @@ $VIEWPORTS_CONFIG:
   }
   div#phaser-example {    
     canvas { 
-      width: 80%;
+      width: 60%;
       margin-left: 10%;
     }
 
@@ -112,7 +112,7 @@ $VIEWPORTS_CONFIG:
   }
   div#phaser-example {    
     canvas { 
-      width: 80%;
+      width: 60%;
       margin-left: 10%;
     }
 
@@ -152,9 +152,11 @@ $VIEWPORTS_CONFIG:
     }
   }
   div#phaser-example {    
+    display:flex;
+    justify-content: center;
     canvas { 
-      width: 80%;
-      margin-left: 10%;
+      width: 60%;
+      // margin-left: 10%;
     }
 
   }
