@@ -18,41 +18,72 @@ $VIEWPORTS_CONFIG:
     font-size: 80%;
   }
   
-  .phaser-example {
-    max-width: 160px;
-  max-height: 120px;
-  width: 100%;
-  height: 100%;
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
   }
 }
 @include viewports(medium) {
   h1.title {
     margin-top: 2em;
-    font-size: 4em;
+    font-size: 3em;
   }
   .btn {
     font-size: 120%;
   }
-  .phaser-example {
-    max-width: 320px;
-  max-height: 240px;
-  width: 100%;
-  height: 100%;
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
   }
 }
 @include viewports(large) {
   h1.title {
     margin-top: 1em;
-    font-size: 6em;
+    font-size: 4em;
   }
-  .btn {
+  button.btn {
+    display: flexbox;
     font-size: 200%;
   }
   .phaser-example {
     canvas { // ocuppy all the space
-      display: flexbox;
-      align-items: center;
-      
-      }
+      image-rendering: -moz-crisp-edges;    /* Firefox */
+      image-rendering: -webkit-crisp-edges; /* Webkit (Safari) */
+      image-rendering: pixelated;           /* Chrome */
     }
+  }
+  div.nav {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-right: 0px;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    }
+    canvas.overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  }
+  div.phaser-example {    
+    canvas { // ocuppy all the space
+      margin-left: 50px;
+    }
+
+  }
+  
 }

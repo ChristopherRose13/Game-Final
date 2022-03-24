@@ -7,12 +7,12 @@ import '../styles/play.scss';
 export default function Play() {
 
   return (
-    <span className="body">
+    
       <div className="play">
         <NavButtons />
         <Game />
       </div>
-    </span>
+    
   );
 }
 

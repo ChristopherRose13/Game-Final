@@ -7,8 +7,8 @@ export default function Leaderboard() {
 
   return (
 
-    <body className="body">
+    <div className="body">
       Leaderboard Page
-    </body>
+    </div>
   )
 };
