@@ -7,14 +7,12 @@ import { isListening } from 'annyang';
 import Leaderboard from '../components/Leaderboard';
 import useAxios from '../hooks/useAxios';
 import state from '../useState';
-
-
-
-
+import Highscores from '../pages/highscores';
+import { render } from 'react-dom';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
-export default function phaserGame () {
+export default function phaserGame() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
   const config = {
     type: Phaser.AUTO,
@@ -105,9 +103,9 @@ export default function phaserGame () {
         voiceMoverX("")
       }, 300)
     },
-    'game over': function (){
+    'game over': function () {
       //send score to database
-      
+
       window.location.reload(true);
     }
   };
@@ -135,6 +133,7 @@ export default function phaserGame () {
   let score = 0;
   let scoreText;
   let gameOverText;
+  let seeLeaderboard;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -201,7 +200,7 @@ export default function phaserGame () {
     this.load.audio('background', 'assets/background.mp3')
     this.load.audio('starSound', 'assets/star.mp3')
     this.load.image('ground', 'assets/platform.png');
-    this.load.image('sky', 'assets/sky.png');
+    this.load.image('sky', 'assets/space.jpeg');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
@@ -315,6 +314,10 @@ export default function phaserGame () {
     gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', color: '#ff0000' });
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
+
+    seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
+    seeLeaderboard.setOrigin(0.5)
+    seeLeaderboard.visible = false;
   }
   
   function update ()
@@ -392,15 +395,13 @@ export default function phaserGame () {
 
   function hitBomb(player, bomb) {
     this.physics.pause();
-
     bombSound.play()
-
     player.setTint(0xff0000);
-
     player.anims.play('turn');
-
     gameOver = true;
     gameOverText.visible = true;
+    seeLeaderboard.visible = true;
+
   }
 
   // Video Functions

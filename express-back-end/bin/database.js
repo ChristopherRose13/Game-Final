@@ -85,8 +85,8 @@ const getHighScores = function() {
     INNER JOIN modes ON highscores.mode_id = modes.id
     INNER JOIN users ON highscores.user_id = users.id
     INNER JOIN games ON highscores.game_id = games.id
-    ORDER BY highscores.score DESC
-    LIMIT 10;
+    ORDER BY highscores.score DESC;
+    
             `)
     .then((result) => {
       console.log("database", result.rows);
