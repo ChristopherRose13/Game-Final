@@ -16,6 +16,7 @@ body {
 }
 
 .title {
+  
   font-size: 90pt;
   display: flex;
   align-self: center;
@@ -29,4 +30,34 @@ body {
 
 .body {
 background-image: "../assets/tron.png"
+}
+
+@media (max-width: 1500px) {
+  .title {
+  
+    font-size: 75pt;
+    display: flex;
+    align-self: center;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 1300px) {
+  .title {
+    margin-top: 1.3em;
+    font-size: 60pt;
+    display: flex;
+    align-self: center;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    margin-top: 1.6em;
+    font-size: 45pt;
+    display: flex;
+    align-self: center;
+    z-index: 2;
+  }
 }
