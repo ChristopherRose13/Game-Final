@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import phaserGame from "../game/intro";
 
-// import '../styles/game.scss';
 import state from "../useState";
+import Leaderboard from "./Leaderboard";
 
 
 let game;
