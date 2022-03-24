@@ -17,7 +17,20 @@ $VIEWPORTS_CONFIG:
   .btn {
     font-size: 80%;
   }
-  
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 15%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 15%;
+    }
+  }
   div.phaser-example {    
     canvas { // ocuppy all the space
       margin-left: 50px;
@@ -32,6 +45,20 @@ $VIEWPORTS_CONFIG:
   }
   .btn {
     font-size: 120%;
+  }
+  div#wrapper {
+    video#camera {
+    position: absolute;
+    
+    margin-left: 25%;
+    }
+    canvas#overlay {
+      position: relative;
+      top: 0;
+      left: 0;
+      
+      margin-left: 25%;
+    }
   }
   div.phaser-example {    
     canvas { // ocuppy all the space
@@ -49,13 +76,6 @@ $VIEWPORTS_CONFIG:
     display: flexbox;
     font-size: 200%;
   }
-  .phaser-example {
-    canvas { // ocuppy all the space
-      image-rendering: -moz-crisp-edges;    /* Firefox */
-      image-rendering: -webkit-crisp-edges; /* Webkit (Safari) */
-      image-rendering: pixelated;           /* Chrome */
-    }
-  }
   div.nav {
     display: flex;
     justify-content: space-around;
@@ -69,19 +89,21 @@ $VIEWPORTS_CONFIG:
   div#wrapper {
     video#camera {
     position: absolute;
+    
+    margin-left: 35%;
     }
-    canvas.overlay {
+    canvas#overlay {
       position: relative;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+      
+      margin-left: 35%;
     }
   }
-  div.phaser-example {    
-    canvas { // ocuppy all the space
-      margin-left: 50px;
+  div#phaser-example {    
+    canvas { 
+      width: 80%;
+      margin-left: 10%;
     }
 
   }
