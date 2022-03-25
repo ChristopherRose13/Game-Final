@@ -384,7 +384,6 @@ export default function phaserGame() {
       player.setVelocityY(-330);
     }
 
-
   }
 
 
