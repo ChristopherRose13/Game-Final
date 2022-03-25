@@ -35,7 +35,7 @@ export default function HowTo() {
         <p className="details">You can move dude around the course with facial tracking! Dude moves in the direction of your head as it moves outside the bounds of the centre square. </p>
       </div>
 
-    </div >
+    </body>
 
   )
 
