@@ -9,11 +9,13 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
+import io from 'socket.io-client';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 export default function phaserGame() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
+  
   const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -146,6 +148,8 @@ export default function phaserGame() {
   let keyboard = false;
   let camera = false;
   let mode_id = 3;
+  // let player2;
+  let multiplayer = false;
   // let firstScene;
   // let changeScene;
 
@@ -207,6 +211,7 @@ export default function phaserGame() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude2', 'assets/dude2.png', {frameWidth:32, frameHeight:48})
 
     this.load.image('blue-sky', 'assets/sky.png');
 
@@ -232,7 +237,22 @@ export default function phaserGame() {
   function kill() {
     game.destroy(true);
   }
+
+  function addPlayer(self, playerInfo) {
+    // self.ship = self.physics.add.image(200, 450, 'dude2').setOrigin(200, 450).setDisplaySize(53, 40);
+    // // if (playerInfo.team === 'blue') {
+    // //   self.ship.setTint(0x0000ff);
+    // // } else {
+    // //   self.ship.setTint(0xff0000);
+    // // }
+    // self.ship.setDrag(100);
+    // self.ship.setAngularDrag(100);
+    // self.ship.setMaxVelocity(200);
+
+  }
+
   function create() {
+
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
     let playButton = document.getElementsByClassName("play")
@@ -302,6 +322,25 @@ export default function phaserGame() {
       repeat: 11,
       setXY: { x: 12, y: 0, stepX: 70 }
     });
+
+    this.socket = io('http://localhost:8000');
+    let self = this;
+    this.socket.on('currentPlayers', function (players) {
+      console.log("connected????")
+      Object.keys(players).forEach(function (id) {
+        console.log("sdjfbasdjkvhbdfjhvbsdjfvbdfh", players[id].playerId, " ", self.socket.id)
+        if (players[id].playerId === self.socket.id) {
+          self.isPlayer2 = true;
+          self.player2 = self.physics.add.sprite(200, 450, 'dude2');
+          self.player2.setBounce(0.2);
+          self.player2.setCollideWorldBounds(true);
+          self.physics.add.collider(self.player2, platforms);
+          self.physics.add.overlap(self.player2, stars, collectStar, null, this);
+          self.physics.add.collider(self.player2, bombs, hitBomb, null, this);
+          self.physics.add.collider(self.player2, player);
+        }
+      });
+    })
 
 
     stars.children.iterate(function (child) {

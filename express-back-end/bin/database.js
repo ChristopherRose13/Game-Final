@@ -66,7 +66,7 @@ const getUsers = function() {
             FROM users;
           `)
     .then((result) => {
-      console.log("database", result.rows);
+      // console.log("database", result.rows);
       return result.rows;
       
     })
@@ -89,7 +89,7 @@ const getHighScores = function() {
     
             `)
     .then((result) => {
-      console.log("database", result.rows);
+      // console.log("database", result.rows);
       return result.rows;
     })
     .catch((err) => {
@@ -108,7 +108,7 @@ const insertHighScore = function(newHighScore) {
                    VALUES ($1, $2, $3, $4)
                   RETURNING *;`, [newHighScore.user_id, newHighScore.game_id, newHighScore.score, newHighScore.mode_id])
     .then(res => {
-      console.log("database", res.rows);
+      // console.log("database", res.rows);
       return res.rows;
     })
     .catch(err => {
@@ -127,7 +127,7 @@ const getGames = function() {
             FROM games;
           `)
     .then((result) => {
-      console.log("database", result.rows);
+      // console.log("database", result.rows);
       return result.rows;
       
     })
@@ -146,7 +146,7 @@ const getModes = function() {
             FROM modes;
           `)
     .then((result) => {
-      console.log("database", result.rows);
+      // console.log("database", result.rows);
       return result.rows;
       
     })
@@ -166,7 +166,7 @@ const getScores = function() {
             ORDER BY highscores.score DESC;
           `)
     .then((result) => {
-      console.log("database", result.rows);
+      // console.log("database", result.rows);
       return result.rows;
       
     })
