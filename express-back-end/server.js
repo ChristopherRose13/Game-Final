@@ -7,6 +7,32 @@ const BodyParser = require('body-parser');
 const PORT = 8000;
 const morgan = require("morgan");
 const database = require('./bin/database');
+const cors = require('cors');
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const httpServer = createServer(App);
+const io = new Server(httpServer, { cors:{origin: "*"} });
+io.on('connection', function(socket) {
+  console.log('a user connected');
+  let players = {};
+  players['socketId'] = {
+    rotation: 0,
+    x: Math.floor(Math.random() * 700) + 50,
+    y: Math.floor(Math.random() * 500) + 50,
+    playerId: socket.id
+  };
+  console.log(players);
+
+  // send the players object to the new player
+  socket.emit('currentPlayers', players);
+  socket.broadcast.emit('newPlayer', players[socket.id]);
+
+  socket.on('disconnect', function() {
+    console.log('user disconnected');
+    socket.broadcast.emit('newPlayer', players[socket.id]);
+  });
+});
+
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -17,12 +43,13 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 App.use(morgan("dev"));
-
+App.use(cors());
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 
 App.use(Express.static('public'));
+
 
 // Sample GET route
 App.get('/api/data', (req, res) => res.json({
@@ -40,7 +67,7 @@ App.get("/api/highscores", (req, res) => {
   ])
     .then((data) => {
       const highScores = data[0];
-      console.log("highScores route", highScores);
+      // console.log("highScores route", highScores);
       res.json(highScores);
     })
     .catch((err) => {
@@ -66,7 +93,7 @@ App.get("/api/users", (req, res) => {
   ])
     .then((data) => {
       const users = data[0];
-      console.log("Users route", users);
+      // console.log("Users route", users);
       res.json(users);
     })
     .catch((err) => {
@@ -80,7 +107,7 @@ App.get("/api/games", (req, res) => {
   ])
     .then((data) => {
       const games = data[0];
-      console.log("Games route", games);
+      // console.log("Games route", games);
       res.json(games);
     })
     .catch((err) => {
@@ -94,7 +121,7 @@ App.get("/api/modes", (req, res) => {
   ])
     .then((data) => {
       const modes = data[0];
-      console.log("Modes route", modes);
+      // console.log("Modes route", modes);
       res.json(modes);
     })
     .catch((err) => {
@@ -108,7 +135,7 @@ App.get("/api/scores", (req, res) => {
   ])
     .then((data) => {
       const scores = data[0];
-      console.log("Scores route", scores);
+      // console.log("Scores route", scores);
       res.json(scores);
     })
     .catch((err) => {
@@ -116,7 +143,7 @@ App.get("/api/scores", (req, res) => {
     });
 });
 
-App.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
