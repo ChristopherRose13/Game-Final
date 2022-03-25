@@ -7,7 +7,7 @@ export default function HowTo() {
   // const navMenu = state();
   return (
 
-    <body className="body">
+    <div className="body">
 
       <video src="./assets/game-recording.mov" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
       <div className="content">
