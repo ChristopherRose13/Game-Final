@@ -146,6 +146,9 @@ export default function phaserGame() {
   let keyboard = false;
   let camera = false;
   let mode_id = 3;
+  // let firstScene;
+  // let changeScene;
+
 
   function preload() {
     var width = this.cameras.main.width;
@@ -204,6 +207,9 @@ export default function phaserGame() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
+
+    this.load.image('blue-sky', 'assets/sky.png');
+
     this.load.spritesheet('dude',
       '/assets/dude.png',
       { frameWidth: 32, frameHeight: 48 }
@@ -223,7 +229,7 @@ export default function phaserGame() {
     }
   }
 
-  function kill () {
+  function kill() {
     game.destroy(true);
   }
   function create() {
@@ -243,6 +249,8 @@ export default function phaserGame() {
     bombSound.setVolume(0.5)
     backgroundMusic.play()
 
+
+
     this.input.keyboard.on('keydown-M', () => {
       toggleVoice()
     }, this);
@@ -252,7 +260,9 @@ export default function phaserGame() {
       toggleVideo();
     }, this);
 
+
     this.add.image(400, 300, 'sky');
+
 
     const platforms = this.physics.add.staticGroup();
 
@@ -318,29 +328,39 @@ export default function phaserGame() {
     seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
     seeLeaderboard.setOrigin(0.5)
     seeLeaderboard.visible = false;
+
+    // firstScene = this.add.image(400, 300, 'sky');
+    // firstScene.visible = true;
+
+    // changeScene = this.add.image(400, 300, 'blue-sky');
+    // changeScene.visible = false;
+
+
   }
-  
-  function update ()
-  {
-    if (gameOver)
-    {
-        if(keyboard) {
-          mode_id = 1;
-        } else if(camera){
-          mode_id = 2;
-        }
-        //save score and name to database
-        postScoreAxios({user_id:2, game_id:1, mode_id, score})
-        // setScore(score)
-        game.scene.pause("default")
-        //send to game over screen
-        return;
-        
+
+
+
+
+  function update() {
+    if (gameOver) {
+      if (keyboard) {
+        mode_id = 1;
+      } else if (camera) {
+        mode_id = 2;
+      }
+      //save score and name to database
+      postScoreAxios({ user_id: 2, game_id: 1, mode_id, score })
+      // setScore(score)
+      game.scene.pause("default")
+      //send to game over screen
+      return;
+
     }
-  
-  
-    if (cursors.left.isDown || movementX==="left" || voiceMoveX==="left")
-  {
+
+
+
+
+    if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
       keyboard = true;
       player.setVelocityX(-160);
 
@@ -368,6 +388,7 @@ export default function phaserGame() {
   }
 
 
+
   function collectStar(player, star) {
     starSound.play();
     star.disableBody(true, true);
@@ -375,9 +396,12 @@ export default function phaserGame() {
     scoreText.setText('Score: ' + score);
 
     if (stars.countActive(true) === 0) {
+      // this.load.image('sky', 'assets/sky.png');
+      // changeScene.visible = true;
+
+
       //  A new batch of stars to collect
       stars.children.iterate(function (child) {
-
         child.enableBody(true, child.x, 0, true, true);
 
       });
@@ -391,6 +415,7 @@ export default function phaserGame() {
       bomb.allowGravity = false;
 
     }
+
   }
 
   function hitBomb(player, bomb) {
@@ -486,7 +511,7 @@ export default function phaserGame() {
         camera = true;
         sendMoveX('left')
       } else if (faceX > rightBound) {
-        camera= true;
+        camera = true;
         sendMoveX('right')
       } else {
         sendMoveX('neutral')
