@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import phaserGame from "../game/intro";
+import phaserGame from "../game/introMulti";
 
 import state from "../useState";
 import Leaderboard from "./Leaderboard";
