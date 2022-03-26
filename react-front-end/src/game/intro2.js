@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import useAxios from '../hooks/useAxios';
 
 
-export default function phaserGame() {
+export default function phaserBonus() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
 
 const config = {

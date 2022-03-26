@@ -12,7 +12,7 @@ import { render } from 'react-dom';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
-export default function phaserGame() {
+export default function phaserSingle() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
   const config = {
     type: Phaser.AUTO,
