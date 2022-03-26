@@ -33,21 +33,18 @@ function preload ()
   this.load.image('ship', 'assets/ship1.png');
   this.load.image('otherPlayer', 'assets/ship2.png');
   this.load.image('star', 'assets/star_gold.png');
-  this.load.image('background', 'assets/Space-Transparent.png');
 }
 function kill() {
   gameMulti.destroy(true);
 }
 function create() {
-  this.add.image(400, 300, 'background');
   let leaderButton = document.getElementsByClassName("leaderboard")
-  let howButton = document.getElementsByClassName("howTo")
-  let playButton = document.getElementsByClassName("play")
-  let multiButton = document.getElementsByClassName("multi")
-  leaderButton[0].addEventListener("click", kill)
-  howButton[0].addEventListener("click", kill)
-  playButton[0].addEventListener("click", kill)
-
+    let howButton = document.getElementsByClassName("howTo")
+    let playButton = document.getElementsByClassName("play")
+    let multiButton = document.getElementsByClassName("multi")
+    leaderButton[0].addEventListener("click", kill)
+    howButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill)
   var self = this;
   this.socket = io();
   this.otherPlayers = this.physics.add.group();
@@ -63,7 +60,7 @@ function create() {
   this.socket.on('newPlayer', function (playerInfo) {
     addOtherPlayers(self, playerInfo);
   });
-  this.socket.on('disconnectPlayer', function (playerId) {
+  this.socket.on('disconnect', function (playerId) {
     self.otherPlayers.getChildren().forEach(function (otherPlayer) {
       if (playerId === otherPlayer.playerId) {
         otherPlayer.destroy();
@@ -112,10 +109,10 @@ function update ()
     if (this.cursors.up.isDown) {
       this.physics.velocityFromRotation(this.ship.rotation + 1.5, 100, this.ship.body.acceleration);
     } else {
-      this.ship.setAcceleration(0.5);
+      this.ship.setAcceleration(0);
     }
     
-        
+        // I think this is inside the if statement
         // emit player movement
           var x = this.ship.x;
           var y = this.ship.y;
@@ -145,7 +142,6 @@ function addPlayer(self, playerInfo) {
   self.ship.setDrag(100);
   self.ship.setAngularDrag(100);
   self.ship.setMaxVelocity(200);
-  // self.ship = self.physics.add.collider(self.ship, self.otherPlayers);
 }
 
 function addOtherPlayers(self, playerInfo) {
