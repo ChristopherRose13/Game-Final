@@ -10,6 +10,7 @@ const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
+  parent: 'phaser-example',
   physics: {
     default: 'arcade',
     arcade: {
@@ -24,7 +25,7 @@ const config = {
   }
 };
 
-var game = new Phaser.Game(config);
+var gameMulti = new Phaser.Game(config);
 
 
 function preload ()
@@ -33,8 +34,17 @@ function preload ()
   this.load.image('otherPlayer', 'assets/ship2.png');
   this.load.image('star', 'assets/star_gold.png');
 }
-
+function kill() {
+  gameMulti.destroy(true);
+}
 function create() {
+  let leaderButton = document.getElementsByClassName("leaderboard")
+    let howButton = document.getElementsByClassName("howTo")
+    let playButton = document.getElementsByClassName("play")
+    let multiButton = document.getElementsByClassName("multi")
+    leaderButton[0].addEventListener("click", kill)
+    howButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill)
   var self = this;
   this.socket = io();
   this.otherPlayers = this.physics.add.group();

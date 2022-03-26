@@ -236,8 +236,10 @@ export default function phaserGame() {
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
     let playButton = document.getElementsByClassName("play")
+    let multiButton = document.getElementsByClassName("multi")
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
+    multiButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
