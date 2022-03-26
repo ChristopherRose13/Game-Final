@@ -22,7 +22,7 @@ const scores = {
   blue: 0,
   red: 0
 };
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
   console.log('a user connected');
   // create a new player and add it to our players object
   players[socket.id] = {
@@ -41,13 +41,15 @@ io.on('connection', function (socket) {
   // update all other players of the new player
   socket.broadcast.emit('newPlayer', players[socket.id]);
   // when a player disconnects, remove them from our players object
-  socket.on('disconnect', function () {
+  socket.on('disconnect', function() {
     console.log('user disconnected');
     // remove this player from our players object
     delete players[socket.id];
+    console.log(players);
     // emit a message to all players to remove this player
-    socket.disconnect(socket.id);
-    // io.emit('disconnect', socket.id);
+    //socket.disconnect(socket.id);
+    // socket.disconnect(socket.id); not works
+    io.emit('disconnectPlayer', socket.id);
   });
   // when a player moves, update the player data
   socket.on('playerMovement', function (movementData) {
@@ -57,7 +59,7 @@ io.on('connection', function (socket) {
     // emit a message to all players about the player that moved
     socket.broadcast.emit('playerMoved', players[socket.id]);
   });
-  socket.on('starCollected', function () {
+  socket.on('starCollected', function() {
     if (players[socket.id].team === 'red') {
       scores.red += 10;
     } else {
