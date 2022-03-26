@@ -9,11 +9,13 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
+import io from 'socket.io-client';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 export default function phaserGame() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
+  
   const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -126,7 +128,6 @@ export default function phaserGame() {
   const game = new Phaser.Game(config);
 
   let cursors;
-  let player;
   let stars;
   let bombs;
   let gameOver = false;
@@ -146,6 +147,15 @@ export default function phaserGame() {
   let keyboard = false;
   let camera = false;
   let mode_id = 3;
+  let player;
+  let platforms;
+  let firstRun = true;
+  let player2;
+  let isPlayer2 = false;
+  let player2Position;
+  let playerPosition;
+  
+  let multiplayer = false;
   // let firstScene;
   // let changeScene;
 
@@ -207,6 +217,7 @@ export default function phaserGame() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude2', 'assets/dude2.png', {frameWidth:32, frameHeight:48})
 
     this.load.image('blue-sky', 'assets/sky.png');
 
@@ -232,14 +243,26 @@ export default function phaserGame() {
   function kill() {
     game.destroy(true);
   }
+
+  function addPlayer(self, playerInfo) {
+   
+
+    if(self.socket.id === playerInfo.id && playerInfo.char == 'dude2') {
+      console.log("creating the seccond player")
+      self.isDude2 = true;
+      isPlayer2 = true;
+      
+    }
+
+  }
+
   function create() {
+
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
     let playButton = document.getElementsByClassName("play")
-    let multiButton = document.getElementsByClassName("multi")
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
-    multiButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
@@ -266,7 +289,7 @@ export default function phaserGame() {
     this.add.image(400, 300, 'sky');
 
 
-    const platforms = this.physics.add.staticGroup();
+    platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
@@ -275,7 +298,7 @@ export default function phaserGame() {
     platforms.create(750, 220, 'ground');
 
     player = this.physics.add.sprite(100, 450, 'dude');
-
+    
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
@@ -305,6 +328,32 @@ export default function phaserGame() {
       setXY: { x: 12, y: 0, stepX: 70 }
     });
 
+    this.socket = io('http://localhost:8001');
+    let self = this;
+    // this.socket.on('currentPlayers', function (players) {
+    //   Object.keys(players).forEach(function (id) {
+    //     if (players[id].playerId === self.socket.id) {
+          
+    //       addPlayer(self)
+    //     }
+    //   });
+    // })
+    player2 = self.physics.add.image(200, 450, 'dude');
+    player2.setBounce(0.2);
+    player2.setCollideWorldBounds(true);
+
+
+    this.socket.on('newPlayer', function (playerInfo) {
+      addPlayer(self, playerInfo);
+    });
+
+    this.socket.on('disconnected', function (playerId) {
+      
+        if (playerId === self.socket.id) {
+          player2.destroy();
+        }
+      
+    });
 
     stars.children.iterate(function (child) {
 
@@ -321,6 +370,12 @@ export default function phaserGame() {
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+
+    
+    this.physics.add.collider(player2, platforms);
+    this.physics.add.overlap(player2, stars, collectStar, null, this);
+    this.physics.add.collider(player2, bombs, hitBomb, null, this);
+    this.physics.add.collider(player2, player);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', color: '#ff0000' });
@@ -341,9 +396,25 @@ export default function phaserGame() {
   }
 
 
-
-
   function update() {
+
+    if (firstRun) {
+      this.socket.on('playerMoved', function (playerInfo) {
+          
+
+          if(playerInfo.char === 'dude') {
+            player.setPosition(playerInfo.x, playerInfo.y)
+            
+          } else if (playerInfo.char === 'dude2') {
+            player2.setPosition(playerInfo.x, playerInfo.y)
+            
+          }
+          
+        
+      });
+      firstRun = false;
+    }
+
     if (gameOver) {
       if (keyboard) {
         mode_id = 1;
@@ -358,32 +429,95 @@ export default function phaserGame() {
       return;
 
     }
-
-
-
-
+    
     if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
       keyboard = true;
-      player.setVelocityX(-160);
+      if(!isPlayer2) {
+        player.setVelocityX(-160);
+        player.anims.play('left', true);
+      } 
+      
+      if(isPlayer2){
+        player2.setVelocityX(-160);
 
-      player.anims.play('left', true);
+      }
+
     }
     else if (cursors.right.isDown || movementX === "right" || voiceMoveX === "right") {
       keyboard = true;
-      player.setVelocityX(160);
+      if(!isPlayer2) {
+        player.setVelocityX(160);
+        player.anims.play('right', true)
+      } 
+      
+      if(isPlayer2){
+        player2.setVelocityX(160);
 
-      player.anims.play('right', true);
+      }
+
     }
     else {
-      player.setVelocityX(0);
+      if(!isPlayer2) {
+        player.setVelocityX(0);
+        player.anims.play('turn', true)
+      } 
+      
+      if(isPlayer2){
+        player2.setVelocityX(0);
 
-      player.anims.play('turn');
+      }
+
     }
 
     if ((cursors.up.isDown && player.body.touching.down) || (movementY === "up" && player.body.touching.down) || (voiceMoveY === "up" && player.body.touching.down)) {
       keyboard = true;
-      jumpSound.play()
-      player.setVelocityY(-330);
+      if(!isPlayer2) {
+        jumpSound.play()
+        player.setVelocityY(-330);
+      } 
+      
+      if(isPlayer2){
+        jumpSound.play()
+        if(player2.body.touching.down){
+          player2.setVelocityY(-330);
+        }
+        
+      }
+
+    }
+    
+
+    let x = player.x;
+    let y = player.y;
+    
+    if(!isPlayer2) {
+
+      if (playerPosition && (x !== playerPosition.x || y !== playerPosition.y)) {
+        this.socket.emit('playerMovement', { x, y });
+     }
+
+     playerPosition = {
+      x,
+      y
+    };
+
+    }
+
+    if(isPlayer2) {
+
+      
+        x = player2.x;
+        y = player2.y;
+        
+        if (player2Position && (x !== player2Position.x || y !== player2Position.y)) {
+          this.socket.emit('playerMovement', { x, y });
+      }
+
+      player2Position = {
+        x,
+        y
+      }
+     
     }
 
   }
@@ -527,8 +661,10 @@ export default function phaserGame() {
         sendMoveY('neutral')
       }
     }
+
   })
   tracking.track(video, tracker, { camera: true, audio: false })
+
 
   function toggleVideo() {
     if (cameraOn) {

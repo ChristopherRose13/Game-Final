@@ -5,6 +5,7 @@ import HowTo from './pages/howto';
 import HighScores from './pages/highscores';
 import Home from './pages/home';
 import { menuContext } from './providers/NavProvider';
+import Multi from './pages/multi';
 import phaserGame from './game/intro';
 
 
@@ -17,6 +18,7 @@ export default function App() {
     <div className="App">
       {/* <h1>My App</h1> */}
       {selector === "home" && <Home />}
+      {selector === "multi" && <Multi />}
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
@@ -27,16 +29,3 @@ export default function App() {
     </div>
   );
 }
-
-// Previous Code for reference
-// #####################################
-// import React, { Component, useState } from 'react';
-// import './App.css';
-// import state from './useState';
-// import './styles/menu.scss';
-// export default function App() {
-//   const [step, setStep] = useState('main');
-//   const navMenu = state(step);
-//   return navMenu;
-// }
-
