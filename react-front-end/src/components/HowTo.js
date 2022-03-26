@@ -34,8 +34,8 @@ export default function HowTo() {
         <h3 className="face-detection" >3. Face Detection:</h3>
         <p className="details">You can move dude around the course with facial tracking! Dude moves in the direction of your head as it moves outside the bounds of the centre square. </p>
       </div>
+    </div>
 
-    </body>
 
   )
 
