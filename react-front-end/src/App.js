@@ -24,7 +24,7 @@ export default function App() {
       {selector === "highscores" && <HighScores />}
       {selector === "single" && <Game mode={"single"}/>}
       {selector === "ai" && <Game mode={"ai"}/>}
-      {selector === "coop" && <Game mode={"coop"}/>}
+      {selector === "multi" && <Game mode={"multi"}/>}
       {selector === "bonus" && <Game mode={"bonus"}/>}
       <div id="wrapper">
         <video id="camera" width="320" height="240" autoplay="true" ></video>
