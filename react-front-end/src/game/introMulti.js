@@ -13,7 +13,7 @@ import io from 'socket.io-client';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
-export default function phaserGame() {
+export default function phaserMulti() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
   
   const config = {
@@ -261,8 +261,8 @@ export default function phaserGame() {
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
     let playButton = document.getElementsByClassName("play")
-    leaderButton[0].addEventListener("click", kill)
-    howButton[0].addEventListener("click", kill)
+    // leaderButton[0].addEventListener("click", kill)
+    // howButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');

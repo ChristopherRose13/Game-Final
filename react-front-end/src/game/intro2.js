@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import useAxios from '../hooks/useAxios';
 
 
-export default function phaserGame() {
+export default function phaserBonus() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
 
 const config = {
@@ -43,7 +43,6 @@ function create() {
   let leaderButton = document.getElementsByClassName("leaderboard")
   let howButton = document.getElementsByClassName("howTo")
   let playButton = document.getElementsByClassName("play")
-  let multiButton = document.getElementsByClassName("multi")
   leaderButton[0].addEventListener("click", kill)
   howButton[0].addEventListener("click", kill)
   playButton[0].addEventListener("click", kill)
