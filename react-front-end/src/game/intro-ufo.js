@@ -152,6 +152,7 @@ export default function phaserAi() {
   let kitty;
   let move;
   let bunnySound;
+  // let hitByBunny;
 
 
   function preload() {
@@ -203,6 +204,7 @@ export default function phaserAi() {
     progressBox.fillRect(240, 270, 320, 50);
 
     this.load.audio('bombSound', 'assets/bomb.mp3')
+    this.load.audio('ufo', 'assets/ufo.wav')
     this.load.audio('jump', 'assets/jump.mp3')
     this.load.audio('background', 'assets/background.mp3')
     this.load.audio('starSound', 'assets/star.mp3')
@@ -255,7 +257,7 @@ export default function phaserAi() {
     bombSound.setVolume(0.5)
     backgroundMusic.play()
 
-    bunnySound = this.sound.add('bombSound');
+    bunnySound = this.sound.add('ufo');
 
     // const newNumber = setInterval(function () {
     //   const all = Object.keys(commands);
@@ -351,22 +353,25 @@ export default function phaserAi() {
     bombs = this.physics.add.group();
 
     cursors = this.input.keyboard.createCursorKeys();
+    this.physics.add.collider(player, kitty);
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(kitty, platforms);
 
-    this.physics.add.collider(player, kitty);
+
 
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
 
+    this.physics.add.overlap(kitty, player, hitByBunny, null, this);
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.overlap(kitty, stars, collectStar, null, this);
-    this.physics.add.overlap(kitty, player, hitByBunny, null, this);
+    // this.physics.add.overlap(kitty, player, hitByBunny, null, this);
 
 
 
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+    this.physics.add.collider(player, kitty, hitByBunny, null, this);
 
     scoreText = this.add.text(16, 16, 'Your Score: 0', { fontSize: '32px', fill: '#000' });
     kittyScoreText = this.add.text(450, 16, 'Alien\'s score: 0', { fontSize: '32px', fill: '#000' });
@@ -400,22 +405,24 @@ export default function phaserAi() {
     }
 
 
+
+//alien moves
     if (kitty.x >= 780) {
       move = 'long left';
     }
     if (kitty.x <= 15) {
       move = 'baby right';
     }
-    if (kitty.x > 250 && kitty.x < 300) {
+    if (kitty.x > 250 && kitty.x < 300 && kitty.y > 40) {
       move = 'right jump';
     }
-    if (kitty.x > 420 && kitty.x < 430 && kitty.y < 300) {
+    if (kitty.x > 420 && kitty.x < 430 && kitty.y < 300 && kitty.y > 15) {
       move = 'right';
     }
     if (kitty.x > 347 && kitty.x < 350 && kitty.y < 474) {
       move = 'jump';
     }
-    if (kitty.x > 433 && kitty.x < 440 && kitty.y < 200) {
+    if (kitty.x > 433 && kitty.x < 440 && kitty.y < 200 && kitty.y > 20) {
       move = 'right';
     }
     if (kitty.x > 787 && kitty.y > 193) {
@@ -424,13 +431,22 @@ export default function phaserAi() {
     if (kitty.x > 374 && kitty.x < 380 && kitty.y < 263 && kitty.y > 250) {
       move = 'long left';
     }
+    if (kitty.x > 725 && kitty.x < 730 && kitty.y < 171 && kitty.y > 166) {
+      move = 'left jump';
+    }
+    if (kitty.x > 315 && kitty.x < 326 && kitty.y < 11 && kitty.y > 10.4) {
+      move = 'left';
+    }
+
+    
 
 
-
-    console.log('MOVE', move)
-    console.log('KITTY X, Y', kitty.x, kitty.y)
+    // console.log('MOVE', move)
+    // console.log('KITTY X, Y', kitty.x, kitty.y)
     // console.log('KITTY Y', kitty.y)
-    //kitty's moves:
+
+    
+    //alien commands:
     if (move === 'left') {
       keyboard = true;
       kitty.setVelocityX(-260);
@@ -507,17 +523,17 @@ export default function phaserAi() {
       jumpSound.play()
       player.setVelocityY(-330);
     }
-    console.log('PLAYER', player.x, player.y)
+    // console.log('PLAYER', player.x, player.y)
   }
 
 
-  function hitByBunny() {
-    bunnySound.play()
-    player.setTint(0x0000ff);
-    score -= 10
-    scoreText.setText('Your Score: ' + score);
+  // function hitByBunny() {
+  //   bunnySound.play()
+  //   player.setTint('#B4A7D6');
+  //   score -= 10
+  //   scoreText.setText('Your Score: ' + score);
 
-  }
+  // }
   // player.clearTint();
 
   function collectStar(character, star) {
@@ -561,7 +577,13 @@ export default function phaserAi() {
 
   }
 
+  function hitByBunny() {
+    bunnySound.play()
+    player.setTint(0xff00ff);
+    score -= 10
+    scoreText.setText('Your Score: ' + score);
 
+  }
 
   function hitBomb(player, bomb) {
     this.physics.pause();
