@@ -1,6 +1,6 @@
 import React from 'react';
 import NavButtons from '../NavButtons';
-import { FaCamera, FaMicrophoneAlt, FaKeyboard, FaMedal } from 'react-icons/fa';
+import { FaCamera, FaMicrophoneAlt, FaBrain, FaKeyboard, FaMedal } from 'react-icons/fa';
 import getLeaderBoard from '../hooks/getLeaderBoard';
 import '../styles/highscores.scss';
 
@@ -69,6 +69,7 @@ export default function Highscores() {
             <tbody className="results">
               {best.map((d, i) => <tr key={i}>
                 <td>
+                  {i + 1}
                   {i === 0 &&
                     <FaMedal className="gold" />
                   }
@@ -78,15 +79,17 @@ export default function Highscores() {
                   {i === 2 &&
                     <FaMedal className="bronze" />
                   }
-                  {i + 1}
 
                 </td>
-                <td>{d.name}</td>
                 <td>
-                  <span>
+                  {d.name}
+                </td>
+                <td>
+                <span>
                     {d.mode_name === "camera" ? <FaCamera /> :
                       d.mode_name === "voice" ? <FaMicrophoneAlt /> :
-                        <FaKeyboard />}
+                        d.mode_name === "keyboard" ? <FaKeyboard /> :
+                        <FaBrain />}
                   </span>
                 </td>
                 <td>{d.score}</td>
