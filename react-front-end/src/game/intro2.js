@@ -36,19 +36,21 @@ function preload ()
   this.load.image('background', 'assets/Space-Transparent.png');
 }
 function kill() {
+  gameMulti.socket.close();
   gameMulti.destroy(true);
 }
 function create() {
   this.add.image(400, 300, 'background');
+
+
+  var self = this;
+  this.socket = io();
   let leaderButton = document.getElementsByClassName("leaderboard")
   let howButton = document.getElementsByClassName("howTo")
   let playButton = document.getElementsByClassName("play")
   leaderButton[0].addEventListener("click", kill)
   howButton[0].addEventListener("click", kill)
   playButton[0].addEventListener("click", kill)
-
-  var self = this;
-  this.socket = io();
   this.otherPlayers = this.physics.add.group();
   
   this.socket.on('currentPlayers', function (players) {
