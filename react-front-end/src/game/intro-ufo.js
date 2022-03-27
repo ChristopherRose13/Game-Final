@@ -152,7 +152,7 @@ export default function phaserAi() {
   let kitty;
   let move;
   let bunnySound;
-  // let hitByBunny;
+  // let detonate;
 
 
   function preload() {
@@ -220,6 +220,10 @@ export default function phaserAi() {
       '/assets/dude.png',
       { frameWidth: 32, frameHeight: 48 }
     );
+    // this.load.spritesheet('kaboom',
+    //   '/assets/explosion.png',
+    //   { frameWidth: 32, frameHeight: 48 }
+    // );
 
     this.load.spritesheet('cat', 'assets/ufo.png', { frameWidth: 32, frameHeight: 48 })
   }
@@ -333,8 +337,38 @@ export default function phaserAi() {
       frameRate: 20
     });
 
+    // this.anims.create({
+    //   key: 'kaboom-boom',
+    //   frames: this.anims.generateFrameNumbers('kaboom', { start: 1, end: 8 }),
+    //   frameRate: 10,
+    //   repeat: 0
+    // });
 
+    // this.boom = this.physics.add.sprite(100, 100, 'kaboom');
+    // this.boom.setScale(3);
+    // this.boom.setVisible(false);
+    // this.boom.on('animationcomplete', () => {
+    //   this.boom.setVisible(false);
 
+    // this.exploded = false;
+
+    // const detonate = function (player, bombs) {
+    //   // Only detonate once
+    //   if (!this.exploded) {
+    //     // Get the x and y of the bomb we touched
+    //     const { x, y } = bombs;
+
+    //     //  Position the explosion where the bomb was and play it
+    //     this.boom.setPosition(x, y);
+    //     this.boom.setVisible(true);
+    //     this.boom.play('kaboom-boom');
+
+    //     // Flip our toggle
+    //     this.exploded = true;
+    //   }
+    // }
+
+    // this.physics.add.overlap(player, bombs, this.detonate, null, this);
 
     stars = this.physics.add.group({
       key: 'star',
@@ -406,7 +440,7 @@ export default function phaserAi() {
 
 
 
-//alien moves
+    //alien moves
     if (kitty.x >= 780) {
       move = 'long left';
     }
@@ -438,14 +472,14 @@ export default function phaserAi() {
       move = 'left';
     }
 
-    
+
 
 
     // console.log('MOVE', move)
     // console.log('KITTY X, Y', kitty.x, kitty.y)
     // console.log('KITTY Y', kitty.y)
 
-    
+
     //alien commands:
     if (move === 'left') {
       keyboard = true;
@@ -586,6 +620,8 @@ export default function phaserAi() {
   }
 
   function hitBomb(player, bomb) {
+    // this.exploded = true;
+    // this.boom.setVisible(true);
     this.physics.pause();
     bombSound.play()
     player.setTint(0xff0000);
@@ -593,7 +629,7 @@ export default function phaserAi() {
     gameOver = true;
     gameOverText.visible = true;
     seeLeaderboard.visible = true;
-
+   
   }
 
   // Video Functions
