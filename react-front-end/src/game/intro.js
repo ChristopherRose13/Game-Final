@@ -348,7 +348,7 @@ export default function phaserSingle() {
         mode_id = 2;
       }
       //save score and name to database
-      postScoreAxios({ user_id: 2, game_id: 1, mode_id, score })
+      postScoreAxios({ user_id: 4, game_id: 1, mode_id, score })
       // setScore(score)
       game.scene.pause("default")
       //send to game over screen

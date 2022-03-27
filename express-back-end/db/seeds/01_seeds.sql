@@ -10,9 +10,10 @@ INSERT INTO users (
 name, email, password) 
 VALUES (
 'Pluto', 'dog@disney.com', 'password');
+INSERT INTO users (
 name, email, password) 
 VALUES (
-'3W', '3w@gmail.com', 'password');
+'3LilSeed', '3w@gmail.com', 'password');
 
 INSERT INTO games (
 name, description, rating)
@@ -25,6 +26,8 @@ INSERT INTO modes (name, description)
 VALUES ('camera', 'Use your face at the camera to play');
 INSERT INTO modes (name, description)
 VALUES ('voice', 'Use your voice to play');
+INSERT INTO modes (name, description)
+VALUES ('AI', 'Play against the AI');
 
 INSERT INTO highscores (user_id, game_id, mode_id, score)
 VALUES (1, 1, 1, 300);
@@ -35,9 +38,9 @@ VALUES (1, 1, 3, 100);
 INSERT INTO highscores (user_id, game_id, mode_id, score)
 VALUES (2, 1, 1, 100);
 INSERT INTO highscores (user_id, game_id, mode_id, score)
-VALUES (2, 1, 2, 50);
+VALUES (2, 1, 4, 50);
 INSERT INTO highscores (user_id, game_id, mode_id, score)
-VALUES (2, 1, 3, 10);
+VALUES (2, 1, 4, 10);
 INSERT INTO highscores (user_id, game_id, mode_id, score)
 VALUES (3, 1, 1, 220);
 INSERT INTO highscores (user_id, game_id, mode_id, score)

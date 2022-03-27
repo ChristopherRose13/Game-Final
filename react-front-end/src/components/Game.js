@@ -29,6 +29,7 @@ export default function Game(props) {
         }
     } 
   }
+  console.log("props", props.mode);
   switch(props.mode) {
     case 'single':
       game = new phaserSingle();
@@ -36,7 +37,8 @@ export default function Game(props) {
     case 'ai':
       game = new phaserAi();
       break;
-    case 'multi':
+    case 'coop':
+      console.log("multi");
       game = new phaserMulti();
       break;
     case 'bonus':
@@ -47,6 +49,7 @@ export default function Game(props) {
   // game = new phaserGame();  
   return (
         <>
+        <img src="../assets/arcade2.jpg" alt="stars" className="background"></img>
         <NavButtons/>
         <div id="phaser-example"></div>
         </>
