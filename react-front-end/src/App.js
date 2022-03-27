@@ -23,7 +23,7 @@ export default function App() {
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
-      {selector === "single" && <Game mode={"single"}/>}
+      {selector === "single" && <Game mode={selector}/>}
       {selector === "ai" && <Game mode={"ai"}/>}
       {selector === "multi" && <Game mode={"multi"}/>}
       {selector === "bonus" && <Game mode={"bonus"}/>}

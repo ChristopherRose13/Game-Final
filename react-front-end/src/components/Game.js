@@ -29,6 +29,7 @@ export default function Game(props) {
         }
     } 
   }
+  console.log("props", props.mode);
   switch(props.mode) {
     case 'single':
       game = new phaserSingle();
@@ -37,6 +38,7 @@ export default function Game(props) {
       game = new phaserAi();
       break;
     case 'multi':
+      console.log("multi");
       game = new phaserMulti();
       break;
     case 'bonus':
