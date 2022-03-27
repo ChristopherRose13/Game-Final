@@ -339,7 +339,8 @@ export default function phaserMulti() {
     //     }
     //   });
     // })
-    player2 = self.physics.add.image(200, 450, 'dude');
+    player2 = self.physics.add.sprite(200, 450, 'dude');
+    player2.setTint('DFFF00')
     player2.setBounce(0.2);
     player2.setCollideWorldBounds(true);
 
