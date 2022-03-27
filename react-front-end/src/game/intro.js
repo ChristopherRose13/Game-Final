@@ -238,6 +238,7 @@ export default function phaserSingle() {
     let playButton = document.getElementsByClassName("play") 
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
@@ -248,8 +249,6 @@ export default function phaserSingle() {
     jumpSound.setVolume(0.6)
     bombSound.setVolume(0.5)
     backgroundMusic.play()
-
-
 
     this.input.keyboard.on('keydown-M', () => {
       toggleVoice()
