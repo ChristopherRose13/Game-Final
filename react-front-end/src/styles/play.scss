@@ -162,3 +162,81 @@ $VIEWPORTS_CONFIG:
   }
   
 }
+
+@font-face {
+  font-family: 'Press Start 2P', cursive;
+  src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+}
+
+body {
+  background-image: url("https://cdn.designbyhumans.com/file/module/store/672/46672/hero/4896966.jpg");
+  }
+.frame {
+  width: 450px;
+  height: 450px;
+  border-radius: 25px;
+  background-color: rgba(70, 70, 70, 0.472);
+  margin: auto;
+  text-align: center;
+  border: 1px solid transparent;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+background-image: url("https://wpmisc.com/sites/default/files/wallpaper/abstract/66172/neon-grid-hd-wallpapers-66172-5530351.png");
+  background-size: cover;
+  
+  position: relative;
+  top: 1rem; 
+  z-index: 1000000;
+}
+
+img {
+  height: 200px;
+  width: 900px;
+  text-align: center;
+  margin: auto;
+}
+.play {
+  text-align: center;
+  margin: auto;
+  z-index: 10;
+  margin-top: 35px;
+}
+button.button {
+  font-family: 'Press Start 2P', cursive;
+	text-shadow: 1px 1px rgb(255, 255, 255), -1px -1px rgb(3, 1, 1);
+
+	line-height: 3em;
+	text-align: center;
+	display: inline-block;
+	padding-left: 30px;
+  padding-right: 30px;
+	-webkit-border-radius: .75em;
+	-moz-border-radius: .75em;
+	-o-border-radius: .75em;
+		border-radius: .75em;
+	background-color: red;
+	-webkit-box-shadow:  0 .2em maroon;
+	-moz-box-shadow:  0 .2em maroon;
+	-o-box-shadow:  0 .2em maroon;
+	box-shadow:  0 .2em maroon;
+	color: rgb(131, 0, 0);
+	margin: 10px;
+	background-color: red;
+	background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	cursor: pointer;
+}
+.button:hover,
+.button:focus {
+  box-shadow: 0 1em 1em -1em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+
+.btn-group {
+  margin-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px
+}

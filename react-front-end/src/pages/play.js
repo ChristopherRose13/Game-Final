@@ -12,27 +12,21 @@ export default function Play() {
   const { selector, onPlay, onMulti, onHowTo, onHighScores, home, playSinglePlayer, playAI, playCoop, playBonus} = useContext(menuContext);
   return (
     
-      <div className="play">
-        <img src="../assets/pink-space.jpeg" alt="stars" className="background"></img>
-        <NavButtons />
-        <h1>Stars n Bombs</h1>
-        <ul>
-          <li>
-            <button onClick={playSinglePlayer}>Single Player</button>
-          </li>
-          <li>
-            <button onClick={playAI}>Versus A.I.</button>
-          </li>
-          <li>
-            <button onClick={playCoop}>Co-op multiplayer</button>
-          </li>
-          <li>
-            <button onClick={playBonus}>*BONUS* ship mode</button>
-          </li>
-        </ul>
-        
-      </div>
-    
+    <>
+    <div class="play">
+      <img src="../assets/pink-space.jpeg" alt="stars" className="background"></img>
+    <NavButtons /> 
+    </div> 
+    <div class="frame">
+      <div class="btn-group">
+        <button class="button" type="button" onClick={playSinglePlayer}><h3>Single Player</h3></button><br/>
+        <button class="button" type="button" onClick={playAI}><h3>Versus A.I.</h3></button><br/>
+        <button class="button" type="button" onClick={playCoop}><h3>Co-op multiplayeL</h3></button><br/>
+        <button class="button" type="button" onClick={playBonus}><h3>*BONUS* ship mode</h3></button>
+      </div>    
+    </div>
+  </>
+      
   );
 }
 

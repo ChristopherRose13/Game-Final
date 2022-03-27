@@ -37,7 +37,7 @@ export default function Game(props) {
     case 'ai':
       game = new phaserAi();
       break;
-    case 'multi':
+    case 'coop':
       console.log("multi");
       game = new phaserMulti();
       break;

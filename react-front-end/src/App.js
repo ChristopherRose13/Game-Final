@@ -19,13 +19,12 @@ export default function App() {
     <div className="App">
       {/* <h1>My App</h1> */}
       {selector === "home" && <Home />}
-      {selector === "multi" && <Multi />}
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
-      {selector === "single" && <Game mode={selector}/>}
+      {selector === "single" && <Game mode={"single"}/>}
       {selector === "ai" && <Game mode={"ai"}/>}
-      {selector === "coop" && <Game mode={"multi"}/>}
+      {selector === "coop" && <Game mode={"coop"}/>}
       {selector === "bonus" && <Game mode={"bonus"}/>}
       <div id="wrapper">
         <video id="camera" width="320" height="240" autoplay="true" ></video>
