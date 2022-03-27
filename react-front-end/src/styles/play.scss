@@ -9,12 +9,27 @@ $VIEWPORTS_CONFIG:
 @import "./viewport.scss";
 
 @include viewports("tiny") {
+  img.title {
+    margin-top: 0.5em;
+    width: 40%
+  }
   h1.title {
     margin-top: 2em;
     font-size: 3em;
   }
   .btn {
-    font-size: 80%;
+    font-size: 60%;
+  }
+  div.nav {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0.5em;
+    margin-right: 0px;
   }
   div#wrapper {
     video#camera {
@@ -47,12 +62,28 @@ $VIEWPORTS_CONFIG:
 
 
 @include viewports(small) {
+  img.title {
+    margin-top: 0.5em;
+    width: 60%
+  }
   h1.title {
     margin-top: 2em;
     font-size: 3em;
   }
-  .btn {
-    font-size: 80%;
+  button.btn {
+    display: flexbox;
+    font-size: 100%;
+  }
+  div.nav {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0.5em;
+    margin-right: 0px;
   }
   div#wrapper {
     video#camera {
@@ -83,12 +114,27 @@ $VIEWPORTS_CONFIG:
   }
 }
 @include viewports(medium) {
+  img.title {
+    margin-top: 0.5em;
+    width: 80%;
+  }
   h1.title {
     margin-top: 2em;
     font-size: 3em;
   }
-  .btn {
+  button.btn {
     font-size: 120%;
+  }
+  div.nav {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0.5em;
+    margin-right: 0px;
   }
   div#wrapper {
     video#camera {
@@ -119,13 +165,16 @@ $VIEWPORTS_CONFIG:
   }
 }
 @include viewports(large) {
+  img.title {
+    margin-top: 0.5em;
+  }
   h1.title {
     margin-top: 1em;
     font-size: 4em;
   }
   button.btn {
     display: flexbox;
-    font-size: 200%;
+    font-size: 150%;
   }
   div.nav {
     display: flex;
@@ -135,6 +184,7 @@ $VIEWPORTS_CONFIG:
     z-index: 2;
     align-items: flex-start;
     align-content: center;
+    margin-top: 0.5em;
     margin-right: 0px;
   }
   div#wrapper {

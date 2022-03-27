@@ -50,6 +50,7 @@ function create() {
   var self = this;
   this.socket = io();
   this.otherPlayers = this.physics.add.group();
+  
   this.socket.on('currentPlayers', function (players) {
     Object.keys(players).forEach(function (id) {
       if (players[id].playerId === self.socket.id) {
@@ -130,6 +131,7 @@ function update ()
           };
   
     this.physics.world.wrap(this.ship, 5);
+    // this.physics.add.collider(this.ship, this.otherPlayers);
   }
 }
 
@@ -144,7 +146,7 @@ function addPlayer(self, playerInfo) {
   self.ship.setDrag(100);
   self.ship.setAngularDrag(100);
   self.ship.setMaxVelocity(200);
-  // self.ship = self.physics.add.collider(self.ship, self.otherPlayers);
+  
 }
 
 function addOtherPlayers(self, playerInfo) {
