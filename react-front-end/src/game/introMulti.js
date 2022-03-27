@@ -340,8 +340,8 @@ export default function phaserMulti() {
     //   });
     // })
     player2 = self.physics.add.sprite(200, 450, 'dude');
-    player2.setTint('DFFF00')
     player2.setBounce(0.2);
+    player2.setTint("#7CFC00")
     player2.setCollideWorldBounds(true);
 
 
@@ -377,7 +377,6 @@ export default function phaserMulti() {
     this.physics.add.collider(player2, platforms);
     this.physics.add.overlap(player2, stars, collectStar, null, this);
     this.physics.add.collider(player2, bombs, hitBomb, null, this);
-    this.physics.add.collider(player2, player);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', color: '#ff0000' });
@@ -403,17 +402,47 @@ export default function phaserMulti() {
     if (firstRun) {
       this.socket.on('playerMoved', function (playerInfo) {
           
-
+          
           if(playerInfo.char === 'dude') {
+            console.log("incoming: x ", playerInfo.x)
+            console.log("actual: x ", player.x)
+            console.log("change: ", playerInfo.x - player.x)
+            if(playerInfo.x - player.x >= -2.6666666666666288 && playerInfo.x - player.x <= 2.6666666666666288){
+              player.anims.play('turn', true)
+            } else
+            if(player.x > playerInfo.x) {
+              player.anims.play('left', true)
+              
+            } else if (player.x  < playerInfo.x) {
+              player.anims.play('right', true)
+            } else {
+              player.anims.play('turn', true)
+            }
+            
             player.setPosition(playerInfo.x, playerInfo.y)
             
+            
           } else if (playerInfo.char === 'dude2') {
+            console.log("incoming: x ", playerInfo.x)
+            console.log("actual: x ", player2.x)
+            console.log("change: ", playerInfo.x - player2.x)
+            if(playerInfo.x - player2.x >= -2.6666666666666288 && playerInfo.x - player2.x <= 2.6666666666666288){
+              player.anims.play('turn', true)
+            } else 
+            if(player2.x > playerInfo.x) {
+              player2.anims.play('left', true)
+            } else if (player2.x < playerInfo.x) {
+              player2.anims.play('right', true)
+            } else {
+              player2.anims.play('turn', true)
+            }
+            
             player2.setPosition(playerInfo.x, playerInfo.y)
             
           }
           
         
-      });
+      })
       firstRun = false;
     }
 
@@ -441,7 +470,7 @@ export default function phaserMulti() {
       
       if(isPlayer2){
         player2.setVelocityX(-160);
-
+        player2.anims.play('left', true);
       }
 
     }
@@ -454,7 +483,7 @@ export default function phaserMulti() {
       
       if(isPlayer2){
         player2.setVelocityX(160);
-
+        player2.anims.play('right', true)
       }
 
     }
@@ -466,7 +495,7 @@ export default function phaserMulti() {
       
       if(isPlayer2){
         player2.setVelocityX(0);
-
+        player2.anims.play('turn', true)
       }
 
     }
@@ -521,6 +550,7 @@ export default function phaserMulti() {
       }
      
     }
+    
 
   }
 
