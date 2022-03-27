@@ -13,9 +13,6 @@ export default function SelectorProvider(props) {
 const home = function() {
   setSelector("home")
 }
-const onMulti = function() {
-  setSelector("multi")
-}
   const onPlay = function() {
     setSelector("play");
   };
@@ -39,7 +36,7 @@ const onMulti = function() {
   }
 
   // This list can get long with a lot of functions.  Reducer may be a better choice
-  const providerData = { selector, onPlay, onMulti, onHowTo, onHighScores, home, playSinglePlayer, playAI, playCoop, playBonus };
+  const providerData = { selector, onPlay, onHowTo, onHighScores, home, playSinglePlayer, playAI, playCoop, playBonus };
 
   // We can now use this as a component to wrap anything
   // that needs our state
