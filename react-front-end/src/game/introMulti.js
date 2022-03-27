@@ -261,8 +261,9 @@ export default function phaserMulti() {
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
     let playButton = document.getElementsByClassName("play")
-    // leaderButton[0].addEventListener("click", kill)
-    // howButton[0].addEventListener("click", kill)
+    leaderButton[0].addEventListener("click", kill)
+    howButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
@@ -583,103 +584,103 @@ export default function phaserMulti() {
   const inititializeCamera = function () {
 
   }
-  let video = document.querySelector("#camera")
-  if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(function (stream) {
-        video.srcObject = stream
-        toggleVideo()
-      })
-      .catch(function (err) {
-        console.log("Something went wrong!")
-        console.log(err)
-      })
-  }
+  // let video = document.querySelector("#camera")
+  // if (navigator.mediaDevices.getUserMedia) {
+  //   navigator.mediaDevices.getUserMedia({ video: true })
+  //     .then(function (stream) {
+  //       video.srcObject = stream
+  //       toggleVideo()
+  //     })
+  //     .catch(function (err) {
+  //       console.log("Something went wrong!")
+  //       console.log(err)
+  //     })
+  // }
 
-  let canvas = document.getElementById('overlay')
-  let context = canvas.getContext('2d')
+  // let canvas = document.getElementById('overlay')
+  // let context = canvas.getContext('2d')
 
-  let drawLine = function (ctx, x1, y1, x2, y2) {
-    context.beginPath()
-    context.moveTo(x1, y1)
-    context.lineTo(x2, y2)
-    context.stroke()
-  }
+  // let drawLine = function (ctx, x1, y1, x2, y2) {
+  //   context.beginPath()
+  //   context.moveTo(x1, y1)
+  //   context.lineTo(x2, y2)
+  //   context.stroke()
+  // }
 
-  let tracker = new tracking.ObjectTracker('face')
-  tracker.setInitialScale(4)
-  tracker.setStepSize(2)
-  tracker.setEdgesDensity(0.1)
+  // let tracker = new tracking.ObjectTracker('face')
+  // tracker.setInitialScale(4)
+  // tracker.setStepSize(2)
+  // tracker.setEdgesDensity(0.1)
 
-  tracker.on('track', function (event) {
-    if (event.data.length === 1) {
-      // Clear entire canvas  
-      context.clearRect(0, 0, canvas.width, canvas.height)
+  // tracker.on('track', function (event) {
+  //   if (event.data.length === 1) {
+  //     // Clear entire canvas  
+  //     context.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Draw grid lines so we can see control points
-      let leftBound = canvas.width / 3
-      let rightBound = leftBound * 2
-      let upBound = canvas.height / 3
-      let downBound = upBound * 2
+  //     // Draw grid lines so we can see control points
+  //     let leftBound = canvas.width / 3
+  //     let rightBound = leftBound * 2
+  //     let upBound = canvas.height / 3
+  //     let downBound = upBound * 2
 
-      context.strokeStyle = '#ff0000';
-      drawLine(context, leftBound, 0, leftBound, canvas.height);
-      drawLine(context, rightBound, 0, rightBound, canvas.height);
-      drawLine(context, 0, upBound, canvas.width, upBound);
-      drawLine(context, 0, downBound, canvas.width, downBound);
+  //     context.strokeStyle = '#ff0000';
+  //     drawLine(context, leftBound, 0, leftBound, canvas.height);
+  //     drawLine(context, rightBound, 0, rightBound, canvas.height);
+  //     drawLine(context, 0, upBound, canvas.width, upBound);
+  //     drawLine(context, 0, downBound, canvas.width, downBound);
 
-      // Find center of face
-      let rect = event.data[0]
-      let faceX = rect.x + (rect.width / 2)
-      let faceY = rect.y + (rect.height / 2)
+  //     // Find center of face
+  //     let rect = event.data[0]
+  //     let faceX = rect.x + (rect.width / 2)
+  //     let faceY = rect.y + (rect.height / 2)
 
-      // Draw square at center of face
-      context.lineWidth = 5
+  //     // Draw square at center of face
+  //     context.lineWidth = 5
 
-      // Draw face bounding box & center point
-      context.strokeStyle = '#0000ff'
-      context.strokeRect(faceX - 10, faceY - 10, 20, 20)
+  //     // Draw face bounding box & center point
+  //     context.strokeStyle = '#0000ff'
+  //     context.strokeRect(faceX - 10, faceY - 10, 20, 20)
 
-      // Has face crossed a boundary?
+  //     // Has face crossed a boundary?
 
-      if (faceX < leftBound) {
-        camera = true;
-        sendMoveX('left')
-      } else if (faceX > rightBound) {
-        camera = true;
-        sendMoveX('right')
-      } else {
-        sendMoveX('neutral')
-      }
-      if (faceY < upBound) {
-        camera = true;
-        sendMoveY('up')
-      } else if (faceY > downBound) {
-        camera = true;
-        sendMoveY('down')
-      } else {
-        sendMoveY('neutral')
-      }
-    }
+  //     if (faceX < leftBound) {
+  //       camera = true;
+  //       sendMoveX('left')
+  //     } else if (faceX > rightBound) {
+  //       camera = true;
+  //       sendMoveX('right')
+  //     } else {
+  //       sendMoveX('neutral')
+  //     }
+  //     if (faceY < upBound) {
+  //       camera = true;
+  //       sendMoveY('up')
+  //     } else if (faceY > downBound) {
+  //       camera = true;
+  //       sendMoveY('down')
+  //     } else {
+  //       sendMoveY('neutral')
+  //     }
+  //   }
 
-  })
-  tracking.track(video, tracker, { camera: true, audio: false })
+  // })
+  // tracking.track(video, tracker, { camera: true, audio: false })
 
 
   function toggleVideo() {
-    if (cameraOn) {
-      const mediaStream = video.srcObject;
-      const tracks = mediaStream.getTracks();
-      tracks.forEach(track => track.stop())
-      cameraOn = false;
-      console.log("camera is off")
-    } else if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream
-        })
-      console.log("camera is on")
-      cameraOn = true;
-    }
+    // if (cameraOn) {
+    //   const mediaStream = video.srcObject;
+    //   const tracks = mediaStream.getTracks();
+    //   tracks.forEach(track => track.stop())
+    //   cameraOn = false;
+    //   console.log("camera is off")
+    // } else if (navigator.mediaDevices.getUserMedia) {
+    //   navigator.mediaDevices.getUserMedia({ video: true })
+    //     .then(function (stream) {
+    //       video.srcObject = stream
+    //     })
+    //   console.log("camera is on")
+    //   cameraOn = true;
+    // }
   }
 }
