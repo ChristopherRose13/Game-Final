@@ -244,6 +244,7 @@ export default function phaserAi() {
     let playButton = document.getElementsByClassName("play")
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill);
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
@@ -391,8 +392,9 @@ export default function phaserAi() {
       } else if (camera) {
         mode_id = 2;
       }
-      //save score and name to database
-      postScoreAxios({ user_id: 2, game_id: 1, mode_id, score })
+      //save score and name to database - AI mode
+      mode_id = 4;
+      postScoreAxios({ user_id: 4, game_id: 1, mode_id, score })
       // setScore(score)
       game.scene.pause("default")
       //send to game over screen
