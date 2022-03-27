@@ -14,7 +14,7 @@ export default function Play() {
     
     <>
     <div class="play">
-      <img src="../assets/pink-space.jpeg" alt="stars" className="background"></img>
+      <img src="../assets/arcade.jpg" alt="stars" className="background"></img>
     <NavButtons /> 
     </div> 
     <div class="frame">

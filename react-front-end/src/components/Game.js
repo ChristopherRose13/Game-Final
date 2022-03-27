@@ -49,6 +49,7 @@ export default function Game(props) {
   // game = new phaserGame();  
   return (
         <>
+        <img src="../assets/arcade2.jpg" alt="stars" className="background"></img>
         <NavButtons/>
         <div id="phaser-example"></div>
         </>

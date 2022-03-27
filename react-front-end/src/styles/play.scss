@@ -222,10 +222,10 @@ button.button {
 	color: rgb(131, 0, 0);
 	margin: 10px;
 	background-color: red;
-	background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-	background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-	background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
-	background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -o-linear-gradient(to left top, pink 3%, red 22%, maroon 99%);
+	background-image: -moz-linear-gradient(to left top, pink 3%, red 22%, maroon 99%);
+	background-image: -webkit-linear-gradient(to left top, pink 3%, red 22%, maroon 99%);
+	background-image: linear-gradient(to left top, pink 3%, red 22%, maroon 99%);
 	cursor: pointer;
 }
 .button:hover,
