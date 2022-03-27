@@ -235,11 +235,10 @@ export default function phaserSingle() {
   function create() {
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
-    let playButton = document.getElementsByClassName("play")
-    let multiButton = document.getElementsByClassName("multi")
+    let playButton = document.getElementsByClassName("play") 
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
-    multiButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill)
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
@@ -250,8 +249,6 @@ export default function phaserSingle() {
     jumpSound.setVolume(0.6)
     bombSound.setVolume(0.5)
     backgroundMusic.play()
-
-
 
     this.input.keyboard.on('keydown-M', () => {
       toggleVoice()
@@ -351,7 +348,7 @@ export default function phaserSingle() {
         mode_id = 2;
       }
       //save score and name to database
-      postScoreAxios({ user_id: 2, game_id: 1, mode_id, score })
+      postScoreAxios({ user_id: 4, game_id: 1, mode_id, score })
       // setScore(score)
       game.scene.pause("default")
       //send to game over screen
