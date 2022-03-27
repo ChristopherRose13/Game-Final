@@ -6,7 +6,7 @@ import './styles/navbar.scss';
 
 
 export default function Selector() {
-  const { selector, onPlay, onMulti, onHowTo, onHighScores } = useContext(menuContext);
+  const { selector, onPlay, onHowTo, onHighScores } = useContext(menuContext);
 
   return (
     <div className="nav">

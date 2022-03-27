@@ -244,6 +244,7 @@ export default function phaserAi() {
     let playButton = document.getElementsByClassName("play")
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
+    playButton[0].addEventListener("click", kill);
     bombSound = this.sound.add('bombSound');
     jumpSound = this.sound.add('jump');
     backgroundMusic = this.sound.add('background');
