@@ -28,7 +28,6 @@ export default function App() {
       {selector === "ai" && <Game mode={"ai"}/>}
       {selector === "multi" && <Game mode={"multi"}/>}
       {selector === "bonus" && <Game mode={"bonus"}/>}
-      
     </div>
   );
 }

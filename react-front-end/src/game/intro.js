@@ -9,10 +9,13 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
-
 import Selector from '../NavButtons';
 import { useContext } from 'react';
 import { menuContext } from '../providers/NavProvider';
+
+// import Selector from '../NavButtons';
+// import { useContext } from 'react';
+// import { menuContext } from '../providers/NavProvider';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
