@@ -9,16 +9,26 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
+import classNames from 'classnames';
+import Selector from '../NavButtons';
+import { useContext } from 'react';
+import { menuContext } from '../providers/NavProvider';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
+
+
 export default function phaserSingle() {
+  const { selector, onPlay, onHowTo, onHighScores } = useContext(menuContext);
   const { postScoreAxios, getHighScoresAxios } = useAxios();
   const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
     parent: 'phaser-example',
+    dom: {
+      createContainer: true
+    },
     physics: {
       default: 'arcade',
       arcade: {
@@ -32,6 +42,7 @@ export default function phaserSingle() {
       update: update
     }
   };
+
 
   const timeOut = setTimeout(() => {
     voiceMoverX("")
@@ -148,6 +159,8 @@ export default function phaserSingle() {
   let mode_id = 3;
   // let firstScene;
   // let changeScene;
+  let exit;
+  let returnWinners;
 
 
   function preload() {
@@ -162,6 +175,9 @@ export default function phaserSingle() {
         fill: '#ffffff'
       }
     });
+
+    this.add.dom(504, 20, 'button', 'background-color: lime; width: 114px; height: 22px; font: 15px monospace', 'Exit');
+
 
     var percentText = this.make.text({
       x: width / 2,
@@ -207,6 +223,7 @@ export default function phaserSingle() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
+    // this.load.image('exit', 'assets/exit.png');
 
     this.load.image('blue-sky', 'assets/sky.png');
 
@@ -235,7 +252,14 @@ export default function phaserSingle() {
   function create() {
     let leaderButton = document.getElementsByClassName("leaderboard")
     let howButton = document.getElementsByClassName("howTo")
-    let playButton = document.getElementsByClassName("play") 
+    let playButton = document.getElementsByClassName("play")
+
+
+    // let exit = document.getElementsByTagName('button')
+
+
+    // exit[0].addEventListener("click", kill)
+
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
     playButton[0].addEventListener("click", kill)
@@ -260,6 +284,23 @@ export default function phaserSingle() {
     }, this);
 
 
+
+    let exit = document.getElementsByTagName('button')
+
+    const returnLeaderboard = function () {
+      onHighScores()
+      kill()
+    }
+
+    exit[3].addEventListener("click",
+      returnLeaderboard
+    );
+
+
+    console.log("exit3==", exit[3])
+    // console.log("exit 1==", exit[1])
+    // console.log("exit 2==", exit[2])
+    // console.log("exit 3==", exit[3])
     this.add.image(400, 300, 'sky');
 
 
@@ -324,6 +365,8 @@ export default function phaserSingle() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
 
+
+
     seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
     seeLeaderboard.setOrigin(0.5)
     seeLeaderboard.visible = false;
@@ -357,7 +400,17 @@ export default function phaserSingle() {
     }
 
 
+    // let exit = document.getElementsByTagName('button')
 
+    // const returnWinners = function () {
+    //   return (
+    //     <Highscores />
+    //   )
+    // }
+    // exit[0].addEventListener("click", returnWinners);
+    // console.log("returnwinners==", returnWinners)
+    // console.log("highscores==", <Highscores />)
+    // console.log("x, y", player.x, player.y)
 
     if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
       keyboard = true;

@@ -10,28 +10,28 @@ export default function SelectorProvider(props) {
   const [selector, setSelector] = useState("home");
 
   // Functions to change  the selector state item
-const home = function() {
-  setSelector("home")
-}
-  const onPlay = function() {
+  const home = function () {
+    setSelector("home")
+  }
+  const onPlay = function () {
     setSelector("play");
   };
-  const onHowTo = function() {
+  const onHowTo = function () {
     setSelector("howto");
   };
-  const onHighScores = function() {
+  const onHighScores = function () {
     setSelector("highscores");
   };
-  const playSinglePlayer = function() {
+  const playSinglePlayer = function () {
     setSelector("single")
   };
-  const playAI = function(){
+  const playAI = function () {
     setSelector("ai")
   }
-  const playCoop = function(){
-    setSelector('multi')
+  const playCoop = function () {
+    setSelector('coop')
   }
-  const playBonus = function(){
+  const playBonus = function () {
     setSelector('bonus')
   }
 

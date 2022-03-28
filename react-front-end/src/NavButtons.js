@@ -10,11 +10,10 @@ export default function Selector() {
 
   return (
     <div className="nav">
-
       <button className="btn play" onClick={onPlay}>PLAY</button>
       <button className="btn howTo" onClick={onHowTo}>HOW TO</button>
       <button className="btn leaderboard" onClick={onHighScores}>LEADERBOARD</button>
-      {/* Context: <span className="Context"> {selector} </span> */}
+
 
     </div>
   );
