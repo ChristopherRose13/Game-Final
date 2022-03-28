@@ -10,9 +10,9 @@ export default function HomeNav() {
 
   return (
     <div className="home-nav">
-      <button className="home-play" onClick={onPlay}>PLAY</button>
-      <button className="home-howTo" onClick={onHowTo}>HOW TO</button>
-      <button className="home-leaderboard" onClick={onHighScores}>LEADERBOARD</button>
+      <button className="home-play glow" onClick={onPlay}>PLAY</button>
+      <button className="home-howTo glow" onClick={onHowTo}>HOW TO</button>
+      <button className="home-leaderboard glow" onClick={onHighScores}>LEADERBOARD</button>
 
 
     </div>
