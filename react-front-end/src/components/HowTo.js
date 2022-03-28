@@ -12,7 +12,8 @@ export default function HowTo() {
       <video src="./assets/game-recording.mov" autoPlay loop id="myVideo" type="video/mp4"></video>
       <div className="content">
         <h1 className="how-to" >How To</h1>
-        <h2 className="welcome">Welcome to Stars n Bombs! The goal is to collect all the stars to gain points. Be on the lookout for falling bombs  💣  though! The game's over when you're hit by a bomb. You have 3 options to play:</h2>
+        <h2 className="welcome">Welcome to ARCADE! </h2>
+        <h3 className='keyboard'>Game 1- Stars n Bombs: The goal is to collect all the stars to gain points. Be on the lookout for falling bombs  💣  though! The game is over when you're hit by a bomb. You have singleplayer, multiplayer and vs. AI options. There are 3 ways to play:</h3>
         <h3 className="keyboard" >1. Keyboard:</h3>
         <p className="details">You know the deal- use your left arrow to move left, right arrow to move right, and up to jump. </p>
 
@@ -33,9 +34,11 @@ export default function HowTo() {
 
         <h3 className="face-detection" >3. Face Detection:</h3>
         <p className="details">You can move dude around the course with facial tracking! Dude moves in the direction of your head as it moves outside the bounds of the centre square. </p>
+
+        <h3 className='keyboard'>Game 2- Ship Game</h3>
       </div>
     </div>
-    
+
 
   )
 
