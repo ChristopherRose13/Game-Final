@@ -13,6 +13,10 @@ import Selector from '../NavButtons';
 import { useContext } from 'react';
 import { menuContext } from '../providers/NavProvider';
 
+// import Selector from '../NavButtons';
+// import { useContext } from 'react';
+// import { menuContext } from '../providers/NavProvider';
+
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 
