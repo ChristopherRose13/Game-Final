@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import Selector from '../NavButtons';
 import { useContext } from 'react';
 import { menuContext } from '../providers/NavProvider';
+import { FaGlasses } from 'react-icons/fa';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
@@ -161,6 +162,7 @@ export default function phaserSingle() {
   // let changeScene;
   let exit;
   let returnWinners;
+  let end;
 
 
   function preload() {
@@ -176,8 +178,8 @@ export default function phaserSingle() {
       }
     });
 
-    this.add.dom(504, 20, 'button', 'background-color: lime; width: 114px; height: 22px; font: 15px monospace', 'Exit');
-
+    end = this.add.dom(400, 450, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
+    end.visible = false;
 
     var percentText = this.make.text({
       x: width / 2,
@@ -223,7 +225,7 @@ export default function phaserSingle() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
-    
+
 
     this.load.image('blue-sky', 'assets/sky.png');
 
@@ -255,7 +257,7 @@ export default function phaserSingle() {
     let playButton = document.getElementsByClassName("play")
 
 
-  
+
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
     playButton[0].addEventListener("click", kill)
@@ -291,6 +293,7 @@ export default function phaserSingle() {
     exit[3].addEventListener("click",
       returnLeaderboard
     );
+
 
 
     console.log("exit3==", exit[3])
@@ -363,9 +366,9 @@ export default function phaserSingle() {
 
 
 
-    seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    seeLeaderboard.setOrigin(0.5)
-    seeLeaderboard.visible = false;
+    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
+    // seeLeaderboard.setOrigin(0.5)
+    // seeLeaderboard.visible = false;
 
     // firstScene = this.add.image(400, 300, 'sky');
     // firstScene.visible = true;
@@ -472,8 +475,8 @@ export default function phaserSingle() {
     player.anims.play('turn');
     gameOver = true;
     gameOverText.visible = true;
-    seeLeaderboard.visible = true;
-
+    // seeLeaderboard.visible = true;
+    end.visible = true;
   }
 
   // Video Functions
