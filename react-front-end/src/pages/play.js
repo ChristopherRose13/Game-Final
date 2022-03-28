@@ -13,16 +13,16 @@ export default function Play() {
   return (
     
     <>
-    <div class="play">
+    <div className="play">
       <img src="../assets/arcade.jpg" alt="stars" className="background"></img>
     <NavButtons /> 
     </div> 
-    <div class="frame">
-      <div class="btn-group">
-        <button class="button" type="button" onClick={playSinglePlayer}><h3>Single Player</h3></button><br/>
-        <button class="button" type="button" onClick={playAI}><h3>Versus A.I.</h3></button><br/>
-        <button class="button" type="button" onClick={playCoop}><h3>Co-op multiplayeL</h3></button><br/>
-        <button class="button" type="button" onClick={playBonus}><h3>*BONUS* ship mode</h3></button>
+    <div className="frame">
+      <div className="btn-group">
+        <button className="button" type="button" onClick={playSinglePlayer}><h3>Single Player</h3></button><br/>
+        <button className="button" type="button" onClick={playAI}><h3>Versus A.I.</h3></button><br/>
+        <button className="button" type="button" onClick={playCoop}><h3>Co-op multiplayeL</h3></button><br/>
+        <button className="button" type="button" onClick={playBonus}><h3>*BONUS* ship mode</h3></button>
       </div>    
     </div>
   </>

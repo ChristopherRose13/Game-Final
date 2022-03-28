@@ -36,20 +36,29 @@ function preload ()
   this.load.image('background', 'assets/Space-Transparent.png');
 }
 function kill() {
+  console.log("socket is:",gameMulti.socket);
+  // gameMulti.socket.on('disconnect', function () {
+  //   gameMulti.socket.disconnect();
+  //   // gameMulti.socket.disconnect(); // is not finding socket
+  //   // gameMulti.socket.emit('disconnect');
+  //   // disconnect socket.io from server
+  // });
   gameMulti.destroy(true);
 }
 function create() {
   this.add.image(400, 300, 'background');
+
+  var self = this;
+  this.socket = io();
+
   let leaderButton = document.getElementsByClassName("leaderboard")
   let howButton = document.getElementsByClassName("howTo")
   let playButton = document.getElementsByClassName("play")
   leaderButton[0].addEventListener("click", kill)
   howButton[0].addEventListener("click", kill)
   playButton[0].addEventListener("click", kill)
-
-  var self = this;
-  this.socket = io();
   this.otherPlayers = this.physics.add.group();
+  
   this.socket.on('currentPlayers', function (players) {
     Object.keys(players).forEach(function (id) {
       if (players[id].playerId === self.socket.id) {
@@ -130,11 +139,11 @@ function update ()
           };
   
     this.physics.world.wrap(this.ship, 5);
+    // this.physics.add.collider(this.ship, this.otherPlayers);
   }
 }
 
 function addPlayer(self, playerInfo) {
-  console.log('adding player', playerInfo);
   self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(53, 40);
   if (playerInfo.team === 'blue') {
     self.ship.setTint(0x0000ff);
@@ -144,7 +153,7 @@ function addPlayer(self, playerInfo) {
   self.ship.setDrag(100);
   self.ship.setAngularDrag(100);
   self.ship.setMaxVelocity(200);
-  // self.ship = self.physics.add.collider(self.ship, self.otherPlayers);
+  
 }
 
 function addOtherPlayers(self, playerInfo) {

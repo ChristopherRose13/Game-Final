@@ -47,9 +47,17 @@ io.on('connection', function(socket) {
     delete players[socket.id];
     console.log(players);
     // emit a message to all players to remove this player
-    //socket.disconnect(socket.id);
-    // socket.disconnect(socket.id); not works
+    
     io.emit('disconnectPlayer', socket.id);
+    // reset the scores if there are no players left
+    console.log("who is left?");
+    console.log(Object.keys(players).length);
+    console.log(socket.id);
+    if (Object.keys(players).length === 0) {
+      scores.blue = 0;
+      scores.red = 0;
+      console.log('reset scores');
+    }
   });
   // when a player moves, update the player data
   socket.on('playerMovement', function (movementData) {
