@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div class="dark">
+      <div className="dark">
       <img src="../assets/dark-matter3.png" alt="title" className="title"></img>
       </div>
       {selector === "home" && <Home />}

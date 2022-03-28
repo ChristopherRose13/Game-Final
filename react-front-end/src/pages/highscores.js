@@ -50,7 +50,7 @@ export default function Highscores() {
   } else {
 
     return (
-      <body className="body">
+      <div className="body">
 
         <img src="../assets/pink-sky.png" alt="stars" className="background"></img>
 
@@ -99,7 +99,7 @@ export default function Highscores() {
           <h2 className="your-score">Your score: {playerScore} </h2>
           <h2 className="your-rank">You are ranked # {rank}!</h2>
         </div>
-      </body>)
+      </div>)
   }
 
 }
