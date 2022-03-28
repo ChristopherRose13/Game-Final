@@ -17,19 +17,18 @@ export default function App() {
 
   return (
     <div className="App">
-      {/* <h1>My App</h1> */}
+      <div className="dark">
+      <img src="../assets/dark-matter3.png" alt="title" className="title"></img>
+      </div>
       {selector === "home" && <Home />}
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}
       {selector === "highscores" && <HighScores />}
       {selector === "single" && <Game mode={"single"}/>}
       {selector === "ai" && <Game mode={"ai"}/>}
-      {selector === "coop" && <Game mode={"coop"}/>}
+      {selector === "multi" && <Game mode={"multi"}/>}
       {selector === "bonus" && <Game mode={"bonus"}/>}
-      <div id="wrapper">
-        <video id="camera" width="320" height="240" autoplay="true" ></video>
-        <canvas id="overlay" width="320" height="240" ></canvas>
-      </div>
+      
     </div>
   );
 }

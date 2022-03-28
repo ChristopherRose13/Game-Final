@@ -40,8 +40,6 @@ io.on('connection', function(socket) {
 
   socket.on('playerMovement', function(movementData) {
 
-    console.log("xy ", players[socket.id], "id: ", socket.id);
-    
     players[socket.id].x = movementData.x;
     players[socket.id].y = movementData.y;
     
