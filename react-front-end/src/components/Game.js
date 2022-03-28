@@ -7,7 +7,7 @@ import phaserMulti from "../game/introMulti";
 import state from "../useState";
 import Leaderboard from "./Leaderboard";
 import NavButtons from "../NavButtons";
-
+import Highscores from "../pages/highscores"
 
 let game;
 export default function Game(props) {
@@ -16,43 +16,59 @@ export default function Game(props) {
     console.log("canvasRef", canvasRef.current)
   }, [])
 
-  window.onkeyup = function(event) {
+  // const returnWinners = function () {
+  //   return (
+  //     <Highscores />
+  //   )
+  // }
+
+
+
+  window.onkeyup = function (event) {
     let key = event.key.toUpperCase();
-    if ( key == 'V' || key == 'v') {
-        console.log("V pressed");
-        const element = document.getElementById("wrapper");
-        console.log(element);
-        if(element.style.display === "block") {
+    if (key == 'V' || key == 'v') {
+      console.log("V pressed");
+      const element = document.getElementById("wrapper");
+      console.log(element);
+      if (element.style.display === "block") {
         element.style.display = "none"
-        } else {
+      } else {
         element.style.display = "block"
-        }
-    } 
+      }
+    }
   }
   console.log("props", props.mode);
-  switch(props.mode) {
+  switch (props.mode) {
     case 'single':
       game = new phaserSingle();
       break;
     case 'ai':
       game = new phaserAi();
       break;
-    case 'coop':
+    case 'multi':
       console.log("multi");
       game = new phaserMulti();
       break;
     case 'bonus':
       game = new phaserBonus();
     default:
-      // game = new phaserSingle();
+    // game = new phaserSingle();
   }
   // game = new phaserGame();  
   return (
-        <>
-        <img src="../assets/arcade2.jpg" alt="stars" className="background"></img>
-        <NavButtons/>
-        <div id="phaser-example"></div>
-        </>
-   
+    <>
+      <img src="../assets/arcade2.jpg" alt="stars" className="background"></img>
+      <NavButtons />
+      <div id="phaser-example"></div>
+      {/* <button onClick={() => { returnWinners()}}>Exit</button> */}
+     
+    </>
+
   )
 }
+
+
+// console.log("returnwinners==", returnWinners)
+
+
+
