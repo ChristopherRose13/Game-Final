@@ -52,7 +52,7 @@ export default function Highscores() {
     return (
       <div className="body">
 
-        <img src="../assets/pink-sky.png" alt="stars" className="background"></img>
+        <img src="../assets/pink-space.jpeg" alt="stars" className="background"></img>
 
         <div className="highScores">
           <NavButtons />
