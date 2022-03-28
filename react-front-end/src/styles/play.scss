@@ -10,15 +10,33 @@ $VIEWPORTS_CONFIG:
 
 @include viewports("tiny") {
   img.title {
-    margin-top: 0.5em;
-    width: 40%
+    position:relative;
+    margin-left: 10%;
+    width: 80%;
+    z-index: 9;
+  }
+  img.planet {
+    position: fixed;
+    top: -10%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
   }
   h1.title {
     margin-top: 2em;
     font-size: 3em;
   }
-  .btn {
-    font-size: 60%;
+  button.home-play{
+    display: flexbox;
+    font-size: 150%;
+  }
+  button.home-howTo{
+    display: flexbox;
+    font-size: 150%;
+  }
+  button.home-leaderboard{
+    display: flexbox;
+    font-size: 80%;
   }
   div.nav {
     display: flex;
@@ -69,16 +87,34 @@ $VIEWPORTS_CONFIG:
 
 @include viewports(small) {
   img.title {
-    margin-top: 0.5em;
-    width: 60%
+    margin-top: 0%;
+    position:relative;
+    margin-left: 10%;
+    width: 80%;
+    z-index: 9;
+  }
+  img.planet {
+    position: fixed;
+    top: -10%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
   }
   h1.title {
     margin-top: 2em;
     font-size: 3em;
   }
-  button.btn {
+  button.home-play{
     display: flexbox;
-    font-size: 100%;
+    font-size: 150%;
+  }
+  button.home-howTo{
+    display: flexbox;
+    font-size: 150%;
+  }
+  button.home-leaderboard{
+    display: flexbox;
+    font-size: 150%;
   }
   div.nav {
     display: flex;
@@ -127,20 +163,34 @@ $VIEWPORTS_CONFIG:
 }
 @include viewports(medium) {
   img.title {
-    margin-top: 0.5em;
-    position: fixed;
-    top: 0;
-    
+    margin-top: 0%;
+    position:relative;
+    margin-left: 10%;
     width: 80%;
-    height: 80%;
-    z-index: 100;
+    z-index: 9;
+  }
+  img.planet {
+    position: fixed;
+    top: -10%;
+    width: 100vw;
+    height: 150vh;
+    z-index: 1;
   }
   h1.title {
     margin-top: 2em;
     font-size: 3em;
   }
-  button.btn {
-    font-size: 120%;
+  button.home-play{
+    display: flexbox;
+    font-size: 150%;
+  }
+  button.home-howTo{
+    display: flexbox;
+    font-size: 150%;
+  }
+  button.home-leaderboard{
+    display: flexbox;
+    font-size: 150%;
   }
   div.nav {
     display: flex;
@@ -189,10 +239,18 @@ $VIEWPORTS_CONFIG:
 }
 @include viewports(large) {
   img.title {
-    margin-left: 0%;
-    width: 100%;
-    height: 100%;
+    margin-top: 0%;
+    position:relative;
+    margin-left: 10%;
+    width: 80%;
     z-index: 9;
+  }
+  img.planet {
+    position: fixed;
+    top: -20%;
+    width: 100vw;
+    height: 180vh;
+    z-index: 0;
   }
   h1.title {
     margin-top: 1em;
@@ -200,8 +258,21 @@ $VIEWPORTS_CONFIG:
   }
   button.btn {
     display: flexbox;
-    font-size: 150%;
+    font-size: 100%;
   }
+  button.home-play{
+    display: flexbox;
+    font-size: 250%;
+  }
+  button.home-howTo{
+    display: flexbox;
+    font-size: 250%;
+  }
+  button.home-leaderboard{
+    display: flexbox;
+    font-size: 250%;
+  }
+
   div.nav {
     position: fixed;
     top: 18em;

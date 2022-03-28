@@ -22,7 +22,7 @@ export default function App() {
         <canvas id="overlay" width="320" height="240" ></canvas>
       </div>
       <div class="dark">
-      <img src="../assets/pinkplanet.png" alt="title" className="title"></img>
+      <img src="../assets/ArcadeTitle.png" alt="title" className="title"></img>
       </div>
       {selector === "home" && <Home />}
       {selector === "play" && <Play />}
