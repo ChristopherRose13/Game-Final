@@ -28,10 +28,7 @@ export default function App() {
       {selector === "ai" && <Game mode={"ai"}/>}
       {selector === "coop" && <Game mode={"coop"}/>}
       {selector === "bonus" && <Game mode={"bonus"}/>}
-      <div id="wrapper">
-        <video id="camera" width="320" height="240" autoplay="true" ></video>
-        <canvas id="overlay" width="320" height="240" ></canvas>
-      </div>
+      
     </div>
   );
 }

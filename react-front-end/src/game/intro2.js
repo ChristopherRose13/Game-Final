@@ -36,15 +36,21 @@ function preload ()
   this.load.image('background', 'assets/Space-Transparent.png');
 }
 function kill() {
-  gameMulti.socket.close();
+  console.log("socket is:",gameMulti.socket);
+  // gameMulti.socket.on('disconnect', function () {
+  //   gameMulti.socket.disconnect();
+  //   // gameMulti.socket.disconnect(); // is not finding socket
+  //   // gameMulti.socket.emit('disconnect');
+  //   // disconnect socket.io from server
+  // });
   gameMulti.destroy(true);
 }
 function create() {
   this.add.image(400, 300, 'background');
 
-
   var self = this;
   this.socket = io();
+
   let leaderButton = document.getElementsByClassName("leaderboard")
   let howButton = document.getElementsByClassName("howTo")
   let playButton = document.getElementsByClassName("play")
@@ -138,7 +144,6 @@ function update ()
 }
 
 function addPlayer(self, playerInfo) {
-  console.log('adding player', playerInfo);
   self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(53, 40);
   if (playerInfo.team === 'blue') {
     self.ship.setTint(0x0000ff);
