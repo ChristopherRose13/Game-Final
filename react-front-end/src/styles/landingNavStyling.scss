@@ -22,29 +22,15 @@
   }
   
   
-  .nav {
+  .landing{
     margin-top: 100px;
     margin-right: auto;
     display: flex;
-    justify-content: space-around;
-    flex-direction: row;
+    justify-content: space-between;
+    flex-direction: column;
     
     z-index: 2;
     align-items: center;
     align-content: center;
     margin-right: 0px;
   }
-  
-  .landing {
-    height: 100%;
-    margin-top: 100px;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    z-index: 2;
-    align-items: center;
-    align-content: center;
-    margin-right: 0px;
-  }
-  
