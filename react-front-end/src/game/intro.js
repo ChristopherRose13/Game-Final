@@ -9,7 +9,7 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
-import classNames from 'classnames';
+
 import Selector from '../NavButtons';
 import { useContext } from 'react';
 import { menuContext } from '../providers/NavProvider';
