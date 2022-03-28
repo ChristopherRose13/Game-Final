@@ -9,10 +9,12 @@ import HomeNav from '../HomeNav';
 export default function Home() {
 
   return (
-    <body className="body">
-      <img src="../assets/planet.png" alt="planet" className="planet"></img>
+    <div className="splash-screen">
+      <div className="center-planet">
+        <img src="../assets/planet.png" alt="planet" className="planet"></img>
+      </div>
       <video src="../assets/stars.mp4" autoPlay loop muted id="video" type="video/mp4" ></video>
       <HomeNav />
-    </body >
+    </div >
   );
 }

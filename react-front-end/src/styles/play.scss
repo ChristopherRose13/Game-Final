@@ -15,12 +15,17 @@ $VIEWPORTS_CONFIG:
     width: 80%;
     z-index: 9;
   }
-  img.planet {
-    position: fixed;
-    top: -10%;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
+  div.center-planet{
+    display: flex;
+    justify-content: center;
+    img.planet {
+      
+      position: fixed;
+      top: 0%;
+      width: auto;
+      height: 50%;
+      z-index: 0;
+    }
   }
   h1.title {
     margin-top: 2em;
@@ -93,12 +98,17 @@ $VIEWPORTS_CONFIG:
     width: 80%;
     z-index: 9;
   }
-  img.planet {
-    position: fixed;
-    top: -10%;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
+  div.center-planet{
+    display: flex;
+    justify-content: center;
+    img.planet {
+      
+      position: fixed;
+      top: 0%;
+      width: auto;
+      height: 70%;
+      z-index: 0;
+    }
   }
   h1.title {
     margin-top: 2em;
@@ -169,12 +179,17 @@ $VIEWPORTS_CONFIG:
     width: 80%;
     z-index: 9;
   }
-  img.planet {
-    position: fixed;
-    top: -10%;
-    width: 100vw;
-    height: 150vh;
-    z-index: 1;
+  div.center-planet{
+    display: flex;
+    justify-content: center;
+    img.planet {
+      
+      position: fixed;
+      top: 0%;
+      width: auto;
+      height: 80%;
+      z-index: 8;
+    }
   }
   h1.title {
     margin-top: 2em;
@@ -245,12 +260,17 @@ $VIEWPORTS_CONFIG:
     width: 80%;
     z-index: 9;
   }
-  img.planet {
-    position: fixed;
-    top: -20%;
-    width: 100vw;
-    height: 180vh;
-    z-index: 0;
+  div.center-planet{
+    display: flex;
+    justify-content: center;
+    img.planet {
+      
+      position: fixed;
+      top: 0%;
+      width: auto;
+      height: 90%;
+      z-index: 8;
+    }
   }
   h1.title {
     margin-top: 1em;
@@ -259,18 +279,22 @@ $VIEWPORTS_CONFIG:
   button.btn {
     display: flexbox;
     font-size: 100%;
+    z-index: 20;
   }
   button.home-play{
     display: flexbox;
     font-size: 250%;
+    z-index: 20;
   }
   button.home-howTo{
     display: flexbox;
     font-size: 250%;
+    z-index: 20;
   }
   button.home-leaderboard{
     display: flexbox;
     font-size: 250%;
+    z-index: 20;
   }
 
   div.nav {
@@ -402,3 +426,19 @@ button.button {
   padding-right: 40px
 }
 
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
