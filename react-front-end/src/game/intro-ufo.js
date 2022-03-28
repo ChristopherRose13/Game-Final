@@ -9,16 +9,23 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
+import Selector from '../NavButtons';
+import { useContext } from 'react';
+import { menuContext } from '../providers/NavProvider';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 export default function phaserAi() {
+  const { selector, onPlay, onHowTo, onHighScores } = useContext(menuContext);
   const { postScoreAxios, getHighScoresAxios } = useAxios();
   const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
     parent: 'phaser-example',
+    dom: {
+      createContainer: true
+    },
     physics: {
       default: 'arcade',
       arcade: {
@@ -148,6 +155,7 @@ export default function phaserAi() {
   let keyboard = false;
   let camera = false;
   let mode_id = 3;
+  let exit;
 
   let kitty;
   let move;
@@ -167,6 +175,8 @@ export default function phaserAi() {
         fill: '#ffffff'
       }
     });
+
+    this.add.dom(300, 200, 'button', 'background-color: lime; width: 114px; height: 22px; font: 15px monospace', 'Exit');
 
     var percentText = this.make.text({
       x: width / 2,
@@ -274,6 +284,17 @@ export default function phaserAi() {
     //   return move;
 
     // }, 1500);
+
+    let exit = document.getElementsByTagName('button')
+    console.log("exit", exit)
+    const returnLeaderboard = function () {
+      onHighScores()
+      kill()
+    }
+
+    exit[3].addEventListener("click",
+      returnLeaderboard
+    );
 
     this.input.keyboard.on('keydown-M', () => {
       toggleVoice()
@@ -631,7 +652,7 @@ export default function phaserAi() {
     gameOver = true;
     gameOverText.visible = true;
     seeLeaderboard.visible = true;
-   
+
   }
 
   // Video Functions

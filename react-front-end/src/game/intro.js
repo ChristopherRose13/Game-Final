@@ -223,7 +223,7 @@ export default function phaserSingle() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
-    // this.load.image('exit', 'assets/exit.png');
+    
 
     this.load.image('blue-sky', 'assets/sky.png');
 
@@ -255,11 +255,7 @@ export default function phaserSingle() {
     let playButton = document.getElementsByClassName("play")
 
 
-    // let exit = document.getElementsByTagName('button')
-
-
-    // exit[0].addEventListener("click", kill)
-
+  
     leaderButton[0].addEventListener("click", kill)
     howButton[0].addEventListener("click", kill)
     playButton[0].addEventListener("click", kill)
