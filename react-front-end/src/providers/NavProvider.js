@@ -29,7 +29,7 @@ const home = function() {
     setSelector("ai")
   }
   const playCoop = function(){
-    setSelector('multi')
+    setSelector('coop')
   }
   const playBonus = function(){
     setSelector('bonus')
