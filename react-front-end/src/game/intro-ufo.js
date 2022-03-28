@@ -142,7 +142,7 @@ export default function phaserAi() {
   let scoreText;
   let kittyScoreText;
   let gameOverText;
-  let seeLeaderboard;
+  // let seeLeaderboard;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -156,7 +156,7 @@ export default function phaserAi() {
   let camera = false;
   let mode_id = 3;
   let exit;
-
+  let end;
   let kitty;
   let move;
   let bunnySound;
@@ -176,7 +176,8 @@ export default function phaserAi() {
       }
     });
 
-    this.add.dom(300, 200, 'button', 'background-color: lime; width: 114px; height: 22px; font: 15px monospace', 'Exit');
+    end = this.add.dom(400, 450, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
+    end.visible = false;
 
     var percentText = this.make.text({
       x: width / 2,
@@ -436,9 +437,9 @@ export default function phaserAi() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
 
-    seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    seeLeaderboard.setOrigin(0.5)
-    seeLeaderboard.visible = false;
+    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
+    // seeLeaderboard.setOrigin(0.5)
+    // seeLeaderboard.visible = false;
     console.log('PLAYER X', player.x)
   }
 
@@ -651,8 +652,8 @@ export default function phaserAi() {
     player.anims.play('turn');
     gameOver = true;
     gameOverText.visible = true;
-    seeLeaderboard.visible = true;
-
+    // seeLeaderboard.visible = true;
+    end.visible = true;
   }
 
   // Video Functions
