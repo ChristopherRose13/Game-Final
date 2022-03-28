@@ -138,7 +138,7 @@ export default function phaserMulti() {
   let score = 0;
   let scoreText;
   let gameOverText;
-  let seeLeaderboard;
+  // let seeLeaderboard;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -402,9 +402,9 @@ export default function phaserMulti() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
 
-    seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    seeLeaderboard.setOrigin(0.5)
-    seeLeaderboard.visible = false;
+    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
+    // seeLeaderboard.setOrigin(0.5)
+    // seeLeaderboard.visible = false;
 
     // firstScene = this.add.image(400, 300, 'sky');
     // firstScene.visible = true;
@@ -611,7 +611,7 @@ export default function phaserMulti() {
     player.anims.play('turn');
     gameOver = true;
     gameOverText.visible = true;
-    seeLeaderboard.visible = true;
+    // seeLeaderboard.visible = true;
     end.visible = true
   }
 

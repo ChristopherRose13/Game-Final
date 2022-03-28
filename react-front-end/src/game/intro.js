@@ -158,8 +158,6 @@ export default function phaserSingle() {
   let keyboard = false;
   let camera = false;
   let mode_id = 3;
-  // let firstScene;
-  // let changeScene;
   let exit;
   let returnWinners;
   let end;
@@ -296,10 +294,6 @@ export default function phaserSingle() {
 
 
 
-    console.log("exit3==", exit[3])
-    // console.log("exit 1==", exit[1])
-    // console.log("exit 2==", exit[2])
-    // console.log("exit 3==", exit[3])
     this.add.image(400, 300, 'sky');
 
 
@@ -366,17 +360,6 @@ export default function phaserSingle() {
 
 
 
-    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    // seeLeaderboard.setOrigin(0.5)
-    // seeLeaderboard.visible = false;
-
-    // firstScene = this.add.image(400, 300, 'sky');
-    // firstScene.visible = true;
-
-    // changeScene = this.add.image(400, 300, 'blue-sky');
-    // changeScene.visible = false;
-
-
   }
 
 
@@ -399,16 +382,6 @@ export default function phaserSingle() {
     }
 
 
-    // let exit = document.getElementsByTagName('button')
-
-    // const returnWinners = function () {
-    //   return (
-    //     <Highscores />
-    //   )
-    // }
-    // exit[0].addEventListener("click", returnWinners);
-    // console.log("returnwinners==", returnWinners)
-    // console.log("highscores==", <Highscores />)
     // console.log("x, y", player.x, player.y)
 
     if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
@@ -446,8 +419,7 @@ export default function phaserSingle() {
     scoreText.setText('Score: ' + score);
 
     if (stars.countActive(true) === 0) {
-      // this.load.image('sky', 'assets/sky.png');
-      // changeScene.visible = true;
+
 
 
       //  A new batch of stars to collect
@@ -475,7 +447,6 @@ export default function phaserSingle() {
     player.anims.play('turn');
     gameOver = true;
     gameOverText.visible = true;
-    // seeLeaderboard.visible = true;
     end.visible = true;
   }
 
