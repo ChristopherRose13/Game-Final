@@ -9,7 +9,7 @@ export default function HowTo() {
 
     <div className="body">
 
-      <video src="./assets/game-recording.mov" autoplay="true" loop="true" id="myVideo" type="video/mp4" playbackRate="0.5"></video>
+      <video src="./assets/game-recording.mov" autoPlay loop id="myVideo" type="video/mp4"></video>
       <div className="content">
         <h1 className="how-to" >How To</h1>
         <h2 className="welcome">Welcome to Stars n Bombs! The goal is to collect all the stars to gain points. Be on the lookout for falling bombs  💣  though! The game's over when you're hit by a bomb. You have 3 options to play:</h2>
