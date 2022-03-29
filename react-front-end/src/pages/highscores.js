@@ -51,7 +51,9 @@ export default function Highscores() {
 
     return (
       <div className="body">
-
+        <div className="dark">
+          <img src="../assets/ArcadeTitle.png" alt="title" className="title"></img>
+        </div>
         <img src="../assets/pink-sky.png" alt="stars" className="background"></img>
 
         <div className="highScores">

@@ -13,6 +13,9 @@ export default function Play() {
   return (
     
     <>
+    <div className="dark">
+      <img src="../assets/ArcadeTitle.png" alt="title" className="title"></img>
+    </div>
     <div className="play">
       <img src="../assets/arcade.jpg" alt="stars" className="background"></img>
     <NavButtons /> 
