@@ -166,12 +166,9 @@ export default function phaserSingle() {
   let end;
   let boom;
   let bomb;
-  let x;
-  let y;
-  // let detonate;
   let endX;
   let endY;
-  
+
 
 
   function preload() {
@@ -322,7 +319,7 @@ export default function phaserSingle() {
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
 
-    
+
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
@@ -397,15 +394,11 @@ export default function phaserSingle() {
     gameOverText.visible = false;
 
 
-
   }
 
 
 
   function update() {
-
-
-
     if (gameOver) {
       if (keyboard) {
         mode_id = 1;
@@ -452,19 +445,6 @@ export default function phaserSingle() {
   }
 
 
-  // function detonate() {
-
-
-  //   endX = bomb.x;
-  //   endY = bomb.y
-  //   console.log('explode X & Y===', endX, endY)
-  //   boom.setPosition(endX, endY)
-  //   boom.anims.play('kaboom-boom', true)
-
-  //   boom.visible = true;
-
-
-  // }
 
   function collectStar(player, star) {
     starSound.play();
@@ -503,9 +483,7 @@ export default function phaserSingle() {
 
   function hitBomb(player, bomb) {
     detonate()
-    // this.physics.pause();
-    console.log('BOMB-X-y', bomb.x, bomb.y)
-    console.log('PLAYER X Y', player.x, player.y)
+  
     bombSound.play()
     player.setTint(0xff0000);
     player.anims.play('turn');

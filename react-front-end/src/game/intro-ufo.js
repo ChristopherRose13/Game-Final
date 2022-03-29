@@ -160,7 +160,6 @@ export default function phaserAi() {
   let kitty;
   let move;
   let bunnySound;
-  // let detonate;
   let endX;
   let endY;
   let boom;
@@ -234,7 +233,7 @@ export default function phaserAi() {
       '/assets/dude.png',
       { frameWidth: 32, frameHeight: 48 }
     );
-   
+
     this.load.spritesheet('kaboom', 'assets/explosion.png', {
       frameWidth: 64,
       frameHeight: 64,
@@ -279,16 +278,7 @@ export default function phaserAi() {
 
     bunnySound = this.sound.add('ufo');
 
-    // const newNumber = setInterval(function () {
-    //   const all = Object.keys(commands);
-    //   const moves = all.filter(x => x !== 'pause' && x !== 'game over');
 
-    //   move = moves[Math.floor(Math.random() * moves.length)];
-    //   console.log('THE MOVE', move);
-
-    //   return move;
-
-    // }, 1500);
 
     let exit = document.getElementsByTagName('button')
     console.log("exit", exit)
@@ -323,7 +313,6 @@ export default function phaserAi() {
     platforms.create(750, 220, 'ground');
 
     player = this.physics.add.sprite(100, 450, 'dude');
-
     kitty = this.physics.add.sprite(300, 500, 'cat')
 
 
@@ -339,9 +328,6 @@ export default function phaserAi() {
 
 
     console.log("kitty x, y==", kitty.x, kitty.y)
-
-
-
 
     player.setBounce(0.2);
     kitty.setBounce(0.2);
@@ -422,10 +408,8 @@ export default function phaserAi() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
 
-    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    // seeLeaderboard.setOrigin(0.5)
-    // seeLeaderboard.visible = false;
-    console.log('PLAYER X', player.x)
+
+    // console.log('PLAYER X', player.x)
   }
 
 
@@ -481,12 +465,6 @@ export default function phaserAi() {
       move = 'left';
     }
 
-
-
-
-    // console.log('MOVE', move)
-    // console.log('KITTY X, Y', kitty.x, kitty.y)
-    // console.log('KITTY Y', kitty.y)
 
 
     //alien commands:
@@ -569,16 +547,6 @@ export default function phaserAi() {
     // console.log('PLAYER', player.x, player.y)
   }
 
-
-  // function hitByBunny() {
-  //   bunnySound.play()
-  //   player.setTint('#B4A7D6');
-  //   score -= 10
-  //   scoreText.setText('Your Score: ' + score);
-
-  // }
-  // player.clearTint();
-
   function collectStar(character, star) {
     if (character === player) {
       starSound.play();
@@ -596,9 +564,6 @@ export default function phaserAi() {
       kittyScoreText.setText('Alien\'s Score: ' + kittyScore);
     }
     if (stars.countActive(true) === 0) {
-      // this.load.image('sky', 'assets/sky.png');
-      // changeScene.visible = true;
-
 
       //  A new batch of stars to collect
       stars.children.iterate(function (child) {
@@ -639,8 +604,7 @@ export default function phaserAi() {
   }
 
   function hitBomb(player, bomb) {
-    // this.exploded = true;
-    // this.boom.setVisible(true);
+
     detonate()
     this.physics.pause();
     bombSound.play()
@@ -650,6 +614,7 @@ export default function phaserAi() {
     gameOverText.visible = true;
     // seeLeaderboard.visible = true;
     end.visible = true;
+    bomb.visible = false;
   }
 
   // Video Functions
