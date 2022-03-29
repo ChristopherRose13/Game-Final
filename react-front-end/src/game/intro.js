@@ -12,7 +12,7 @@ import { render } from 'react-dom';
 import Selector from '../NavButtons';
 import { useContext } from 'react';
 import { menuContext } from '../providers/NavProvider';
-import { FaGlasses } from 'react-icons/fa';
+import { FaBuromobelexperte, FaGlasses } from 'react-icons/fa';
 
 // import Selector from '../NavButtons';
 // import { useContext } from 'react';
@@ -164,6 +164,11 @@ export default function phaserSingle() {
   let exit;
   let returnWinners;
   let end;
+  let boom;
+  let bomb;
+  let endX;
+  let endY;
+
 
 
   function preload() {
@@ -234,6 +239,12 @@ export default function phaserSingle() {
       '/assets/dude.png',
       { frameWidth: 32, frameHeight: 48 }
     );
+
+    this.load.spritesheet('kaboom', 'assets/explosion.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
+
   }
 
   const toggleVoice = function () {
@@ -308,10 +319,18 @@ export default function phaserSingle() {
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
 
-    player = this.physics.add.sprite(100, 450, 'dude');
 
+
+    player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
+
+    boom = this.physics.add.sprite(endX, endY, 'kaboom');
+    boom.setCollideWorldBounds(true)
+    boom.visible = false;
+
+    // boom = this.physics.add.sprite(endX, endY, 'kaboom');
+
 
     this.anims.create({
       key: 'right',
@@ -348,13 +367,26 @@ export default function phaserSingle() {
 
     bombs = this.physics.add.group();
 
+    this.anims.create({
+      key: 'kaboom-boom',
+      frames: this.anims.generateFrameNumbers('kaboom', { start: 0, end: 23 }),
+      frameRate: 20,
+      repeat: -1,
+
+    });
+
+
+
     cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(boom, platforms);
+
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+    this.physics.add.overlap(player, bombs, detonate, null, this);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', color: '#ff0000' });
@@ -362,9 +394,7 @@ export default function phaserSingle() {
     gameOverText.visible = false;
 
 
-
   }
-
 
 
 
@@ -385,7 +415,8 @@ export default function phaserSingle() {
     }
 
 
-    // console.log("x, y", player.x, player.y)
+    boom.anims.play('kaboom-boom', true)
+
 
     if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
       keyboard = true;
@@ -422,9 +453,6 @@ export default function phaserSingle() {
     scoreText.setText('Score: ' + score);
 
     if (stars.countActive(true) === 0) {
-
-
-
       //  A new batch of stars to collect
       stars.children.iterate(function (child) {
         child.enableBody(true, child.x, 0, true, true);
@@ -442,16 +470,31 @@ export default function phaserSingle() {
     }
 
   }
+  function detonate() {
+    endX = player.x;
+    endY = player.y
+    console.log('explode.X&Y===', endX, endY)
+    boom.setPosition(endX, endY)
+    boom.setScale(2);
+    boom.visible = true;
+    boom.anims.play('kaboom-boom', true)
+  }
+
 
   function hitBomb(player, bomb) {
-    this.physics.pause();
+    detonate()
+  
     bombSound.play()
     player.setTint(0xff0000);
     player.anims.play('turn');
+    this.physics.pause();
     gameOver = true;
     gameOverText.visible = true;
     end.visible = true;
+    bomb.visible = false;
   }
+
+
 
   // Video Functions
   const sendMoveX = function (move) {
