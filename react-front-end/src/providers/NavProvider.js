@@ -29,7 +29,7 @@ export default function SelectorProvider(props) {
     setSelector("ai")
   }
   const playCoop = function () {
-    setSelector('coop')
+    setSelector('multi')
   }
   const playBonus = function () {
     setSelector('bonus')

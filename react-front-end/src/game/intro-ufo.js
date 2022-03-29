@@ -9,16 +9,23 @@ import useAxios from '../hooks/useAxios';
 import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
+import Selector from '../NavButtons';
+import { useContext } from 'react';
+import { menuContext } from '../providers/NavProvider';
 
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 export default function phaserAi() {
+  const { selector, onPlay, onHowTo, onHighScores } = useContext(menuContext);
   const { postScoreAxios, getHighScoresAxios } = useAxios();
   const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
     parent: 'phaser-example',
+    dom: {
+      createContainer: true
+    },
     physics: {
       default: 'arcade',
       arcade: {
@@ -135,7 +142,7 @@ export default function phaserAi() {
   let scoreText;
   let kittyScoreText;
   let gameOverText;
-  let seeLeaderboard;
+  // let seeLeaderboard;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -148,7 +155,8 @@ export default function phaserAi() {
   let keyboard = false;
   let camera = false;
   let mode_id = 3;
-
+  let exit;
+  let end;
   let kitty;
   let move;
   let bunnySound;
@@ -167,6 +175,9 @@ export default function phaserAi() {
         fill: '#ffffff'
       }
     });
+
+    end = this.add.dom(400, 550, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
+    end.visible = false;
 
     var percentText = this.make.text({
       x: width / 2,
@@ -274,6 +285,17 @@ export default function phaserAi() {
     //   return move;
 
     // }, 1500);
+
+    let exit = document.getElementsByTagName('button')
+    console.log("exit", exit)
+    const returnLeaderboard = function () {
+      onHighScores()
+      kill()
+    }
+
+    exit[3].addEventListener("click",
+      returnLeaderboard
+    );
 
     this.input.keyboard.on('keydown-M', () => {
       toggleVoice()
@@ -415,9 +437,9 @@ export default function phaserAi() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
 
-    seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    seeLeaderboard.setOrigin(0.5)
-    seeLeaderboard.visible = false;
+    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
+    // seeLeaderboard.setOrigin(0.5)
+    // seeLeaderboard.visible = false;
     console.log('PLAYER X', player.x)
   }
 
@@ -630,8 +652,8 @@ export default function phaserAi() {
     player.anims.play('turn');
     gameOver = true;
     gameOverText.visible = true;
-    seeLeaderboard.visible = true;
-   
+    // seeLeaderboard.visible = true;
+    end.visible = true;
   }
 
   // Video Functions
