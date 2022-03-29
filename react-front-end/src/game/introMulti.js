@@ -10,17 +10,21 @@ import state from '../useState';
 import Highscores from '../pages/highscores';
 import { render } from 'react-dom';
 import io from 'socket.io-client';
-
+import { menuContext } from '../providers/NavProvider';
+import { useContext } from 'react';
 // const configuration = configFunction()
 // const game = new Phaser.Game(configuration);
 export default function phaserMulti() {
   const { postScoreAxios, getHighScoresAxios } = useAxios();
-  
+  const { selector, onPlay, onHowTo, onHighScores } = useContext(menuContext);
   const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
     parent: 'phaser-example',
+    dom: {
+      createContainer: true
+    },
     physics: {
       default: 'arcade',
       arcade: {
@@ -134,7 +138,6 @@ export default function phaserMulti() {
   let score = 0;
   let scoreText;
   let gameOverText;
-  let seeLeaderboard;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -158,6 +161,8 @@ export default function phaserMulti() {
   let player2Death = false;
   let player2Platform;
   let playerPlatform;
+  let end;
+
   
   let multiplayer = false;
   // let firstScene;
@@ -176,6 +181,9 @@ export default function phaserMulti() {
         fill: '#ffffff'
       }
     });
+
+    end = this.add.dom(400, 550, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
+    end.visible = false;
 
     var percentText = this.make.text({
       x: width / 2,
@@ -221,7 +229,7 @@ export default function phaserMulti() {
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude2', 'assets/dude2.png', {frameWidth:32, frameHeight:48})
+    this.load.spritesheet('dude2', 'assets/dude2.png', { frameWidth: 32, frameHeight: 48 })
 
     this.load.image('blue-sky', 'assets/sky.png');
 
@@ -249,13 +257,13 @@ export default function phaserMulti() {
   }
 
   function addPlayer(self, playerInfo) {
-   
 
-    if(self.socket.id === playerInfo.id && playerInfo.char == 'dude2') {
+
+    if (self.socket.id === playerInfo.id && playerInfo.char == 'dude2') {
       console.log("creating the seccond player")
       self.isDude2 = true;
       isPlayer2 = true;
-      
+
     }
 
   }
@@ -290,6 +298,17 @@ export default function phaserMulti() {
       toggleVideo();
     }, this);
 
+    let exit = document.getElementsByTagName('button')
+
+    const returnLeaderboard = function () {
+      onHighScores()
+      kill()
+    }
+
+    exit[3].addEventListener("click",
+      returnLeaderboard
+    );
+
 
     this.add.image(400, 300, 'sky');
 
@@ -303,7 +322,7 @@ export default function phaserMulti() {
     platforms.create(750, 220, 'ground');
 
     player = this.physics.add.sprite(100, 450, 'dude');
-    
+
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
@@ -338,7 +357,7 @@ export default function phaserMulti() {
     // this.socket.on('currentPlayers', function (players) {
     //   Object.keys(players).forEach(function (id) {
     //     if (players[id].playerId === self.socket.id) {
-          
+
     //       addPlayer(self)
     //     }
     //   });
@@ -354,11 +373,11 @@ export default function phaserMulti() {
     });
 
     this.socket.on('disconnected', function (playerId) {
-      
-        if (playerId === self.socket.id) {
-          player2.destroy();
-        }
-      
+
+      if (playerId === self.socket.id) {
+        player2.destroy();
+      }
+
     });
 
     stars.children.iterate(function (child) {
@@ -387,9 +406,9 @@ export default function phaserMulti() {
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
 
-    seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
-    seeLeaderboard.setOrigin(0.5)
-    seeLeaderboard.visible = false;
+    // seeLeaderboard = this.add.text(400, 350, "Go to the Leaderboard to see your rank!", { fontSize: '20px', color: '#ff0000' })
+    // seeLeaderboard.setOrigin(0.5)
+    // seeLeaderboard.visible = false;
 
     // firstScene = this.add.image(400, 300, 'sky');
     // firstScene.visible = true;
@@ -405,47 +424,47 @@ export default function phaserMulti() {
 
     if (firstRun) {
       this.socket.on('playerMoved', function (playerInfo) {
-          
-          
-          if(playerInfo.char === 'dude') {
-            console.log("incoming: x ", playerInfo.x)
-            console.log("actual: x ", player.x)
-            console.log("change: ", playerInfo.x - player.x)
-            if(playerInfo.x - player.x >= -2.6666666666666288 && playerInfo.x - player.x <= 2.6666666666666288){
-              player.anims.play('turn', true)
-            } else
-            if(player.x > playerInfo.x) {
+
+
+        if (playerInfo.char === 'dude') {
+          console.log("incoming: x ", playerInfo.x)
+          console.log("actual: x ", player.x)
+          console.log("change: ", playerInfo.x - player.x)
+          if (playerInfo.x - player.x >= -2.6666666666666288 && playerInfo.x - player.x <= 2.6666666666666288) {
+            player.anims.play('turn', true)
+          } else
+            if (player.x > playerInfo.x) {
               player.anims.play('left', true)
-              
-            } else if (player.x  < playerInfo.x) {
+
+            } else if (player.x < playerInfo.x) {
               player.anims.play('right', true)
             } else {
               player.anims.play('turn', true)
             }
-            
-            player.setPosition(playerInfo.x, playerInfo.y)
-            
-            
-          } else if (playerInfo.char === 'dude2') {
-            console.log("incoming: x ", playerInfo.x)
-            console.log("actual: x ", player2.x)
-            console.log("change: ", playerInfo.x - player2.x)
-            if(playerInfo.x - player2.x >= -2.6666666666666288 && playerInfo.x - player2.x <= 2.6666666666666288){
-              player.anims.play('turn', true)
-            } else 
-            if(player2.x > playerInfo.x) {
+
+          player.setPosition(playerInfo.x, playerInfo.y)
+
+
+        } else if (playerInfo.char === 'dude2') {
+          console.log("incoming: x ", playerInfo.x)
+          console.log("actual: x ", player2.x)
+          console.log("change: ", playerInfo.x - player2.x)
+          if (playerInfo.x - player2.x >= -2.6666666666666288 && playerInfo.x - player2.x <= 2.6666666666666288) {
+            player.anims.play('turn', true)
+          } else
+            if (player2.x > playerInfo.x) {
               player2.anims.play('left', true)
             } else if (player2.x < playerInfo.x) {
               player2.anims.play('right', true)
             } else {
               player2.anims.play('turn', true)
             }
-            
-            player2.setPosition(playerInfo.x, playerInfo.y)
-            
-          }
-          
-        
+
+          player2.setPosition(playerInfo.x, playerInfo.y)
+
+        }
+
+
       })
       firstRun = false;
     }
@@ -464,15 +483,15 @@ export default function phaserMulti() {
       return;
 
     }
-    
+
     if (cursors.left.isDown || movementX === "left" || voiceMoveX === "left") {
       keyboard = true;
-      if(!isPlayer2) {
+      if (!isPlayer2) {
         player.setVelocityX(-160);
         player.anims.play('left', true);
-      } 
-      
-      if(isPlayer2){
+      }
+
+      if (isPlayer2) {
         player2.setVelocityX(-160);
         player2.anims.play('left', true);
       }
@@ -480,24 +499,24 @@ export default function phaserMulti() {
     }
     else if (cursors.right.isDown || movementX === "right" || voiceMoveX === "right") {
       keyboard = true;
-      if(!isPlayer2) {
+      if (!isPlayer2) {
         player.setVelocityX(160);
         player.anims.play('right', true)
-      } 
-      
-      if(isPlayer2){
+      }
+
+      if (isPlayer2) {
         player2.setVelocityX(160);
         player2.anims.play('right', true)
       }
 
     }
     else {
-      if(!isPlayer2) {
+      if (!isPlayer2) {
         player.setVelocityX(0);
         player.anims.play('turn', true)
-      } 
-      
-      if(isPlayer2){
+      }
+
+      if (isPlayer2) {
         player2.setVelocityX(0);
         player2.anims.play('turn', true)
       }
@@ -506,54 +525,54 @@ export default function phaserMulti() {
 
     if ((cursors.up.isDown && player.body.touching.down) || (movementY === "up" && player.body.touching.down) || (voiceMoveY === "up" && player.body.touching.down)) {
       keyboard = true;
-      if(!isPlayer2) {
+      if (!isPlayer2) {
         jumpSound.play()
         player.setVelocityY(-330);
-      } 
-      
-      if(isPlayer2){
+      }
+
+      if (isPlayer2) {
         jumpSound.play()
-        if(player2.body.touching.down){
+        if (player2.body.touching.down) {
           player2.setVelocityY(-330);
         }
-        
+
       }
 
     }
 
     let x = player.x;
     let y = player.y;
-    
-    if(!isPlayer2) {
+
+    if (!isPlayer2) {
 
       if (playerPosition && (x !== playerPosition.x || y !== playerPosition.y)) {
         this.socket.emit('playerMovement', { x, y });
-     }
+      }
 
-     playerPosition = {
-      x,
-      y
-    };
+      playerPosition = {
+        x,
+        y
+      };
 
     }
 
-    if(isPlayer2) {
+    if (isPlayer2) {
 
-      
-        x = player2.x;
-        y = player2.y;
-        
-        if (player2Position && (x !== player2Position.x || y !== player2Position.y)) {
-          this.socket.emit('playerMovement', { x, y });
+
+      x = player2.x;
+      y = player2.y;
+
+      if (player2Position && (x !== player2Position.x || y !== player2Position.y)) {
+        this.socket.emit('playerMovement', { x, y });
       }
 
       player2Position = {
         x,
         y
       }
-     
+
     }
-    
+
 
   }
 
@@ -600,9 +619,11 @@ export default function phaserMulti() {
     playerDeath = true;
     this.physics.world.removeCollider(playerPlatform);
     if(player2Death) {
+      end.visible = true;
       gameOver = true;
       gameOverText.visible = true;
-      seeLeaderboard.visible = true;
+      
+      
     }
     
   }
@@ -620,9 +641,11 @@ export default function phaserMulti() {
     this.physics.world.removeCollider(player2Platform);
     player2Death = true;
     if(playerDeath) {
+      end.visible = true;
       gameOver = true;
       gameOverText.visible = true;
-      seeLeaderboard.visible = true;
+      
+      
     }
 
   }
