@@ -179,7 +179,7 @@ export default function phaserSingle() {
       }
     });
 
-    end = this.add.dom(400, 450, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
+    end = this.add.dom(400, 550, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
     end.visible = false;
 
     var percentText = this.make.text({

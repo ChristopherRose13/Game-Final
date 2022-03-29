@@ -17,25 +17,27 @@
   top:10em;
    background: rgba(54, 64, 66, 0.5);
   color: hsl(0, 5%, 96%);
-  margin: 0em 4em 0em 4em;
+  margin: 0em 10em 0em 10em;
   padding: 0em 3em 2em 3em;
   margin-top: 30px;
- 
+  font-size: 15;
 }
+
+
  
 
 .keyboard {
   padding-top: 40px;
-  font-size: 25pt;
+  // font-size: 25pt;
 }
 .voice-control {
   padding-top: 40px;
-  font-size: 25pt;
+  // font-size: 25pt;
 }
 
 .face-detection {
   padding-top: 40px;
-  font-size: 25pt;
+  // font-size: 25pt;
 }
 
 .how-to {
@@ -46,7 +48,7 @@
 
 
 .details {
-  font-size: 20pt;
+  font-size: 15pt;
   
 }
 
@@ -60,5 +62,5 @@
 }
 
 .welcome {
-  font-size: 30pt;
+  font-size: 20pt;
 }

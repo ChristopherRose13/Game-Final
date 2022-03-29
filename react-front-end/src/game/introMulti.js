@@ -138,7 +138,6 @@ export default function phaserMulti() {
   let score = 0;
   let scoreText;
   let gameOverText;
-  // let seeLeaderboard;
   let movementX;
   let movementY;
   let voiceMoveX;
@@ -158,8 +157,13 @@ export default function phaserMulti() {
   let isPlayer2 = false;
   let player2Position;
   let playerPosition;
+  let playerDeath = false;
+  let player2Death = false;
+  let player2Platform;
+  let playerPlatform;
   let end;
 
+  
   let multiplayer = false;
   // let firstScene;
   // let changeScene;
@@ -178,7 +182,7 @@ export default function phaserMulti() {
       }
     });
 
-    end = this.add.dom(400, 450, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
+    end = this.add.dom(400, 550, 'button', 'background-color: red; width: 200px; height: 28px; font: 20px monospace', 'View Your Rank');
     end.visible = false;
 
     var percentText = this.make.text({
@@ -385,17 +389,17 @@ export default function phaserMulti() {
     bombs = this.physics.add.group();
 
     cursors = this.input.keyboard.createCursorKeys();
-    this.physics.add.collider(player, platforms);
+    playerPlatform = this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 
-
-    this.physics.add.collider(player2, platforms);
+    
+    player2Platform = this.physics.add.collider(player2, platforms);
     this.physics.add.overlap(player2, stars, collectStar, null, this);
-    this.physics.add.collider(player2, bombs, hitBomb, null, this);
+    this.physics.add.collider(player2, bombs, secondHitBomb, null, this);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'GAME OVER', { fontSize: '60px', color: '#ff0000' });
@@ -536,7 +540,6 @@ export default function phaserMulti() {
 
     }
 
-
     let x = player.x;
     let y = player.y;
 
@@ -605,15 +608,49 @@ export default function phaserMulti() {
   }
 
   function hitBomb(player, bomb) {
-    this.physics.pause();
+    // this.physics.pause();
     bombSound.play()
+    console.log("player being hit: ", player)
     player.setTint(0xff0000);
     player.anims.play('turn');
-    gameOver = true;
-    gameOverText.visible = true;
-    // seeLeaderboard.visible = true;
-    end.visible = true
+    player.setVelocity(-100)
+    player.collider = false;
+    player.setCollideWorldBounds(false)
+    playerDeath = true;
+    this.physics.world.removeCollider(playerPlatform);
+    if(player2Death) {
+      end.visible = true;
+      gameOver = true;
+      gameOverText.visible = true;
+      
+      
+    }
+    
   }
+
+  function secondHitBomb(player, bomb) {
+    // this.physics.pause();
+    bombSound.play()
+    console.log("player being hit: ", player)
+    player.setTint(0xff0000);
+    player.anims.play('turn');
+    player.setVelocity(-100)
+    player.body.enable = false;
+    player.setCollideWorldBounds(false)
+    console.log("player platform ", player2Platform)
+    this.physics.world.removeCollider(player2Platform);
+    player2Death = true;
+    if(playerDeath) {
+      end.visible = true;
+      gameOver = true;
+      gameOverText.visible = true;
+      
+      
+    }
+
+  }
+
+  
 
   // Video Functions
   const sendMoveX = function (move) {
