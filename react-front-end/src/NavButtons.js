@@ -10,9 +10,9 @@ export default function Selector() {
 
   return (
     <div className="navHorizontal">
-      <button className="btn play" id="btnPlay"onClick={onPlay}>PLAY</button>
-      <button className="btn howTo" onClick={onHowTo}>HOW TO</button>
-      <button className="btn leaderboard" onClick={onHighScores}>LEADERBOARD</button>
+      <button className="btn play glow" id="btnPlay"onClick={onPlay}>PLAY</button>
+      <button className="btn howTo glow" onClick={onHowTo}>HOW TO</button>
+      <button className="btn leaderboard glow" onClick={onHighScores}>LEADERBOARD</button>
 
 
     </div>

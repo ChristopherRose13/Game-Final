@@ -13,6 +13,7 @@
   cursor: pointer;
   margin-left: 15px;
   margin-right: 15px;
+
   
   }
   
@@ -22,16 +23,15 @@
   }
   
   
-  .nav {
-    margin-top: 0;
+  .landing{
+    margin-top: 100px;
     margin-right: auto;
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
+    justify-content: space-between;
+    flex-direction: column;
     
     z-index: 2;
-    align-items: flex-start;
+    align-items: center;
     align-content: center;
     margin-right: 0px;
   }
-  
