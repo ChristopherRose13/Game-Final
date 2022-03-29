@@ -446,11 +446,9 @@ export default function phaserMulti() {
 
 
         } else if (playerInfo.char === 'dude2') {
-          console.log("incoming: x ", playerInfo.x)
-          console.log("actual: x ", player2.x)
-          console.log("change: ", playerInfo.x - player2.x)
+
           if (playerInfo.x - player2.x >= -2.6666666666666288 && playerInfo.x - player2.x <= 2.6666666666666288) {
-            player.anims.play('turn', true)
+            player2.anims.play('turn', true)
           } else
             if (player2.x > playerInfo.x) {
               player2.anims.play('left', true)

@@ -9,6 +9,13 @@ $VIEWPORTS_CONFIG:
 @import "./viewport.scss";
 
 @include viewports("tiny") {
+  img.splashTitle {
+    margin-top: 0%;
+    position:relative;
+    margin-left: 10%;
+    width: 80%;
+    z-index: 9;
+  }
   img.title {
     position:relative;
     margin-left: 10%;
@@ -32,16 +39,23 @@ $VIEWPORTS_CONFIG:
     font-size: 3em;
   }
   button.home-play{
-    display: flexbox;
-    font-size: 150%;
-  }
-  button.home-howTo{
-    display: flexbox;
-    font-size: 150%;
-  }
-  button.home-leaderboard{
+    height: 2em;
     display: flexbox;
     font-size: 80%;
+    z-index: 120;
+    margin-bottom: 1em;
+  }
+  button.home-howTo{
+    height: 2em;
+    display: flexbox;
+    font-size: 80%;
+    z-index: 20;
+  }
+  button.home-leaderboard{
+    height: 2em;
+    display: flexbox;
+    font-size: 80%;
+    z-index: 20;
   }
   div.nav {
     display: flex;
@@ -53,6 +67,20 @@ $VIEWPORTS_CONFIG:
     align-content: center;
     margin-top: 0.5em;
     margin-right: 0px;
+  }
+  div.navHorizontal{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0em;
+    margin-right: 0px;
+    button.btn{
+      font-size: 100%;
+      z-index: 120;
+    }
   }
   div#wrapper {
     position: fixed;
@@ -91,11 +119,18 @@ $VIEWPORTS_CONFIG:
 
 
 @include viewports(small) {
-  img.title {
+  img.splashTitle {
     margin-top: 0%;
     position:relative;
     margin-left: 10%;
     width: 80%;
+    z-index: 9;
+  }
+  img.title {
+    margin-top: 0%;
+    position:relative;
+    margin-left: 25%;
+    width: 50%;
     z-index: 9;
   }
   div.center-planet{
@@ -115,16 +150,31 @@ $VIEWPORTS_CONFIG:
     font-size: 3em;
   }
   button.home-play{
+    position:absolute;
+    top: 30vh;
+    height: 2em;
     display: flexbox;
-    font-size: 150%;
+    font-size: 80%;
+    z-index: 120;
+    margin-bottom: 1em;
   }
   button.home-howTo{
+    position:absolute;
+    top: 42vh;
+    height: 2em;
     display: flexbox;
-    font-size: 150%;
+    font-size: 80%;
+    z-index: 20;
+    margin-bottom: 1em;
   }
   button.home-leaderboard{
+    position:absolute;
+    top: 55vh;
+    height: 2em;
     display: flexbox;
-    font-size: 150%;
+    font-size: 80%;
+    z-index: 20;
+    margin-bottom: 1em;
   }
   div.nav {
     display: flex;
@@ -136,6 +186,20 @@ $VIEWPORTS_CONFIG:
     align-content: center;
     margin-top: 0.5em;
     margin-right: 0px;
+  }
+  div.navHorizontal{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0em;
+    margin-right: 0px;
+    button.btn{
+      font-size: 100%;
+      z-index: 120;
+    }
   }
   div#wrapper {
     position: fixed;
@@ -172,11 +236,18 @@ $VIEWPORTS_CONFIG:
   }
 }
 @include viewports(medium) {
-  img.title {
+  img.splashTitle {
     margin-top: 0%;
     position:relative;
     margin-left: 10%;
     width: 80%;
+    z-index: 9;
+  }
+  img.title {
+    margin-top: 0%;
+    position:relative;
+    margin-left: 25%;
+    width: 50%;
     z-index: 9;
   }
   div.center-planet{
@@ -196,16 +267,31 @@ $VIEWPORTS_CONFIG:
     font-size: 3em;
   }
   button.home-play{
+    position:absolute;
+    top: 30vh;
+    height: 2em;
     display: flexbox;
-    font-size: 150%;
+    font-size: 100%;
+    z-index: 120;
+    margin-bottom: 1em;
   }
   button.home-howTo{
+    position:absolute;
+    top: 45vh;
+    height: 2em;
     display: flexbox;
-    font-size: 150%;
+    font-size: 100%;
+    z-index: 20;
+    margin-bottom: 1em;
   }
   button.home-leaderboard{
+    position:absolute;
+    top: 60vh;
+    height: 2em;
     display: flexbox;
-    font-size: 150%;
+    font-size: 100%;
+    z-index: 20;
+    margin-bottom: 1em;
   }
   div.nav {
     display: flex;
@@ -217,6 +303,20 @@ $VIEWPORTS_CONFIG:
     align-content: center;
     margin-top: 0.5em;
     margin-right: 0px;
+  }
+  div.navHorizontal{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0em;
+    margin-right: 0px;
+    button.btn{
+      font-size: 120%;
+      z-index: 120;
+    }
   }
   div#wrapper {
     position: fixed;
@@ -253,11 +353,18 @@ $VIEWPORTS_CONFIG:
   }
 }
 @include viewports(large) {
-  img.title {
+  img.splashTitle {
     margin-top: 0%;
     position:relative;
     margin-left: 10%;
     width: 80%;
+    z-index: 9;
+  }
+  img.title {
+    margin-top: 0%;
+    position:relative;
+    margin-left: 25%;
+    width: 50%;
     z-index: 9;
   }
   div.center-planet{
@@ -282,19 +389,32 @@ $VIEWPORTS_CONFIG:
     z-index: 20;
   }
   button.home-play{
+    position:absolute;
+    top: 30vh;
+    height: 2em;
     display: flexbox;
-    font-size: 250%;
-    z-index: 20;
+    font-size: 150%;
+    z-index: 120;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
   button.home-howTo{
+    position:absolute;
+    top: 50vh;
+    height: 2em;
     display: flexbox;
-    font-size: 250%;
+    font-size: 150%;
     z-index: 20;
+    margin-bottom: 1em;
   }
   button.home-leaderboard{
+    position:absolute;
+    top: 70vh;
+    height: 2em;
     display: flexbox;
-    font-size: 250%;
+    font-size: 150%;
     z-index: 20;
+    margin-bottom: 1em;
   }
 
   div.nav {
@@ -310,6 +430,20 @@ $VIEWPORTS_CONFIG:
     align-content: center;
     margin-top: 0.5em;
     margin-right: 0px;
+  }
+  div.navHorizontal{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    z-index: 2;
+    align-items: flex-start;
+    align-content: center;
+    margin-top: 0em;
+    margin-right: 0px;
+    button.btn{
+      font-size: 150%;
+      z-index: 120;
+    }
   }
   div#wrapper {
     position: fixed;
@@ -440,5 +574,21 @@ button.button {
   
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+.glow3 {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow3 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e6c400, 0 0 40px #e2e600, 0 0 50px #e2e600, 0 0 60px #e6e200, 0 0 70px #e2e600;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #fff34d, 0 0 40px #fcff4d, 0 0 50px #fffc4d, 0 0 60px #fcff4d, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
 }

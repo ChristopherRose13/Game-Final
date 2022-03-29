@@ -52,7 +52,7 @@ export default function phaserSingle() {
     voiceMoverX("")
   }, 1000)
   // Let's define a command.
-  var commands = {
+  const commands = {
     'pause': function () { alert('Game is paused!'); },
     'right': function () {
       voiceMoverX("right")

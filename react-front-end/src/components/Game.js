@@ -29,11 +29,14 @@ export default function Game(props) {
     if (key == 'V' || key == 'v') {
       console.log("V pressed");
       const element = document.getElementById("wrapper");
+      const button = document.getElementById("btnPlay");
       console.log(element);
       if (element.style.display === "block") {
         element.style.display = "none"
+        button.style.zIndex = 120;
       } else {
         element.style.display = "block"
+        button.style.zIndex = 1;
       }
     }
   }
@@ -57,7 +60,10 @@ export default function Game(props) {
   // game = new phaserGame();  
   return (
     <>
-      <img src="../assets/arcade2.jpg" alt="stars" className="background"></img>
+      <div className="dark">
+        <img src="../assets/ArcadeTitle.png" alt="title" className="title"></img>
+      </div>
+      <img src="../assets/arcade2b.jpg" alt="stars" className="background"></img>
       <NavButtons />
       <div id="phaser-example"></div>
       {/* <button onClick={() => { returnWinners()}}>Exit</button> */}

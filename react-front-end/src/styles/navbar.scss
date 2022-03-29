@@ -34,8 +34,7 @@ margin-right: 15px;
 }
 
 .home-nav {
-  
-  margin-top: 120px;
+  margin-top: 0px;
   display: flex;
   align-content: flex-end;
   flex-direction: column;
@@ -44,9 +43,6 @@ margin-right: 15px;
 }
 
 .home-play {
-  height: 45px;
-  margin-bottom: 30px;
-  padding-bottom: 40px;
   font-size: 30pt;
  font-family: 'Press Start 2P', cursive;
  outline: none;
@@ -56,10 +52,7 @@ cursor: pointer;
 }
 
 .home-howTo{
-  height: 45px;
-  margin-bottom: 30px;
-  padding-bottom: 40px;
-  font-size: 30pt;
+ font-size: 30pt;
  font-family: 'Press Start 2P', cursive;
  outline: none;
  background:none;
@@ -67,10 +60,7 @@ border:none;
 cursor: pointer;
 }
 .home-leaderboard {
-  height: 45px;
-  margin-bottom: 30px;
-  padding-bottom: 40px;
-  font-size: 30pt;
+ font-size: 30pt;
  font-family: 'Press Start 2P', cursive;
  outline: none;
  background:none;

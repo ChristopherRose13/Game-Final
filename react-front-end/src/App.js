@@ -21,9 +21,6 @@ export default function App() {
         <video id="camera" width="320" height="240" autoplay="true" ></video>
         <canvas id="overlay" width="320" height="240" ></canvas>
       </div>
-      <div className="dark">
-      <img src="../assets/ArcadeTitle.png" alt="title" className="title"></img>
-      </div>
       {selector === "home" && <Home />}
       {selector === "play" && <Play />}
       {selector === "howto" && <HowTo />}

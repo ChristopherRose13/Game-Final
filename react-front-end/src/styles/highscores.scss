@@ -62,3 +62,20 @@ text-align: center;
 .bronze {
   color: rgb(210, 116, 58);
 }
+
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #ffdf29, 0 0 50px #ffdf29, 0 0 60px #ffdf29, 0 0 70px #ffdf29;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #d29040, 0 0 40px #d29040, 0 0 50px #d29040, 0 0 60px #d29040, 0 0 70px #d29040, 0 0 80px #d29040;
+  }
+}

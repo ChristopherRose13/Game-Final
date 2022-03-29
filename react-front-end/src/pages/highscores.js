@@ -51,12 +51,14 @@ export default function Highscores() {
 
     return (
       <div className="body">
-
+        <div className="dark">
+          <img src="../assets/ArcadeTitle.png" alt="title" className="title"></img>
+        </div>
         <img src="../assets/pink-space.jpeg" alt="stars" className="background"></img>
 
         <div className="highScores">
           <NavButtons />
-          <h1 className="leaderboard"> Leaderboard </h1>
+          <h1 className="leaderboard glow3"> Leaderboard </h1>
           <table className="table">
             <thead>
               <tr>
