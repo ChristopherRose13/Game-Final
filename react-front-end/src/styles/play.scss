@@ -150,6 +150,8 @@ $VIEWPORTS_CONFIG:
     font-size: 3em;
   }
   button.home-play{
+    position:absolute;
+    top: 30vh;
     height: 2em;
     display: flexbox;
     font-size: 80%;
@@ -157,6 +159,8 @@ $VIEWPORTS_CONFIG:
     margin-bottom: 1em;
   }
   button.home-howTo{
+    position:absolute;
+    top: 42vh;
     height: 2em;
     display: flexbox;
     font-size: 80%;
@@ -164,6 +168,8 @@ $VIEWPORTS_CONFIG:
     margin-bottom: 1em;
   }
   button.home-leaderboard{
+    position:absolute;
+    top: 55vh;
     height: 2em;
     display: flexbox;
     font-size: 80%;
@@ -261,6 +267,8 @@ $VIEWPORTS_CONFIG:
     font-size: 3em;
   }
   button.home-play{
+    position:absolute;
+    top: 30vh;
     height: 2em;
     display: flexbox;
     font-size: 100%;
@@ -268,6 +276,8 @@ $VIEWPORTS_CONFIG:
     margin-bottom: 1em;
   }
   button.home-howTo{
+    position:absolute;
+    top: 45vh;
     height: 2em;
     display: flexbox;
     font-size: 100%;
@@ -275,6 +285,8 @@ $VIEWPORTS_CONFIG:
     margin-bottom: 1em;
   }
   button.home-leaderboard{
+    position:absolute;
+    top: 60vh;
     height: 2em;
     display: flexbox;
     font-size: 100%;
@@ -377,6 +389,8 @@ $VIEWPORTS_CONFIG:
     z-index: 20;
   }
   button.home-play{
+    position:absolute;
+    top: 30vh;
     height: 2em;
     display: flexbox;
     font-size: 150%;
@@ -385,6 +399,8 @@ $VIEWPORTS_CONFIG:
     margin-bottom: 1em;
   }
   button.home-howTo{
+    position:absolute;
+    top: 50vh;
     height: 2em;
     display: flexbox;
     font-size: 150%;
@@ -392,6 +408,8 @@ $VIEWPORTS_CONFIG:
     margin-bottom: 1em;
   }
   button.home-leaderboard{
+    position:absolute;
+    top: 70vh;
     height: 2em;
     display: flexbox;
     font-size: 150%;
@@ -556,5 +574,21 @@ button.button {
   
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+.glow3 {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow3 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e6c400, 0 0 40px #e2e600, 0 0 50px #e2e600, 0 0 60px #e6e200, 0 0 70px #e2e600;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #fff34d, 0 0 40px #fcff4d, 0 0 50px #fffc4d, 0 0 60px #fcff4d, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
 }

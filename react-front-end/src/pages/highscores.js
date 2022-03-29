@@ -58,7 +58,7 @@ export default function Highscores() {
 
         <div className="highScores">
           <NavButtons />
-          <h1 className="leaderboard glow"> Leaderboard </h1>
+          <h1 className="leaderboard glow3"> Leaderboard </h1>
           <table className="table">
             <thead>
               <tr>
