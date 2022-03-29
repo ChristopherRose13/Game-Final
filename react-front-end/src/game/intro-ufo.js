@@ -161,6 +161,9 @@ export default function phaserAi() {
   let move;
   let bunnySound;
   // let detonate;
+  let endX;
+  let endY;
+  let boom;
 
 
   function preload() {
@@ -231,10 +234,11 @@ export default function phaserAi() {
       '/assets/dude.png',
       { frameWidth: 32, frameHeight: 48 }
     );
-    // this.load.spritesheet('kaboom',
-    //   '/assets/explosion.png',
-    //   { frameWidth: 32, frameHeight: 48 }
-    // );
+   
+    this.load.spritesheet('kaboom', 'assets/explosion.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
 
     this.load.spritesheet('cat', 'assets/ufo.png', { frameWidth: 32, frameHeight: 48 })
   }
@@ -323,6 +327,10 @@ export default function phaserAi() {
     kitty = this.physics.add.sprite(300, 500, 'cat')
 
 
+    boom = this.physics.add.sprite(endX, endY, 'kaboom');
+    boom.setCollideWorldBounds(true)
+    boom.visible = false;
+
     if (kitty.x === 300 && kitty.y === 500) {
       setTimeout(() => {
         move = 'right';
@@ -360,38 +368,7 @@ export default function phaserAi() {
       frameRate: 20
     });
 
-    // this.anims.create({
-    //   key: 'kaboom-boom',
-    //   frames: this.anims.generateFrameNumbers('kaboom', { start: 1, end: 8 }),
-    //   frameRate: 10,
-    //   repeat: 0
-    // });
 
-    // this.boom = this.physics.add.sprite(100, 100, 'kaboom');
-    // this.boom.setScale(3);
-    // this.boom.setVisible(false);
-    // this.boom.on('animationcomplete', () => {
-    //   this.boom.setVisible(false);
-
-    // this.exploded = false;
-
-    // const detonate = function (player, bombs) {
-    //   // Only detonate once
-    //   if (!this.exploded) {
-    //     // Get the x and y of the bomb we touched
-    //     const { x, y } = bombs;
-
-    //     //  Position the explosion where the bomb was and play it
-    //     this.boom.setPosition(x, y);
-    //     this.boom.setVisible(true);
-    //     this.boom.play('kaboom-boom');
-
-    //     // Flip our toggle
-    //     this.exploded = true;
-    //   }
-    // }
-
-    // this.physics.add.overlap(player, bombs, this.detonate, null, this);
 
     stars = this.physics.add.group({
       key: 'star',
@@ -409,6 +386,14 @@ export default function phaserAi() {
 
     bombs = this.physics.add.group();
 
+    this.anims.create({
+      key: 'kaboom-boom',
+      frames: this.anims.generateFrameNumbers('kaboom', { start: 0, end: 23 }),
+      frameRate: 20,
+      repeat: -1,
+
+    });
+
     cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, kitty);
     this.physics.add.collider(player, platforms);
@@ -422,7 +407,7 @@ export default function phaserAi() {
     this.physics.add.overlap(kitty, player, hitByBunny, null, this);
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.overlap(kitty, stars, collectStar, null, this);
-    // this.physics.add.overlap(kitty, player, hitByBunny, null, this);
+    this.physics.add.overlap(player, bombs, detonate, null, this);
 
 
 
@@ -643,9 +628,20 @@ export default function phaserAi() {
 
   }
 
+  function detonate() {
+    endX = player.x;
+    endY = player.y
+    console.log('explode.X&Y===', endX, endY)
+    boom.setPosition(endX, endY)
+    boom.setScale(2);
+    boom.visible = true;
+    boom.anims.play('kaboom-boom', true)
+  }
+
   function hitBomb(player, bomb) {
     // this.exploded = true;
     // this.boom.setVisible(true);
+    detonate()
     this.physics.pause();
     bombSound.play()
     player.setTint(0xff0000);

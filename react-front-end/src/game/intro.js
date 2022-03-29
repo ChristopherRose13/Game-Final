@@ -171,7 +171,7 @@ export default function phaserSingle() {
   // let detonate;
   let endX;
   let endY;
-  let exploded;
+  
 
 
   function preload() {
@@ -380,9 +380,6 @@ export default function phaserSingle() {
 
 
 
-
-
-
     cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(boom, platforms);
@@ -494,9 +491,6 @@ export default function phaserSingle() {
 
   }
   function detonate() {
-    // boom = this.physics.add.sprite(endX, endY, 'kaboom');
-    // boom.visible = false;
-
     endX = player.x;
     endY = player.y
     console.log('explode.X&Y===', endX, endY)
