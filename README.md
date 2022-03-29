@@ -6,6 +6,18 @@ There are two games, you could play.
 * Stars and Bombs (you can play, solo, cooperative with other person or against AI)
 * And a Star Trek Multiplayer game that you have to use the warp speed to get to the next solar system first, divided in to teams.
 
+## Splash Screen
+!["Splash Screen"](https://github.com/ChristopherRose13/Game-Final/blob/master/docs/splashscreen.jpg)
+## Menu Screen
+!["Menu Screen"](https://github.com/ChristopherRose13/Game-Final/blob/master/docs/menuscreen.jpg)
+## HighScores
+!["Highscores"](https://github.com/ChristopherRose13/Game-Final/blob/master/docs/highscores.jpg)
+## Instructions
+!["Instructions"](https://github.com/ChristopherRose13/Game-Final/blob/master/docs/instructions.jpg)
+## Small Screens
+!["Small Screens"](https://github.com/ChristopherRose13/Game-Final/blob/master/docs/smalldevices.jpg)
+## Star Trek Multiplayer
+!["Star Trek Multiplayer"](https://github.com/ChristopherRose13/Game-Final/blob/master/docs/multiplayergame.jpg)
 
 ## Technology
 
